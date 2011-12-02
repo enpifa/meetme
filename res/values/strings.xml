@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, MeetMeActivity!</string>
     <string name="app_name">MeetMe</string>
+    
+    <string name="profile_default_name">Name</string>
+    <string name="profile_default_company">Company</string>
+    <string name="profile_default_position">Position</string>
+    <string name="profile_default_email">email</string>
+    <string name="profile_default_phone">phone</string>
+    <string name="profile_default_twitter">twitter</string>
+    <string name="profile_default_web">website</string>
 
 </resources>
