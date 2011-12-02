@@ -10,7 +10,7 @@ public class ContactsActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         TextView textview = new TextView(this);
-        textview.setText("This is the Artists tab");
+        textview.setText("Not yet implemented.");
         setContentView(textview);
     }
 }
