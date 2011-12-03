@@ -27,26 +27,26 @@ public class MeetMeActivity extends TabActivity {
         intent = new Intent().setClass(this, ProfileActivity.class);
 
         // Initialize a TabSpec for each tab and add it to the TabHost
-        spec = tabHost.newTabSpec("artists").setIndicator("Artists",
+        spec = tabHost.newTabSpec("profile").setIndicator("Profile",
                           res.getDrawable(R.drawable.ic_tab_profile))
                       .setContent(intent);
         tabHost.addTab(spec);
 
         // Do the same for the other tabs
         intent = new Intent().setClass(this, ContactsActivity.class);
-        spec = tabHost.newTabSpec("albums").setIndicator("Albums",
+        spec = tabHost.newTabSpec("contacts").setIndicator("Contacts",
                           res.getDrawable(R.drawable.ic_tab_contacts))
                       .setContent(intent);
         tabHost.addTab(spec);
 
         intent = new Intent().setClass(this, SearchActivity.class);
-        spec = tabHost.newTabSpec("songs").setIndicator("Songs",
+        spec = tabHost.newTabSpec("sarch").setIndicator("Search",
                           res.getDrawable(R.drawable.ic_tab_search))
                       .setContent(intent);
         tabHost.addTab(spec);
         
         intent = new Intent().setClass(this, SettingsActivity.class);
-        spec = tabHost.newTabSpec("songs").setIndicator("Songs",
+        spec = tabHost.newTabSpec("settings").setIndicator("Settings",
                           res.getDrawable(R.drawable.ic_tab_settings))
                       .setContent(intent);
         tabHost.addTab(spec);
