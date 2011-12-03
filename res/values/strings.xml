@@ -10,5 +10,9 @@
     <string name="profile_default_phone">phone</string>
     <string name="profile_default_twitter">twitter</string>
     <string name="profile_default_web">website</string>
-
+    
+    <string name="edit_profile">Edit</string>
+    <string name="change_profile_image">Image...</string>
+    <string name="change_twitter_account">Change</string>
+	<string name="save_changes">Save changes</string>
 </resources>

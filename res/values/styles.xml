@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="MyTheme" parent="android:Theme.Light.NoTitleBar">
+    <item name="android:windowBackground">@color/beige</item>
+    <item name="android:textAppearance">@style/MyDefaultTextAppearance</item>
+    <item name="android:listViewStyle">@style/MyListView</item>
+  </style>
+
+  <style name="MyListView" parent="@android:style/Widget.ListView">
+    <!-- item name="android:listSelector">@drawable/list_selector</item> -->
+  </style>
+  
+  <style name="MyDefaultTextAppearance" parent="@android:style/TextAppearance">
+      <item name="android:textColor">@color/dark_grey</item>
+      <item name="android:textSize">8.5pt</item>
+  </style>
+</resources>
