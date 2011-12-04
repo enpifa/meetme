@@ -29,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:adjustViewBounds="true"
+	                android:background="@color/beige"
                     android:src="@drawable/default_profile" />
 
                 <LinearLayout
@@ -190,12 +191,13 @@
 	            android:layout_margin="5dip" >
 	
 	            <ImageView
-	                android:id="@+id/profile_image"
+	                android:id="@+id/profile_image_edit"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:layout_weight="0.3"
 	                android:paddingBottom="10dip"
 	                android:paddingTop="5dip"
+	                android:background="@color/beige"
 	                android:src="@drawable/default_profile" />
 	
 	            <LinearLayout

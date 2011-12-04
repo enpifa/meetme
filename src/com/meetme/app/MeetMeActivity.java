@@ -16,8 +16,9 @@ public class MeetMeActivity extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	System.out.println("OK");
         setContentView(R.layout.main);
-
+        
         Resources res = getResources(); // Resource object to get Drawables
         TabHost tabHost = getTabHost();  // The activity TabHost
         TabHost.TabSpec spec;  // Resusable TabSpec for each tab
@@ -40,7 +41,7 @@ public class MeetMeActivity extends TabActivity {
         tabHost.addTab(spec);
 
         intent = new Intent().setClass(this, SearchActivity.class);
-        spec = tabHost.newTabSpec("sarch").setIndicator("Search",
+        spec = tabHost.newTabSpec("search").setIndicator("Search",
                           res.getDrawable(R.drawable.ic_tab_search))
                       .setContent(intent);
         tabHost.addTab(spec);
@@ -51,6 +52,6 @@ public class MeetMeActivity extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
 
-        tabHost.setCurrentTab(1);
+        tabHost.setCurrentTab(0);
     }
 }
