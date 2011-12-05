@@ -5,10 +5,10 @@ public class Contact {
 	private String name;
 	private String company;
 	private String position;
-	private String email;
-	private String phone;
-	private String web;
-	private String twitter;
+	//private String email;
+	//private String phone;
+	//private String web;
+	//private String twitter;
 	
 	public Contact(){
 		
