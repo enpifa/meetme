@@ -11,7 +11,8 @@
         android:label="@string/app_name" >
         <activity
             android:label="@string/app_name"
-            android:name=".MeetMeActivity" >
+            android:name=".MeetMeActivity" 
+            android:theme="@style/MyTheme">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.meetme.contacts.ContactsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
-        <activity android:name="com.meetme.profile.ProfileActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:name="com.meetme.profile.ProfileActivity" android:screenOrientation="portrait" android:theme="@style/MyTheme"/>
         <activity android:name="com.meetme.search.SearchActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
         <activity android:name="com.meetme.settings.SettingsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
     </application>

@@ -40,7 +40,7 @@ public class ContactAdapter extends ArrayAdapter<Contact>{
 				company.setText(contact.getCompany());
 			}
 			if(com_position != null){
-				company.setText(contact.getPosition());
+				com_position.setText(contact.getPosition());
 			}
 		}
     
