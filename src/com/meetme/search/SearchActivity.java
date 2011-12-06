@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -67,7 +68,18 @@ public class SearchActivity extends Activity {
 		company.setText(user.getCompany());
 		TextView position = (TextView)findViewById(R.id.user_position_label);
 		position.setText(user.getPosition());
+		TextView twitter = (TextView)findViewById(R.id.user_twitter_label);
+		if(user.getTwitter() != null){
+			twitter.setText(user.getTwitter());
+		}
+		else{
+			TableRow twitterRow = (TableRow)findViewById(R.id.user_twitter_row);
+			twitterRow.setVisibility(View.GONE);
+		}
 		flipper.showNext();
 	}
 	
+	public void changeToSearchView(View view){
+		flipper.showPrevious();
+	}
 }

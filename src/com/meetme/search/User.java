@@ -10,9 +10,17 @@ public class User {
 	private String twitter;
 	private ArrayList<String> emails;
 	private ArrayList<String> phones;
+	private ArrayList<String> webs;
 	
 	public User(){
-		
+		username = null;
+		name = null;
+		company = null;
+		position = null;
+		twitter = null;
+		emails = new ArrayList<String>();
+		phones = new ArrayList<String>();
+		webs = new ArrayList<String>();
 	}
 	
 	public String getUsername(){
@@ -43,6 +51,10 @@ public class User {
 		return phones;
 	}
 	
+	public ArrayList<String> getWebs(){
+		return webs;
+	}
+	
 	public void setUsername(String newUsername){
 		username = newUsername;
 	}
@@ -67,7 +79,23 @@ public class User {
 		emails = newEmails;
 	}
 	
+	public void addEmail(String newEmail){
+		emails.add(newEmail);
+	}
+	
 	public void setPhones(ArrayList<String> newPhones){
 		phones = newPhones;
+	}
+	
+	public void addPhone(String newPhone){
+		phones.add(newPhone);
+	}
+	
+	public void setWebs(ArrayList<String> newWebs){
+		webs = newWebs;
+	}
+	
+	public void addWeb(String newWeb){
+		webs.add(newWeb);
 	}
 }

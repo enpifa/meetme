@@ -44,171 +44,190 @@
         </ListView>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/users_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/beige"
-        android:gravity="right"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip" >
-
-            <ImageView
-                android:id="@+id/user_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:adjustViewBounds="true"
-             android:background="@color/beige"
-                android:src="@drawable/default_profile" />
+            android:layout_height="match_parent"
+            android:background="@color/beige"
+            android:gravity="right"
+            android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5dip"
-                android:layout_weight="0.7"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/user_name_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_name"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <TextView
-                    android:id="@+id/user_company_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_company"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <TextView
-                    android:id="@+id/user_position_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_position"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TableLayout
-            android:id="@+id/tableLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:stretchColumns="*" >
-
-            <TableRow
-                android:id="@+id/tableRow1"
+                android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" >
-
-                <TextView
-                    android:id="@+id/user_email_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_email"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_margin="5dip" >
 
                 <ImageView
-                    android:id="@+id/ic_email"
+                    android:id="@+id/user_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|left"
-                    android:layout_margin="5dip"
-                    android:src="@drawable/ic_email" />
-            </TableRow>
+                    android:layout_weight="0.3"
+                    android:adjustViewBounds="true"
+                    android:background="@color/beige"
+                    android:src="@drawable/default_profile" />
 
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dip"
+                    android:layout_weight="0.7"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/user_name_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_name"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/user_company_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_company"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/user_position_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_position"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:stretchColumns="*" >
+
+                <TableRow
+                    android:id="@+id/tableRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" >
+
+                    <TextView
+                        android:id="@+id/user_email_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_email"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageView
+                        android:id="@+id/ic_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:layout_margin="5dip"
+                        android:src="@drawable/ic_email" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/user_phone_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_phone"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageView
+                        android:id="@+id/ic_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:layout_margin="5dip"
+                        android:src="@drawable/ic_phone" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/user_web_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_web"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageView
+                        android:id="@+id/ic_web"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:layout_margin="5dip"
+                        android:src="@drawable/ic_web" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/user_twitter_row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/user_twitter_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_margin="5dip"
+                        android:text="@string/profile_default_twitter"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageView
+                        android:id="@+id/ic_twitter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:layout_margin="5dip"
+                        android:src="@drawable/ic_twitter" />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/user_phone_label"
+                <Button
+                    android:id="@+id/user_save_contact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_phone"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:layout_marginTop="10dip"
+                    android:text="@string/add_contact" />
 
-                <ImageView
-                    android:id="@+id/ic_phone"
+                <Button
+                    android:id="@+id/user_back_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|left"
-                    android:layout_margin="5dip"
-                    android:src="@drawable/ic_phone" />
-            </TableRow>
+                    android:layout_marginTop="10dip"
+                    android:onClick="changeToSearchView"
+                    android:text="@string/back" />
 
-            <TableRow
-                android:id="@+id/tableRow4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-                <TextView
-                    android:id="@+id/user_web_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_web"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <ImageView
-                    android:id="@+id/ic_web"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|left"
-                    android:layout_margin="5dip"
-                    android:src="@drawable/ic_web" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/user_twitter_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_twitter"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <ImageView
-                    android:id="@+id/ic_twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|left"
-                    android:layout_margin="5dip"
-                    android:src="@drawable/ic_twitter" />
-            </TableRow>
-        </TableLayout>
-
-        <Button
-            android:id="@+id/user_save_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:text="@string/add_contact" />
-    </LinearLayout>
-    
-    
-        
 </ViewFlipper>

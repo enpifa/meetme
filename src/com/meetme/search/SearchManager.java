@@ -128,8 +128,32 @@ public class SearchManager {
 			JSONObject json_data = new JSONObject(recievedData);
 		    user.setUsername(username);
 		    user.setName(json_data.getString("name"));
-		    user.setCompany(json_data.getString("company"));
-		    user.setPosition(json_data.getString("position"));
+		    if(json_data.getString("company") != "null"){
+		    	user.setCompany(json_data.getString("company"));
+		    }
+		    if(json_data.getString("position") != "null"){
+		    	user.setPosition(json_data.getString("position"));
+		    }
+		    if(json_data.getString("twitter") != "null") {
+		    	user.setTwitter(json_data.getString("twitter"));
+		    }
+
+		    JSONArray json_emails = json_data.getJSONArray("emails");
+		    for(int i = 0; i < json_emails.length(); ++i){
+		    	user.addEmail(json_emails.getString(i));
+		    }
+		    
+		    JSONArray json_phones = json_data.getJSONArray("phones");
+		    for(int i = 0; i < json_phones.length(); ++i){
+		    	user.addPhone(json_phones.getString(i));
+		    }
+		    
+		    JSONArray json_webs = json_data.getJSONArray("webs");
+		    for(int i = 0; i < json_webs.length(); ++i){
+		    	user.addWeb(json_webs.getString(i));
+		    }
+		    
+		    
 		}
 		catch(JSONException e){
 		        Log.e("log_tag", "Error parsing data "+e.toString());
