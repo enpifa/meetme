@@ -10,7 +10,8 @@ import android.widget.ListView;
 
 public class ContactsActivity extends Activity {
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.contacts);
