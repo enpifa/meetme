@@ -1,6 +1,6 @@
 package com.meetme.app;
 
-import org.apache.http.entity.ByteArrayEntity;
+import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -270,13 +270,63 @@ public class MeetMeDbAdapter {
      * l'update i crear les noves.
      */
     public boolean updateUser(long rowId, String username, String password, String name,
-    		String company, String position, ByteArrayEntity image, String twitter, String twitterpass) {
-				
+    		String company, String position, String image, String twitter, String twitterpass,
+    		ArrayList<String> phones, ArrayList<String> mails, ArrayList<String> webs) {
+		
+    	/**
+    	 * UPDATE NORMAL DE LA FILA DE LA TAULA USER
+    	 */
+    	ContentValues args = new ContentValues();
+    	args.put(KEY_USERNAME, username);
+    	args.put(KEY_PASSWORD, password);
+    	args.put(KEY_NAME, name);
+    	args.put(KEY_COMPANY, company);
+    	args.put(KEY_POSITION, position);
+    	args.put(KEY_IMAGE, image);
+    	args.put(KEY_TWITTERNAME, twitter);
+    	args.put(KEY_TWITTERPASS, twitterpass);
+    	if (mDb.update(DATABASE_TABLE_USERS, args,	 KEY_ROWID + "=" + rowId, null) <= 0) return false;
     	
-    	return false;
+    	/**
+    	 * PER A SIMPLIFICAR-HO FARƒ QUE S'ESBORRIN TOTES LES FILES DE L'USUARI
+    	 * A LES TAULES AUXILIARS I QUE S'INSEREIXIN LES DELS ARRAYS
+    	 */
     	
+    	// ESBORRAT
+    	if (!deleteExtrasOfUser(username)) return false;
+
+    	//INSERCIî
+    	for (int i = 0; i < phones.size(); ++i) {
+        	args = new ContentValues();
+        	args.put(KEY_USERNAME, username);
+        	args.put(KEY_PHONE, phones.get(i));
+        	if (mDb.insert(DATABASE_TABLE_PHONES, null, args) < 0) return false;
+    	}
+    	
+    	for (int i = 0; i < mails.size(); ++i) {
+        	args = new ContentValues();
+        	args.put(KEY_USERNAME, username);
+        	args.put(KEY_MAIL, mails.get(i));
+        	if (mDb.insert(DATABASE_TABLE_MAILS, null, args) < 0) return false;
+
+    	}
+    	
+    	for (int i = 0; i < webs.size(); ++i) {
+        	args = new ContentValues();
+        	args.put(KEY_USERNAME, username);
+        	args.put(KEY_WEB, webs.get(i));
+        	if (mDb.insert(DATABASE_TABLE_WEBS, null, args) < 0) return false;
+    	}
+    	
+    	return true;
     }
     
+    boolean deleteExtrasOfUser(String username) {
+    	if (mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + username, null) <= 0) return false;
+    	if (mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + username, null) <= 0) return false;
+    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + username, null) > 0;
+    	
+    }
 
     
     
