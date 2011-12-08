@@ -1,5 +1,7 @@
 package com.meetme.app;
 
+import org.apache.http.entity.ByteArrayEntity;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -267,7 +269,13 @@ public class MeetMeDbAdapter {
      * de les taules auxiliars totes les referències a l'usuari que no es trobin a
      * l'update i crear les noves.
      */
-    public boolean updateUser(long rowId, )
+    public boolean updateUser(long rowId, String username, String password, String name,
+    		String company, String position, ByteArrayEntity image, String twitter, String twitterpass) {
+				
+    	
+    	return false;
+    	
+    }
     
 
     
