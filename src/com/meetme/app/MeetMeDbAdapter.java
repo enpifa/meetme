@@ -146,6 +146,12 @@ public class MeetMeDbAdapter {
 
     }
     
+    
+    
+    /**
+     * MÈTODES DE FETCH
+     */
+    
     /**
      * Retorna un cursor sobre els usuaris amb la seva informació (excepte passwords).
      * 
@@ -201,6 +207,10 @@ public class MeetMeDbAdapter {
     }
     
     
+    /**
+     * MÈTODES D'ESBORRAT "INTEL·LIGENTS"
+     */
+    
     
     /**
      * Esborra un usuari per complet: la fila de la taula d'usuaris i les files
@@ -216,7 +226,7 @@ public class MeetMeDbAdapter {
     }
 
     /**
-     * Esborra el telèfon phoneNumber de l'usuari amb rowId userId
+     * Esborra el telèfon phoneNumber de l'usuari amb rowId userId.
      * @param phoneNumber número de telèfon a esborrar
      * @param userId rowId de l'usuari associat al telèfon
      * @return cert si s'ha esborrat la fila correctament
@@ -224,6 +234,28 @@ public class MeetMeDbAdapter {
     public boolean deletePhoneOfUser(String phoneNumber, long userId) {
     	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERID + "=" + userId + 
     			" and " + KEY_PHONE + "=" + phoneNumber, null) > 0;
+    }
+    
+    /**
+     * Esborra el mail mail de l'usuari amb rowId userId.
+     * @param mail mail a esborrar
+     * @param userId rowId de l'usuari associat al mail
+     * @return cert si s'ha esborrat la fila correctament
+     */
+    public boolean deleteMailOfUser(String mail, long userId) {
+    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERID + "=" + userId + 
+    			" and " + KEY_MAIL + "=" + mail, null) > 0;
+    }
+    
+    /**
+     * Esborra la web webPage de l'usuari amb rowId userId.
+     * @param webPage web a esborrar
+     * @param userId rowId de l'usuari associat a la web
+     * @return cert si s'ha esborrat la fila correctament
+     */
+    public boolean deleteWebOfUser(String webPage, long userId) {
+    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERID + "=" + userId + 
+    			" and " + KEY_WEB + "=" + webPage, null) > 0;
     }
     
     //També podem fer un update user al que se li passin vectors de phones, mails i webs i updategi
@@ -242,7 +274,7 @@ public class MeetMeDbAdapter {
     
     
     /**
-     * DELETES SIMPLES DE LES TAULES AUXILIARS
+     * MÈTODES D'ESBORRAT SIMPLES PER A LES TAULES AUXILIARS
      */
     
     
