@@ -166,39 +166,109 @@ public class MeetMeDbAdapter {
     	return mCursor;
     }
     
-    public Cursor fetchPhonesOf(String username) throws SQLException {
+    
+    /**
+     * Retorna un cursor sobre els telèfons d'un usuari.
+     * @param userId id de la fila de l'usuari a la taula users
+     * @return cursor sobre els telèfons de l'usuari amb id userId
+     * @throws SQLException
+     */
+    public Cursor fetchPhonesOf(long userId) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_ROWID,
-    			KEY_PHONE}, KEY_USERNAME + "=" + username, null, null, null, null, null);    	
+    			KEY_PHONE}, KEY_USERID + "=" + userId, null, null, null, null, null);    	
     }
     
-    public Cursor fetchMailsOf(String username) throws SQLException {
+    /**
+     * Retorna un cursor sobre els mails d'un usuari.
+     * @param userId id de la fila de l'usuari a la taula users
+     * @return cursor sobre els mails de l'usuari amb id userId
+     * @throws SQLException
+     */
+    public Cursor fetchMailsOf(long userId) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_MAILS, new String[] {KEY_ROWID,
-    			KEY_MAIL}, KEY_USERNAME + "=" + username, null, null, null, null, null);    	
+    			KEY_MAIL}, KEY_USERID + "=" + userId, null, null, null, null, null);    	
     }
     
-    public Cursor fetchWebsOf(String username) throws SQLException {
+    /**
+     * Retorna un cursor sobre les webs d'un usuari.
+     * @param userId id de la fila de l'usuari a la taula users
+     * @return cursor sobre les webs de l'usuari amb id userId
+     * @throws SQLException
+     */
+    public Cursor fetchWebsOf(long userId) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
-    			KEY_WEB}, KEY_USERNAME + "=" + username, null, null, null, null, null);    	
+    			KEY_WEB}, KEY_USERID + "=" + userId, null, null, null, null, null);    	
     }
     
-    //si vols esborrar un usuari voldras borrar tota la info relativa a ell, phones, webs, etc.
-    // Per tant, haurà de ser una funció "intel·ligent" que encapsuli els esborrats a totes les taules
     
-    //També podem fer un update user al que se li passin vectors de phones, mails i webs i updategi
-    //intel·ligentment, creant noves files a les respectives taules
+    
+    /**
+     * Esborra un usuari per complet: la fila de la taula d'usuaris i les files
+     * associades al mateix usuari de les taules phones, mails i webs.
+     * @param rowId id de l'usuari que volem esborrar
+     * @return cert si s'ha esborrat tota la informació relativa a l'usuari
+     */
     public boolean deleteUser(long rowId) {
-        
+        if (mDb.delete(DATABASE_TABLE_MAILS, KEY_USERID + "=" + rowId, null) <= 0) return false;
+    	if (mDb.delete(DATABASE_TABLE_PHONES, KEY_USERID + "=" + rowId, null) <= 0) return false;
+    	if (mDb.delete(DATABASE_TABLE_WEBS, KEY_USERID + "=" + rowId, null) <= 0) return false;
     	return mDb.delete(DATABASE_TABLE_USERS, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
+    /**
+     * Esborra el telèfon phoneNumber de l'usuari amb rowId userId
+     * @param phoneNumber número de telèfon a esborrar
+     * @param userId rowId de l'usuari associat al telèfon
+     * @return cert si s'ha esborrat la fila correctament
+     */
+    public boolean deletePhoneOfUser(String phoneNumber, long userId) {
+    	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERID + "=" + userId + 
+    			" and " + KEY_PHONE + "=" + phoneNumber, null) > 0;
+    }
+    
+    //També podem fer un update user al que se li passin vectors de phones, mails i webs i updategi
+    //intel·ligentment, creant noves files a les respectives taules
+
+    /**
+     * L'update ha de ser super intel·ligent... ha de deixar l'usuari només
+     * amb els paràmetres que li passen. Per tant, s'ha d'encarregar d'esborrar
+     * de les taules auxiliars totes les referències a l'usuari que no es trobin a
+     * l'update i crear les noves.
+     */
+    public boolean updateUser(long rowId, )
+    
+
+    
+    
+    
+    /**
+     * DELETES SIMPLES DE LES TAULES AUXILIARS
+     */
+    
+    
+    /**
+     * Esborra la fila de la taula phones amb id rowId
+     * @param rowId id de la fila
+     * @return cert si s'ha esborrat correctament
+     */
     public boolean deletePhone(long rowId) {
         return mDb.delete(DATABASE_TABLE_PHONES, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
+    /**
+     * Esborra la fila de la taula webs amb id rowId
+     * @param rowId id de la fila
+     * @return cert si s'ha esborrat correctament
+     */
     public boolean deleteWeb(long rowId) {
         return mDb.delete(DATABASE_TABLE_WEBS, KEY_ROWID + "=" + rowId, null) > 0;
     }
     
+    /**
+     * Esborra la fila de la taula mails amb id rowId
+     * @param rowId id de la fila
+     * @return cert si s'ha esborrat correctament
+     */
     public boolean deleteMail(long rowId) {
         return mDb.delete(DATABASE_TABLE_MAILS, KEY_ROWID + "=" + rowId, null) > 0;
     }
