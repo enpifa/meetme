@@ -179,6 +179,30 @@ public class MeetMeDbAdapter {
     	return mDb.insert(DATABASE_TABLE_PROFILES, null, initialValues);
     }
     
+    public boolean updateProfile(String username, String name, String company,
+    		String position, String image, String twittername, String twitterpass) {
+    	ContentValues args = new ContentValues();
+    	args.put(KEY_USERNAME, username);
+    	args.put(KEY_NAME, name);
+    	args.put(KEY_COMPANY, company);
+    	args.put(KEY_POSITION, position);
+    	args.put(KEY_IMAGE, image);
+    	args.put(KEY_TWITTERNAME, twittername);
+    	args.put(KEY_TWITTERPASS, twitterpass);
+    	return mDb.update(DATABASE_TABLE_PROFILES, args, KEY_USERNAME + "=" + username, null) > 0;
+    }
+    
+    
+    public boolean deleteProfile(String username) {
+        return mDb.delete(DATABASE_TABLE_PROFILES, KEY_USERNAME + "=" + username, null) > 0;
+    }
+    
+    public boolean fetchProfile(String username) {
+    	
+    }
+    
+    
+    
     
     
     
@@ -340,19 +364,6 @@ public class MeetMeDbAdapter {
     			" and " + KEY_WEB + "=" + webPage, null) > 0;
     }
     
-    public boolean updateProfile(String username, String name,
-    		String company, String position, String image, String twitter, String twitterpass) {
-    	
-    	ContentValues args = new ContentValues();
-    	args.put(KEY_USERNAME, username);
-    	args.put(KEY_NAME, name);
-    	args.put(KEY_COMPANY, company);
-    	args.put(KEY_POSITION, position);
-    	args.put(KEY_IMAGE, image);
-    	args.put(KEY_TWITTERNAME, twitter);
-    	args.put(KEY_TWITTERPASS, twitterpass);
-    	return mDb.update(DATABASE_TABLE_USERS, args,	 KEY_USERNAME + "=" + username, null) > 0;
-    }
     
     
     public boolean deletePhonesOfUser(String username) {
