@@ -104,12 +104,12 @@ public class MeetMeDbAdapter {
     
     /**
      * Es crea una fila a la taula phones per a representar que
-     * l'usuari username té el telèfone phoneNumber.
-     * @param username l'identificador de l'usuari
+     * l'usuari userId té el telèfone phoneNumber.
+     * @param userId la rowId de l'usuari
      * @param phoneNumber un dels números de telèfon de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createPhone(String userId, String phoneNumber) {
+    public long createPhone(long userId, String phoneNumber) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERID, userId);
     	initialValues.put(KEY_PHONE, phoneNumber);
@@ -120,12 +120,12 @@ public class MeetMeDbAdapter {
     
     /**
      * Es crea una fila a la taula webs per a representar que
-     * l'usuari username té la web webPage.
-     * @param username l'identificador de l'usuari
+     * l'usuari userId té la web webPage.
+     * @param userId la rowId de l'usuari
      * @param webPage una de les webs de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createWeb(String userId, String webPage) {
+    public long createWeb(long userId, String webPage) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERID, userId);
     	initialValues.put(KEY_WEB, webPage);
@@ -135,12 +135,12 @@ public class MeetMeDbAdapter {
     
     /**
      * Es crea una fila a la taula mails per a representar que
-     * l'usuaru username té el mail mail.
-     * @param username l'identificador de l'usuari
+     * l'usuaru userId té el mail mail.
+     * @param userId la rowId de l'usuari
      * @param mail un dels mails de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createMail(String userId, String mail) {
+    public long createMail(long userId, String mail) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERID, userId);
     	initialValues.put(KEY_MAIL, mail);

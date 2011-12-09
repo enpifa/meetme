@@ -2,9 +2,9 @@ package com.meetme.profile;
 
 import java.util.ArrayList;
 
-import com.meetme.app.MeetMeDbAdapter;
-
 import android.content.ContentValues;
+
+import com.meetme.app.MeetMeDbAdapter;
 
 public class ProfileDataManager {
 
@@ -29,27 +29,18 @@ public class ProfileDataManager {
 	    	if (!mDbHelper.deleteMailsOfUSer(username)) return false;
 	    	if (!mDbHelper.deleteWebsOfUser(username)) return false;
 	    	
+	    	
 	    	//INSERCIî
 	    	for (int i = 0; i < phones.size(); ++i) {
-	        	args = new ContentValues();
-	        	args.put(KEY_USERNAME, username);
-	        	args.put(KEY_PHONE, phones.get(i));
-	        	if (mDb.insert(DATABASE_TABLE_PHONES, null, args) < 0) return false;
+	        	if (mDbHelper.createPhone(rowId, phones.get(i)) < 0) return false;	
 	    	}
 	    	
 	    	for (int i = 0; i < mails.size(); ++i) {
-	        	args = new ContentValues();
-	        	args.put(KEY_USERNAME, username);
-	        	args.put(KEY_MAIL, mails.get(i));
-	        	if (mDb.insert(DATABASE_TABLE_MAILS, null, args) < 0) return false;
-
+	    		if (mDbHelper.createMail(rowId, mails.get(i)) < 0) return false;
 	    	}
 	    	
 	    	for (int i = 0; i < webs.size(); ++i) {
-	        	args = new ContentValues();
-	        	args.put(KEY_USERNAME, username);
-	        	args.put(KEY_WEB, webs.get(i));
-	        	if (mDb.insert(DATABASE_TABLE_WEBS, null, args) < 0) return false;
+	    		if (mDbHelper.createWeb(rowId, webs.get(i)) < 0) return false;
 	    	}
 	    	
 	    	return true;

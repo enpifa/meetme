@@ -6,10 +6,8 @@ import com.meetme.app.MeetMeDbAdapter;
 
 public class LoginManager {
     private MeetMeDbAdapter mDbHelper;
-	
     
-    
-    //Així o que comprovi dins registerUser si existeix o no?
+    //Així o que comprovi dins registerUser si existeix o no? -->
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
@@ -17,7 +15,7 @@ public class LoginManager {
      * @return la id del nou user o -1 si no s'ha creat
      */
     public long registerUser(String username, String password) {
-    	return mDbHelper.createUser(username, password);
+    	return mDbHelper.createUser(username, password); // retorna la rowId perquè el login/register li haurà de passar la rowId de l'usuari a l'activitat principal o guardarla en alguna property com a active user
     }
     
 	/**
