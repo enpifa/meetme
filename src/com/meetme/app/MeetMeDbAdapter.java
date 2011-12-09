@@ -25,7 +25,6 @@ public class MeetMeDbAdapter {
 	public static final String KEY_PHONE = "phonenumber";
 	public static final String KEY_WEB = "webpage";
 	public static final String KEY_MAIL = "mail";
-	public static final String KEY_USERID = "userId";
 	
 
 
@@ -35,24 +34,30 @@ public class MeetMeDbAdapter {
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
 	
+	
 	private static final String DATABASE_CREATE_USERS = 
-		"create table users (_id integer primary key autoincrement, "
-		+ "username text not null, password text not null, name text, company text, position text, image blob, twittername text, twitterpass text";
+		"create table users (username primary key, password text not null)";
+
+	
+	private static final String DATABASE_CREATE_PROFILES = 
+		"create table profiles (username primary key, name text, company text, "
+		+ "position text, image blob, twittername text, twitterpass text";
 	
 	private static final String DATABASE_CREATE_PHONES =
 		"create table phones (_id integer primary key autoincrement, "
-		+ "userId integer not null, phonenumber text not null";
+		+ "username text not null, phonenumber text not null";
 	
 	private static String DATABASE_CREATE_WEBS = 
 		"create table webs (_id integer primary key autoincrement, "
-		+ "userId integer not null, webpage text not null";
+		+ "username text not null, webpage text not null";
 	
 	private static final String DATABASE_CREATE_MAILS = 
 		"create table mails (_id integer primary key autoincrement, "
-		+ "userId integer not null, mail text not null";
+		+ "username text not null, mail text not null";
 	
 	private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
+    private static final String DATABASE_TABLE_PROFILES = "profiles";
     private static final String DATABASE_TABLE_PHONES = "phones";
 	private static final String DATABASE_TABLE_WEBS = "webs";
 	private static final String DATABASE_TABLE_MAILS = "mails";
@@ -102,6 +107,81 @@ public class MeetMeDbAdapter {
     
     
     
+    
+    
+    
+    
+    /**
+     * TAULA USERS: USERNAME I PASSWORD
+     */
+    
+    /**
+     * Crea un nou usuari.
+     * @param username el nom d'usuari únic
+     * @param password la contrassenya associada al nom d'usuari
+     * @return rowId o -1 si ha fallat
+     */
+    public long createUser(String username, String password) {
+    	ContentValues initialValues = new ContentValues();
+    	initialValues.put(KEY_USERNAME, username);
+    	initialValues.put(KEY_PASSWORD, password);
+    	return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
+    }
+    
+    public boolean updateUser(String username, String password) {
+    	ContentValues args = new ContentValues();
+    	args.put(KEY_USERNAME, username);
+    	args.put(KEY_PASSWORD, password);
+    	return mDb.update(DATABASE_TABLE_USERS, args, KEY_USERNAME + "=" + username, null) > 0;
+    }
+    
+    public boolean deleteUser(String username) {
+        return mDb.delete(DATABASE_TABLE_USERS, KEY_USERNAME + "=" + username, null) > 0;
+    }
+    
+    /**
+     * Retorna un cursor amb la password de l'usuari username.
+     * @param username identificador de l'usuari
+     * @return només retorna la password perquè el username ja el sabem
+     * @throws SQLException
+     */
+    public Cursor fetchUser(String username) throws SQLException{
+    	Cursor cursor =
+            mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + username, null,
+                    null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+    
+    
+    
+    
+    
+    
+    /**
+     * TAULA PROFILES: emmagatzema la informació de perfil dels usuaris via username
+     */
+    
+    
+    public long createProfile(String username, String name, String company,
+    		String position, String image, String twittername, String twitterpass) {
+    	
+    	ContentValues initialValues = new ContentValues();
+    	initialValues.put(KEY_USERNAME, username);
+    	initialValues.put(KEY_NAME, name);
+    	initialValues.put(KEY_COMPANY, company);
+    	initialValues.put(KEY_POSITION, position);
+    	initialValues.put(KEY_IMAGE, image);
+    	initialValues.put(KEY_TWITTERNAME, twittername);
+    	initialValues.put(KEY_TWITTERPASS, twitterpass);
+    	return mDb.insert(DATABASE_TABLE_PROFILES, null, initialValues);
+    }
+    
+    
+    
+    
     /**
      * Es crea una fila a la taula phones per a representar que
      * l'usuari userId té el telèfone phoneNumber.
@@ -109,9 +189,9 @@ public class MeetMeDbAdapter {
      * @param phoneNumber un dels números de telèfon de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createPhone(long userId, String phoneNumber) {
+    public long createPhone(String username, String phoneNumber) {
     	ContentValues initialValues = new ContentValues();
-    	initialValues.put(KEY_USERID, userId);
+    	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_PHONE, phoneNumber);
     	return mDb.insert(DATABASE_TABLE_PHONES, null, initialValues);
     	
@@ -125,7 +205,7 @@ public class MeetMeDbAdapter {
      * @param webPage una de les webs de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createWeb(long userId, String webPage) {
+    public long createWeb(String username, String webPage) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERID, userId);
     	initialValues.put(KEY_WEB, webPage);
@@ -140,7 +220,7 @@ public class MeetMeDbAdapter {
      * @param mail un dels mails de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createMail(long userId, String mail) {
+    public long createMail(String username, String mail) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERID, userId);
     	initialValues.put(KEY_MAIL, mail);
@@ -165,7 +245,7 @@ public class MeetMeDbAdapter {
     			null, null, null, null, KEY_USERNAME);
     }
     
-    public Cursor fetchUser(String username) throws SQLException {
+    public Cursor fetchProfile(String username) throws SQLException {
     	Cursor mCursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_ROWID,
     			KEY_USERNAME, KEY_NAME, KEY_COMPANY, KEY_POSITION, KEY_IMAGE,
     			KEY_TWITTERNAME}, KEY_USERNAME + "=" + username, null, null, null,
@@ -181,7 +261,7 @@ public class MeetMeDbAdapter {
      * @return cursor sobre els telèfons de l'usuari amb id userId
      * @throws SQLException
      */
-    public Cursor fetchPhonesOf(long userId) throws SQLException {
+    public Cursor fetchPhonesOf(String username) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_ROWID,
     			KEY_PHONE}, KEY_USERID + "=" + userId, null, null, null, null, null);    	
     }
@@ -192,7 +272,7 @@ public class MeetMeDbAdapter {
      * @return cursor sobre els mails de l'usuari amb id userId
      * @throws SQLException
      */
-    public Cursor fetchMailsOf(long userId) throws SQLException {
+    public Cursor fetchMailsOf(String username) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_MAILS, new String[] {KEY_ROWID,
     			KEY_MAIL}, KEY_USERID + "=" + userId, null, null, null, null, null);    	
     }
@@ -203,7 +283,7 @@ public class MeetMeDbAdapter {
      * @return cursor sobre les webs de l'usuari amb id userId
      * @throws SQLException
      */
-    public Cursor fetchWebsOf(long userId) throws SQLException {
+    public Cursor fetchWebsOf(String username) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
     			KEY_WEB}, KEY_USERID + "=" + userId, null, null, null, null, null);    	
     }
@@ -233,7 +313,7 @@ public class MeetMeDbAdapter {
      * @param userId rowId de l'usuari associat al telèfon
      * @return cert si s'ha esborrat la fila correctament
      */
-    public boolean deletePhoneOfUser(String phoneNumber, long userId) {
+    public boolean deletePhoneOfUser(String phoneNumber, String username) {
     	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERID + "=" + userId + 
     			" and " + KEY_PHONE + "=" + phoneNumber, null) > 0;
     }
@@ -244,45 +324,34 @@ public class MeetMeDbAdapter {
      * @param userId rowId de l'usuari associat al mail
      * @return cert si s'ha esborrat la fila correctament
      */
-    public boolean deleteMailOfUser(String mail, long userId) {
-    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERID + "=" + userId + 
+    public boolean deleteMailOfUser(String mail, String username) {
+    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + username + 
     			" and " + KEY_MAIL + "=" + mail, null) > 0;
     }
     
     /**
-     * Esborra la web webPage de l'usuari amb rowId userId.
+     * Esborra la web webPage de l'usuari username.
      * @param webPage web a esborrar
-     * @param userId rowId de l'usuari associat a la web
+     * @param username usuari associat a la web
      * @return cert si s'ha esborrat la fila correctament
      */
-    public boolean deleteWebOfUser(String webPage, long userId) {
-    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERID + "=" + userId + 
+    public boolean deleteWebOfUser(String webPage, String username) {
+    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + username + 
     			" and " + KEY_WEB + "=" + webPage, null) > 0;
     }
     
-    //També podem fer un update user al que se li passin vectors de phones, mails i webs i updategi
-    //intel·ligentment, creant noves files a les respectives taules
-
-    /**
-     * L'update ha de ser super intel·ligent... ha de deixar l'usuari només
-     * amb els paràmetres que li passen. Per tant, s'ha d'encarregar d'esborrar
-     * de les taules auxiliars totes les referències a l'usuari que no es trobin a
-     * l'update i crear les noves.
-     */
-    
-    public boolean updateUser(long rowId, String username, String password, String name,
+    public boolean updateProfile(String username, String name,
     		String company, String position, String image, String twitter, String twitterpass) {
     	
     	ContentValues args = new ContentValues();
     	args.put(KEY_USERNAME, username);
-    	args.put(KEY_PASSWORD, password);
     	args.put(KEY_NAME, name);
     	args.put(KEY_COMPANY, company);
     	args.put(KEY_POSITION, position);
     	args.put(KEY_IMAGE, image);
     	args.put(KEY_TWITTERNAME, twitter);
     	args.put(KEY_TWITTERPASS, twitterpass);
-    	return mDb.update(DATABASE_TABLE_USERS, args,	 KEY_ROWID + "=" + rowId, null) > 0;
+    	return mDb.update(DATABASE_TABLE_USERS, args,	 KEY_USERNAME + "=" + username, null) > 0;
     }
     
     
@@ -336,18 +405,6 @@ public class MeetMeDbAdapter {
         return mDb.delete(DATABASE_TABLE_MAILS, KEY_ROWID + "=" + rowId, null) > 0;
     }
     
-    /**
-     * Com que un usuari es crearà en el moment del registre, només
-     * tindrem username i password.
-     * @param username el nom d'usuari únic
-     * @param password la contrassenya associada al nom d'usuari
-     * @return rowId o -1 si ha fallat
-     */
-    public long createUser(String username, String password) {
-    	ContentValues initialValues = new ContentValues();
-    	initialValues.put(KEY_USERNAME, username);
-    	initialValues.put(KEY_PASSWORD, password);
-    	return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
-    }
+    
     
 }

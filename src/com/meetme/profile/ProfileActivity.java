@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.meetme.app.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -21,16 +19,29 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import com.meetme.app.R;
 
 public class ProfileActivity extends Activity {
 
 	ViewFlipper flipper;
 	
+	private long mActiveUserId; //TODO a l'onCreate se li passarˆ la rowId corresponent
+	
 	private Uri mImageCaptureUri;
 	private ImageView mImageView;
+	private EditText mNameBox;
+	private EditText mCompanyBox;
+	private EditText mPositionBox;
+	private EditText mMailBox;
+	private EditText mPhoneBox;
+	private EditText mWebBox;
+	
+	private ProfileDataManager pdm;
 	
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int CROP_FROM_CAMERA = 2;
@@ -94,7 +105,35 @@ public class ProfileActivity extends Activity {
 		flipper.showNext();
 	}
 	
-	public void changeToProfileView(View view){
+	public void saveChangesAndChangeToProfileView(View view){
+		//pilla info
+		mNameBox = (EditText) findViewById(R.id.profile_name_box);
+		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
+		mPositionBox = (EditText) findViewById(R.id.profile_position_box);
+		mMailBox = (EditText) findViewById(R.id.profile_email_box);
+		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
+		mWebBox = (EditText) findViewById(R.id.profile_web_box);
+		
+		String name = mNameBox.getText().toString();
+		String company = mCompanyBox.getText().toString();
+		String position = mPositionBox.getText().toString();
+		String mail = mMailBox.getText().toString();
+		String phone = mPhoneBox.getText().toString();
+		String web = mWebBox.getText().toString();
+		
+		//TODO "chapuza" provisional
+		
+		ArrayList<String> phones = new ArrayList<String>(1);
+		phones.set(0, phone);
+		ArrayList<String> mails = new ArrayList<String>(1);
+		mails.set(0, mail);
+		ArrayList<String> webs = new ArrayList<String>(1);
+		webs.set(0, web);
+		
+		//crida pdm.updateUser
+		pdm.updateUser(mActiveUserId, username, password, name, company, position, image, twitter, twitterpass, phones, mails, webs)
+		
+		//change to profile view
 		flipper.showPrevious();
 	}
 	

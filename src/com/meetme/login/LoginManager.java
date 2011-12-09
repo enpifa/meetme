@@ -3,10 +3,11 @@ package com.meetme.login;
 import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
+import com.meetme.profile.ProfileDataManager;
 
 public class LoginManager {
     private MeetMeDbAdapter mDbHelper;
-    
+    private ProfileDataManager pdm;
     //Així o que comprovi dins registerUser si existeix o no? -->
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
@@ -25,7 +26,7 @@ public class LoginManager {
      * @return cert si existeix un usuari username amb contrassenya password.
      */
     public boolean correctUserAndPassword(String username, String password) {
-    	Cursor user = mDbHelper.fetchUser(username);
+    	Cursor user = pdm.getUser(username);
     	return user != null && user.getString(user.getColumnIndex(MeetMeDbAdapter.KEY_PASSWORD)) == password;
     }
     
