@@ -197,8 +197,15 @@ public class MeetMeDbAdapter {
         return mDb.delete(DATABASE_TABLE_PROFILES, KEY_USERNAME + "=" + username, null) > 0;
     }
     
-    public boolean fetchProfile(String username) {
-    	
+    public Cursor fetchProfile(String username) throws SQLException {
+    	Cursor cursor =
+            mDb.query(true, DATABASE_TABLE_PROFILES, new String[] {KEY_COMPANY, KEY_POSITION,
+            		KEY_IMAGE, KEY_TWITTERNAME, KEY_TWITTERPASS}, KEY_USERNAME + "=" + username,
+            		null, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
     }
     
     
@@ -269,14 +276,7 @@ public class MeetMeDbAdapter {
     			null, null, null, null, KEY_USERNAME);
     }
     
-    public Cursor fetchProfile(String username) throws SQLException {
-    	Cursor mCursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_ROWID,
-    			KEY_USERNAME, KEY_NAME, KEY_COMPANY, KEY_POSITION, KEY_IMAGE,
-    			KEY_TWITTERNAME}, KEY_USERNAME + "=" + username, null, null, null,
-    			null, null);
-    	if (mCursor != null) mCursor.moveToFirst();
-    	return mCursor;
-    }
+    
     
     
     /**
