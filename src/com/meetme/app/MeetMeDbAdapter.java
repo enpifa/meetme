@@ -16,7 +16,7 @@ public class MeetMeDbAdapter {
 	public static final String KEY_PASSWORD = "password";
 	public static final String KEY_NAME = "name";
 	public static final String KEY_COMPANY = "company";
-	private static final String KEY_POSITION = "position";
+	public static final String KEY_POSITION = "position";
 	public static final String KEY_IMAGE = "image";
 	public static final String KEY_TWITTERNAME = "twittername";
 	public static final String KEY_TWITTERPASS = "twitterpass";
@@ -269,13 +269,10 @@ public class MeetMeDbAdapter {
      * de les taules auxiliars totes les referències a l'usuari que no es trobin a
      * l'update i crear les noves.
      */
+    
     public boolean updateUser(long rowId, String username, String password, String name,
-    		String company, String position, String image, String twitter, String twitterpass,
-    		ArrayList<String> phones, ArrayList<String> mails, ArrayList<String> webs) {
-		
-    	/**
-    	 * UPDATE NORMAL DE LA FILA DE LA TAULA USER
-    	 */
+    		String company, String position, String image, String twitter, String twitterpass) {
+    	
     	ContentValues args = new ContentValues();
     	args.put(KEY_USERNAME, username);
     	args.put(KEY_PASSWORD, password);
@@ -285,48 +282,24 @@ public class MeetMeDbAdapter {
     	args.put(KEY_IMAGE, image);
     	args.put(KEY_TWITTERNAME, twitter);
     	args.put(KEY_TWITTERPASS, twitterpass);
-    	if (mDb.update(DATABASE_TABLE_USERS, args,	 KEY_ROWID + "=" + rowId, null) <= 0) return false;
-    	
-    	/**
-    	 * PER A SIMPLIFICAR-HO FARÉ QUE S'ESBORRIN TOTES LES FILES DE L'USUARI
-    	 * A LES TAULES AUXILIARS I QUE S'INSEREIXIN LES DELS ARRAYS
-    	 */
-    	
-    	// ESBORRAT
-    	if (!deleteExtrasOfUser(username)) return false;
-
-    	//INSERCIÓ
-    	for (int i = 0; i < phones.size(); ++i) {
-        	args = new ContentValues();
-        	args.put(KEY_USERNAME, username);
-        	args.put(KEY_PHONE, phones.get(i));
-        	if (mDb.insert(DATABASE_TABLE_PHONES, null, args) < 0) return false;
-    	}
-    	
-    	for (int i = 0; i < mails.size(); ++i) {
-        	args = new ContentValues();
-        	args.put(KEY_USERNAME, username);
-        	args.put(KEY_MAIL, mails.get(i));
-        	if (mDb.insert(DATABASE_TABLE_MAILS, null, args) < 0) return false;
-
-    	}
-    	
-    	for (int i = 0; i < webs.size(); ++i) {
-        	args = new ContentValues();
-        	args.put(KEY_USERNAME, username);
-        	args.put(KEY_WEB, webs.get(i));
-        	if (mDb.insert(DATABASE_TABLE_WEBS, null, args) < 0) return false;
-    	}
-    	
-    	return true;
+    	return mDb.update(DATABASE_TABLE_USERS, args,	 KEY_ROWID + "=" + rowId, null) > 0;
     }
     
-    boolean deleteExtrasOfUser(String username) {
-    	if (mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + username, null) <= 0) return false;
-    	if (mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + username, null) <= 0) return false;
-    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + username, null) > 0;
-    	
+    
+    public boolean deletePhonesOfUser(String username) {
+    	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + username, null) > 0;
     }
+    
+    public boolean deleteMailsOfUSer(String username) {
+    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + username, null) > 0;
+    }
+    
+    public boolean deleteWebsOfUser(String username) {
+    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + username, null) > 0;
+    }
+   
+    
+    
 
     
     
@@ -363,12 +336,6 @@ public class MeetMeDbAdapter {
         return mDb.delete(DATABASE_TABLE_MAILS, KEY_ROWID + "=" + rowId, null) > 0;
     }
     
-    
-    
-    /**
-     * MÈTODES ESPECÍFICS PER AL REGISTRE I LOGIN
-     */
-    
     /**
      * Com que un usuari es crearà en el moment del registre, només
      * tindrem username i password.
@@ -381,34 +348,6 @@ public class MeetMeDbAdapter {
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_PASSWORD, password);
     	return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
-    }
-    
-    /**
-     * Comprova si és correcte l'usuari + password
-     * @param username el nom d'usuari
-     * @param password la contrassenya
-     * @return cert si existeix un usuari username amb contrassenya password.
-     */
-    public boolean correctUserAndPassword(String username, String password) {
-    	Cursor mCursor = mDb.query(DATABASE_TABLE_USERS, new String[] {KEY_ROWID},
-    			KEY_USERNAME + "=" + username + " and " + KEY_PASSWORD + "=" + password,
-    			null, null, null, null);
-    	
-    	if (mCursor == null) return false;
-    	return true;
-    }
-    
-    /**
-     * Comprova si ja existeix l'usuari.
-     * @param username el nom d'usuari
-     * @return cert si existeix ja un usuari username.
-     */
-    public boolean existsUser(String username) {
-    	Cursor mCursor = mDb.query(DATABASE_TABLE_USERS, new String[] {KEY_ROWID},
-    			KEY_USERNAME + "=" + username, null, null, null, null);
-    	
-    	if (mCursor == null) return false;
-    	return true;
     }
     
 }
