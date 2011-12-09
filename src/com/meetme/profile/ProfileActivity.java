@@ -131,7 +131,7 @@ public class ProfileActivity extends Activity {
 		webs.set(0, web);
 		
 		//crida pdm.updateUser
-		pdm.updateUser(mActiveUserId, username, password, name, company, position, image, twitter, twitterpass, phones, mails, webs)
+		//pdm.updateProfile();
 		
 		//change to profile view
 		flipper.showPrevious();
