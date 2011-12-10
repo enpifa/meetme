@@ -1,21 +1,27 @@
 package com.meetme.app;
 
-import com.meetme.contacts.ContactsActivity;
-import com.meetme.login.LoginActivity;
-import com.meetme.profile.ProfileActivity;
-import com.meetme.search.SearchActivity;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+import com.meetme.contacts.ContactsActivity;
+import com.meetme.login.LoginActivity;
+import com.meetme.profile.ProfileActivity;
+import com.meetme.search.SearchActivity;
+
 public class MeetMeActivity extends TabActivity {
+	
+	private MeetMeDbAdapter mDbHelper;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+
+    	mDbHelper = new MeetMeDbAdapter(this);
+        mDbHelper.open();
+
     	System.out.println("OK");
         setContentView(R.layout.main);
         
