@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import com.meetme.app.R;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -14,7 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements OnClickListener {
 
 	SearchManager sm;
 	ArrayList<User> results;
@@ -23,6 +25,8 @@ public class SearchActivity extends Activity {
 	ListView usersList;
 	
 	ViewFlipper flipper;
+	
+	Dialog addContactDialog;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,5 +85,34 @@ public class SearchActivity extends Activity {
 	
 	public void changeToSearchView(View view){
 		flipper.showPrevious();
+	}
+	
+	public void showAddContactDialog(View view){
+		showDialog(0);
+	}
+	
+	@Override
+    protected Dialog onCreateDialog (int id){
+		Dialog dialog = new Dialog(this, R.style.CustomDialog);
+		dialog.setTitle(R.string.add_contact);
+		dialog.setContentView(R.layout.add_contact);
+		View closeButton = dialog.findViewById(R.id.add_contact_save_button);
+		closeButton.setOnClickListener(this);
+		addContactDialog = dialog;
+		return dialog;
+	}
+	
+	public void addContact(){
+		
+		addContactDialog.dismiss();
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		case R.id.add_contact_save_button:
+			addContact();
+			break;
+		}
 	}
 }

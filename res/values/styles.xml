@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="MyTheme" parent="android:Theme.Light.NoTitleBar">
+  <style name="MyTheme" parent="android:style/Theme.Light.NoTitleBar">
     <item name="android:windowBackground">@color/beige</item>
     <item name="android:textAppearance">@style/MyDefaultTextAppearance</item>
     <item name="android:listViewStyle">@style/MyListView</item>
+  </style>
+  
+  <style name="MyTabTheme" parent="android:style/Theme.Light.NoTitleBar">
+    <item name="android:windowBackground">@color/beige</item>
+    <item name="android:textAppearance">@style/MyDefaultTextAppearance</item>
+    <item name="android:listViewStyle">@style/MyListView</item>
+    <item name="android:windowContentOverlay">@null</item>
+  </style>
+  
+  <style name="CustomDialog" parent="android:Theme.Dialog">
+    <item name="android:windowBackground">@color/beige</item>
   </style>
 
   <style name="MyListView" parent="@android:style/Widget.ListView">
