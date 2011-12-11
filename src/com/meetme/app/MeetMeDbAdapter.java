@@ -39,19 +39,19 @@ public class MeetMeDbAdapter {
 	
 	private static final String DATABASE_CREATE_PROFILES = 
 		"create table profiles (username primary key, name text, company text, "
-		+ "position text, image blob, twittername text, twitterpass text";
+		+ "position text, image blob, twittername text, twitterpass text)";
 	
 	private static final String DATABASE_CREATE_PHONES =
 		"create table phones (_id integer primary key autoincrement, "
-		+ "username text not null, phonenumber text not null";
+		+ "username text not null, phonenumber text not null)";
 	
 	private static String DATABASE_CREATE_WEBS = 
 		"create table webs (_id integer primary key autoincrement, "
-		+ "username text not null, webpage text not null";
+		+ "username text not null, webpage text not null)";
 	
 	private static final String DATABASE_CREATE_MAILS = 
 		"create table mails (_id integer primary key autoincrement, "
-		+ "username text not null, mail text not null";
+		+ "username text not null, mail text not null)";
 	
 	private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
