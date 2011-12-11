@@ -28,12 +28,14 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	Dialog addContactDialog;
 	
+	User currentViewedUser;
+	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         sm = new SearchManager();
         
-        setContentView(R.layout.search);
+        this.setContentView(R.layout.search);
         
         searchBox = (EditText)findViewById(R.id.web_search_box);
         
@@ -66,6 +68,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	private void changeToProfileView(String username){
 		User user = sm.searchForUser(username);
+		currentViewedUser = user;
 		TextView name = (TextView)findViewById(R.id.user_name_label);
 		name.setText(user.getName());
 		TextView company = (TextView)findViewById(R.id.user_company_label);
@@ -81,6 +84,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			twitterRow.setVisibility(View.GONE);
 		}
 		flipper.showNext();
+		
 	}
 	
 	public void changeToSearchView(View view){
@@ -96,6 +100,13 @@ public class SearchActivity extends Activity implements OnClickListener {
 		Dialog dialog = new Dialog(this, R.style.CustomDialog);
 		dialog.setTitle(R.string.add_contact);
 		dialog.setContentView(R.layout.add_contact);
+		TextView nameLabel = (TextView)dialog.findViewById(R.id.add_contact_name);
+		nameLabel.setText(currentViewedUser.getName());
+		TextView companyLabel = (TextView)dialog.findViewById(R.id.add_contact_company);
+		companyLabel.setText(currentViewedUser.getCompany());
+		TextView positionLabel = (TextView)dialog.findViewById(R.id.add_contact_position);
+		positionLabel.setText(currentViewedUser.getPosition());
+		
 		View closeButton = dialog.findViewById(R.id.add_contact_save_button);
 		closeButton.setOnClickListener(this);
 		addContactDialog = dialog;
@@ -103,7 +114,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	}
 	
 	public void addContact(){
-		
+		//TODO: guardar el contacte
 		addContactDialog.dismiss();
 	}
 

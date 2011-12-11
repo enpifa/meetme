@@ -9,7 +9,7 @@
     <string name="register_confirm_button">Register</string>
     <string name="create_confirm_button">Create</string>
     <string name="back">Back</string>
-    <string name="blank_text"></string>
+    <string name="blank_text">    </string>
     
     <string name="profile_default_name">Name</string>
     <string name="profile_default_company">Company</string>

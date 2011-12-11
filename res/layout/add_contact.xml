@@ -28,7 +28,7 @@
 	            android:id="@+id/add_contact_name"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="@string/profile_default_name"
+	            android:text="@string/blank_text"
 	            android:textAppearance="?android:attr/textAppearanceMedium" />
 	
 	        <LinearLayout
@@ -40,14 +40,14 @@
 	                android:id="@+id/add_contact_company"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:text="@string/profile_default_company" />
+	                android:text="@string/blank_text" />
 	
 	            <TextView
 	                android:id="@+id/add_contact_position"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:layout_marginLeft="10dip"
-	                android:text="@string/profile_default_position" />
+	                android:text="@string/blank_text" />
 	
 	        </LinearLayout>
 	

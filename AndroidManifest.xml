@@ -11,22 +11,22 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"  
+        android:theme="@style/MyTheme">
         <activity
             android:label="@string/app_name"
-            android:name=".MeetMeActivity" 
-            android:theme="@style/MyTheme">
+            android:name=".MeetMeActivity">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.meetme.contacts.ContactsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
-        <activity android:name="com.meetme.profile.ProfileActivity" android:screenOrientation="portrait" android:theme="@style/MyTheme"/>
-        <activity android:name="com.meetme.search.SearchActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
-        <activity android:name="com.meetme.settings.SettingsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar"/>
-        <activity android:name="com.meetme.login.LoginActivity" android:screenOrientation="portrait" android:theme="@style/MyTheme"/>
+        <activity android:name="com.meetme.contacts.ContactsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.meetme.profile.ProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.meetme.search.SearchActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.meetme.settings.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.meetme.login.LoginActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
