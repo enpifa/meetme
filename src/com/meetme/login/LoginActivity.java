@@ -65,11 +65,17 @@ public class LoginActivity extends Activity {
 		
         login.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String user = et1.getEditableText().toString();
-				String psw = et2.getEditableText().toString();
-				if (lm.correctUserAndPassword(user, psw)) errorText.setText("El login s'ha fet correctament");
+				String username = et1.getEditableText().toString();
+				String password = et2.getEditableText().toString();
+				if (lm.correctUserAndPassword(username, password)) {
+					errorText.setText("El login s'ha fet correctament");
+					//TODO Crear SharedPreference per a l'activeUser
+					lm.setActiveUser(username);
+					//TODO INICIAR ACTIVITY MEETME
+					
+				}
 				else
-					errorText.setText("ERROR: username or password are not correct " + user + " " + psw);
+					errorText.setText("ERROR: username or password are not correct " + username + " " + password);
 				//Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
 				//startActivity(i);
 				//carregar la pagina de perfil amb el nom d'usuari
@@ -94,7 +100,9 @@ public class LoginActivity extends Activity {
 					else {
 						lm.registerUser(username, password);
 						errorText.setText("You have created a new user successfully"); 
-						changeToLogin(v);
+						lm.setActiveUser(username);
+						//TODO iniciar activity meetme
+
 					}
 				}
 				else errorText.setText("ERROR: Passwords do not match");

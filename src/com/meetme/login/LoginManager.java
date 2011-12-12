@@ -1,13 +1,15 @@
 package com.meetme.login;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
 
 public class LoginManager {
-    private MeetMeDbAdapter mDbHelper;
     
-    //Així o que comprovi dins registerUser si existeix o no? -->
+	private MeetMeDbAdapter mDbHelper;
+    private SharedPreferences userPreferences;
+    
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
@@ -27,7 +29,7 @@ public class LoginManager {
     public boolean correctUserAndPassword(String username, String password) {
     	if (!existsUser(username)) return false;
     	Cursor user = mDbHelper.fetchUser(username);
-    	return user != null && user.getString(user.getColumnIndex(MeetMeDbAdapter.KEY_PASSWORD)) == password;
+    	return user.getString(user.getColumnIndex(MeetMeDbAdapter.KEY_PASSWORD)).equals(password);
     }
     
     /**
@@ -46,6 +48,12 @@ public class LoginManager {
 	public LoginManager(MeetMeDbAdapter mDbHelper) {
 		super();
 		this.mDbHelper = mDbHelper;
+	}
+	
+	public void setActiveUser(String username) {
+		SharedPreferences.Editor prefEditor = userPreferences.edit();
+		prefEditor.putString("activeUser", username);
+		prefEditor.commit();
 	}
     
 }
