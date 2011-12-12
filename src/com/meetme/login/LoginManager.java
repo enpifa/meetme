@@ -25,6 +25,7 @@ public class LoginManager {
      * @return cert si existeix un usuari username amb contrassenya password.
      */
     public boolean correctUserAndPassword(String username, String password) {
+    	if (!existsUser(username)) return false;
     	Cursor user = mDbHelper.fetchUser(username);
     	return user != null && user.getString(user.getColumnIndex(MeetMeDbAdapter.KEY_PASSWORD)) == password;
     }
@@ -35,6 +36,16 @@ public class LoginManager {
      * @return cert si ja existeix un usuari username.
      */
     public boolean existsUser(String username) {
-    	return mDbHelper.fetchUser(username) != null;
+    	return mDbHelper.existsUser(username);
     }
+
+	public void setmDbHelper(MeetMeDbAdapter mDbHelper) {
+		this.mDbHelper = mDbHelper;
+	}
+
+	public LoginManager(MeetMeDbAdapter mDbHelper) {
+		super();
+		this.mDbHelper = mDbHelper;
+	}
+    
 }

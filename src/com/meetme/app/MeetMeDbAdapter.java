@@ -84,7 +84,7 @@ public class MeetMeDbAdapter {
 			Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS users");
-            onCreate(db);			
+            onCreate(db);
 		}
     	
     }
@@ -144,19 +144,25 @@ public class MeetMeDbAdapter {
      * @return només retorna la password perquè el username ja el sabem
      * @throws SQLException
      */
-    public Cursor fetchUser(String username) throws SQLException{
-    	Cursor cursor = null;
-    	if (username != null) {
-    		cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + username, null,
-                    null, null, null, null);
-    	}
-    	else return cursor;
+    public Cursor fetchUser(String username)  throws SQLException {
+		Cursor cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + "'" + username + "'",
+				null, null, null, null, null);
+    	
         if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursor;
     }
     
+    public boolean existsUser(String username) {
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + "'" + username + "'",
+				null, null, null, null, null);
+    	
+        if (cursor != null) {
+            return cursor.moveToFirst();
+        }
+        return false;
+    }
     
     
     

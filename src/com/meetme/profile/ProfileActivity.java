@@ -30,6 +30,7 @@ public class ProfileActivity extends Activity {
 
 	ViewFlipper flipper;
 	
+	//TODO private SharedPreferences 
 	private long mActiveUserId; //TODO a l'onCreate se li passarˆ la rowId corresponent
 	
 	private Uri mImageCaptureUri;
@@ -131,7 +132,7 @@ public class ProfileActivity extends Activity {
 		webs.set(0, web);
 		
 		//crida pdm.updateUser
-		//pdm.updateProfile(username, name, company, position, null, null, null, phones, mails, webs);
+		//TODO pdm.updateProfile(username, name, company, position, null, null, null, phones, mails, webs);
 		
 		//change to profile view
 		flipper.showPrevious();
