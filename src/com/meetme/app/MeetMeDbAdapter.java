@@ -34,7 +34,7 @@ public class MeetMeDbAdapter {
 	
 	
 	private static final String DATABASE_CREATE_USERS = 
-		"create table users (username primary key, password text not null)";
+		"create table users (username text primary key, password text not null)";
 
 	
 	private static final String DATABASE_CREATE_PROFILES = 
@@ -145,9 +145,12 @@ public class MeetMeDbAdapter {
      * @throws SQLException
      */
     public Cursor fetchUser(String username) throws SQLException{
-    	Cursor cursor =
-            mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + username, null,
+    	Cursor cursor = null;
+    	if (username != null) {
+    		cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + username, null,
                     null, null, null, null);
+    	}
+    	else return cursor;
         if (cursor != null) {
             cursor.moveToFirst();
         }
