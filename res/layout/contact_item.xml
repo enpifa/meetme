@@ -8,11 +8,12 @@
     android:paddingTop="5px" >
 
     <ImageView
-       android:id="@+id/profile_image"
-       android:layout_width="wrap_content"
-       android:layout_height="fill_parent"
-       android:layout_marginRight="6dip"
-       android:src="@drawable/ic_launcher" />
+        android:id="@+id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:src="@drawable/ic_contact" />
+
     <LinearLayout
        android:orientation="vertical"
        android:layout_width="0dip"

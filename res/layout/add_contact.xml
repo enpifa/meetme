@@ -12,11 +12,11 @@
         android:layout_height="wrap_content" >
         
         <ImageView
-       android:id="@+id/add_contact_image"
-       android:layout_width="wrap_content"
-       android:layout_height="fill_parent"
-       android:layout_marginRight="6dip"
-       android:src="@drawable/ic_launcher" />
+            android:id="@+id/add_contact_image"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="6dip"
+            android:src="@drawable/ic_contact" />
 	   
 	   <LinearLayout
 	       android:orientation="vertical"

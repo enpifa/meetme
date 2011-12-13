@@ -158,6 +158,7 @@ public class SearchManager {
 		catch(JSONException e){
 		        Log.e("log_tag", "Error parsing data "+e.toString());
 		}
+		
 		return user;
 	}
 }
