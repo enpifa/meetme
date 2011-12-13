@@ -32,7 +32,6 @@ public class ProfileActivity extends Activity {
 	ViewFlipper flipper;
 	
 	//TODO private SharedPreferences 
-	private long mActiveUserId; //TODO a l'onCreate se li passarˆ la rowId corresponent
 	
 	private Uri mImageCaptureUri;
 	private ImageView mImageView;
@@ -53,6 +52,7 @@ public class ProfileActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        pdm = new ProfileDataManager(this);
         setContentView(R.layout.profile);
         
         final String [] items			= new String [] {"Take from camera", "Select from gallery"};				

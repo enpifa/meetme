@@ -12,9 +12,10 @@ public class LoginManager {
 	private MeetMeDbAdapter mDbHelper;
     private SharedPreferences userPreferences;
     
-    public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
+    public LoginManager(Context context) {
 		super();
-		this.mDbHelper = mDbHelper;
+		mDbHelper = new MeetMeDbAdapter(context);
+		mDbHelper.open();
 		userPreferences = context.getSharedPreferences("general", 0);
 	}
     

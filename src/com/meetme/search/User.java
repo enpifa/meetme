@@ -8,6 +8,7 @@ public class User {
 	private String company;
 	private String position;
 	private String image; //TODO posar el tipus correcte a image
+	
 	public String getImage() {
 		return image;
 	}
