@@ -19,6 +19,9 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 	void setActiveUser(String username) {
 		
 		SharedPreferences.Editor prefEditor = userPreferences.edit();
@@ -35,10 +38,13 @@ public class LoginManager {
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+<<<<<<< HEAD
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
     public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
 		super();
 		this.mDbHelper = mDbHelper;
@@ -51,10 +57,13 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
@@ -76,6 +85,9 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
     public long registerUser(String username, String password) {
     	return mDbHelper.createUser(username, password);
     	this.setActiveUser(username);
@@ -88,10 +100,13 @@ public class LoginManager {
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+<<<<<<< HEAD
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
     public void registerUser(String username, String password) {
     	mDbHelper.createUser(username, password);
     	User user = new User();
@@ -104,10 +119,13 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c

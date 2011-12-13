@@ -120,6 +120,7 @@ public class ProfileActivity extends Activity {
 		User user = new User();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		user.setUsername(username) //TODO pilla el username de les preferences
 =======
 		
@@ -127,6 +128,9 @@ public class ProfileActivity extends Activity {
 =======
 		
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+		user.setUsername(username) //TODO pilla el username de les preferences
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
 		user.setPosition(mPositionBox.getText().toString());
@@ -135,12 +139,15 @@ public class ProfileActivity extends Activity {
 		user.addWeb(mWebBox.getText().toString());
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 		
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 		pdm.updateProfile(user);
 		//crida pdm.updateUser
 		

@@ -14,6 +14,9 @@ public class User {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 	private String image; //TODO posar el tipus que calgui
 =======
 	private String image; //TODO posar el tipus correcte a image
@@ -30,12 +33,15 @@ public class User {
 =======
 	private String image; //TODO posar el tipus correcte a image
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+<<<<<<< HEAD
 =======
 	private String image; //TODO posar el tipus correcte a image
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 	private String image; //TODO posar el tipus correcte a image
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 	public String getImage() {
 		return image;
 	}

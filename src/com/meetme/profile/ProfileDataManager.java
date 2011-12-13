@@ -12,16 +12,21 @@ public class ProfileDataManager {
 	 public boolean updateProfile(User user) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 			
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 	    	/**
 	    	 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
 	    	 */
 		 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -29,6 +34,9 @@ public class ProfileDataManager {
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 	    	mDbHelper.updateProfile(user);
 	    	
 	    	/**
