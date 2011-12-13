@@ -8,9 +8,13 @@ public class User {
 	private String company;
 	private String position;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	private String image; //TODO posar el tipus que calgui
 
+=======
+	private String image; //TODO posar el tipus correcte a image
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 	private String image; //TODO posar el tipus correcte a image
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c

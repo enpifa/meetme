@@ -10,6 +10,7 @@ public class ProfileDataManager {
     private MeetMeDbAdapter mDbHelper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	 public boolean updateProfile(User user) {
 
@@ -20,6 +21,8 @@ public class ProfileDataManager {
 	    	mDbHelper.updateProfile(user);
 
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	 public boolean updateProfile(User user) {
 			
 	    	/**
@@ -27,6 +30,9 @@ public class ProfileDataManager {
 	    	 */
 		 
 	    	mDbHelper.updateProfile(user);
+<<<<<<< HEAD
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	
 	    	/**
