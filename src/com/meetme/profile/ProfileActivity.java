@@ -118,13 +118,21 @@ public class ProfileActivity extends Activity {
 		
 		//TODO comprovar que aix˜ tira
 		User user = new User();
+<<<<<<< HEAD
 		user.setUsername(username) //TODO pilla el username de les preferences
+=======
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
 		user.setPosition(mPositionBox.getText().toString());
 		user.addEmail(mMailBox.getText().toString());
 		user.addPhone(mPhoneBox.getText().toString());
 		user.addWeb(mWebBox.getText().toString());
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		pdm.updateProfile(user);
 		//crida pdm.updateUser
 		

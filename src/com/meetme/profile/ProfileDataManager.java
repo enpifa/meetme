@@ -10,12 +10,19 @@ public class ProfileDataManager {
     private MeetMeDbAdapter mDbHelper;
 
 	 public boolean updateProfile(User user) {
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	/**
 	    	 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
 	    	 */
 		 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	mDbHelper.updateProfile(user);
 	    	
 	    	/**
