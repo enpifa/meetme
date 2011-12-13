@@ -13,12 +13,16 @@ public class ProfileDataManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 			
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
 
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
@@ -29,11 +33,15 @@ public class ProfileDataManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+
+>>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
 
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
