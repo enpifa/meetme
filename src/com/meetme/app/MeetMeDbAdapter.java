@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+//TODO renombrar tot el que Žs mail a Email
 
 public class MeetMeDbAdapter {
 	public static final String KEY_USERNAME = "username";
