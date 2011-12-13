@@ -118,23 +118,6 @@ public class ProfileActivity extends Activity {
 		
 		//TODO comprovar que aix˜ tira
 		User user = new User();
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-		user.setUsername(username) //TODO pilla el username de les preferences
-		user.setName(mNameBox.getText().toString());
-		user.setCompany(mCompanyBox.getText().toString());
-		user.setPosition(mPositionBox.getText().toString());
-		user.addEmail(mMailBox.getText().toString());
-		user.addPhone(mPhoneBox.getText().toString());
-		user.addWeb(mWebBox.getText().toString());
-
-		pdm.updateProfile(user);
-
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
@@ -144,14 +127,7 @@ public class ProfileActivity extends Activity {
 		user.addWeb(mWebBox.getText().toString());
 		
 		pdm.updateProfile(user);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 		//crida pdm.updateUser
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-		//crida pdm.updateUser
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		
 		//change to profile view
 		flipper.showPrevious();
