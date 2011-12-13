@@ -7,9 +7,13 @@ public class User {
 	private String name;
 	private String company;
 	private String position;
+<<<<<<< HEAD
 
 	private String image; //TODO posar el tipus que calgui
 
+=======
+	private String image; //TODO posar el tipus correcte a image
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	public String getImage() {
 		return image;
 	}

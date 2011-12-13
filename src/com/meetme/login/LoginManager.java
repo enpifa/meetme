@@ -11,14 +11,22 @@ public class LoginManager {
     
 	private MeetMeDbAdapter mDbHelper;
     private SharedPreferences userPreferences;
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
 		super();
 		this.mDbHelper = mDbHelper;
 		userPreferences = context.getSharedPreferences("general", 0);
 	}
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari

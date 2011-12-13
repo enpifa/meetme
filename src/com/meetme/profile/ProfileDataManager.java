@@ -9,6 +9,7 @@ public class ProfileDataManager {
 
     private MeetMeDbAdapter mDbHelper;
 
+<<<<<<< HEAD
 
 	 public boolean updateProfile(User user) {
 
@@ -18,6 +19,15 @@ public class ProfileDataManager {
 	
 	    	mDbHelper.updateProfile(user);
 
+=======
+	 public boolean updateProfile(User user) {
+			
+	    	/**
+	    	 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
+	    	 */
+		 
+	    	mDbHelper.updateProfile(user);
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	
 	    	/**
 	    	 * PER A SIMPLIFICAR-HO FARƒ QUE S'ESBORRIN TOTES LES FILES DE L'USUARI
