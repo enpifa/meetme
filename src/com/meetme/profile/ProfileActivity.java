@@ -122,6 +122,7 @@ public class ProfileActivity extends Activity {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		user.setUsername(username) //TODO pilla el username de les preferences
 =======
 		
@@ -135,6 +136,9 @@ public class ProfileActivity extends Activity {
 =======
 		user.setUsername(username) //TODO pilla el username de les preferences
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+=======
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
 		user.setPosition(mPositionBox.getText().toString());
@@ -145,6 +149,7 @@ public class ProfileActivity extends Activity {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
@@ -155,6 +160,9 @@ public class ProfileActivity extends Activity {
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+=======
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		pdm.updateProfile(user);
 		//crida pdm.updateUser
 		

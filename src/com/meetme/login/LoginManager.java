@@ -21,6 +21,7 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
@@ -51,6 +52,8 @@ public class LoginManager {
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
 		super();
 		this.mDbHelper = mDbHelper;
@@ -65,6 +68,7 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 =======
@@ -73,6 +77,8 @@ public class LoginManager {
 =======
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
@@ -87,6 +93,7 @@ public class LoginManager {
      * @param username el nom d'usuari
      * @param password la contrassenya
      */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -122,6 +129,8 @@ public class LoginManager {
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     public void registerUser(String username, String password) {
     	mDbHelper.createUser(username, password);
     	User user = new User();
@@ -136,6 +145,7 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 =======
@@ -144,6 +154,8 @@ public class LoginManager {
 =======
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c

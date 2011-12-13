@@ -14,8 +14,11 @@ public class ProfileDataManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 			
@@ -34,6 +37,7 @@ public class ProfileDataManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
@@ -45,6 +49,8 @@ public class ProfileDataManager {
 =======
 
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	mDbHelper.updateProfile(user);
 	    	
 	    	/**
