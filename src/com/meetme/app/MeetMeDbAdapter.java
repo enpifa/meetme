@@ -1,5 +1,7 @@
 package com.meetme.app;
 
+import com.meetme.search.User;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,8 +18,7 @@ public class MeetMeDbAdapter {
 	public static final String KEY_COMPANY = "company";
 	public static final String KEY_POSITION = "position";
 	public static final String KEY_IMAGE = "image";
-	public static final String KEY_TWITTERNAME = "twittername";
-	public static final String KEY_TWITTERPASS = "twitterpass";
+	public static final String KEY_TWITTER = "twitter";
 
 
 	public static final String KEY_PHONE = "phonenumber";
@@ -39,7 +40,7 @@ public class MeetMeDbAdapter {
 	
 	private static final String DATABASE_CREATE_PROFILES = 
 		"create table profiles (username primary key, name text, company text, "
-		+ "position text, image blob, twittername text, twitterpass text)";
+		+ "position text, image blob, twitter text)";
 	
 	private static final String DATABASE_CREATE_PHONES =
 		"create table phones (_id integer primary key autoincrement, "
@@ -173,31 +174,27 @@ public class MeetMeDbAdapter {
      */
     
     
-    public long createProfile(String username, String name, String company,
-    		String position, String image, String twittername, String twitterpass) {
+    public long createProfile(User user) {
     	
     	ContentValues initialValues = new ContentValues();
-    	initialValues.put(KEY_USERNAME, username);
-    	initialValues.put(KEY_NAME, name);
-    	initialValues.put(KEY_COMPANY, company);
-    	initialValues.put(KEY_POSITION, position);
-    	initialValues.put(KEY_IMAGE, image);
-    	initialValues.put(KEY_TWITTERNAME, twittername);
-    	initialValues.put(KEY_TWITTERPASS, twitterpass);
+    	initialValues.put(KEY_USERNAME, user.getUsername());
+    	initialValues.put(KEY_NAME, user.getName());
+    	initialValues.put(KEY_COMPANY, user.getCompany());
+    	initialValues.put(KEY_POSITION, user.getPosition());
+    	initialValues.put(KEY_IMAGE, user.getImage());
+    	initialValues.put(KEY_TWITTER, user.getTwitter());
     	return mDb.insert(DATABASE_TABLE_PROFILES, null, initialValues);
     }
     
-    public boolean updateProfile(String username, String name, String company,
-    		String position, String image, String twittername, String twitterpass) {
+    public boolean updateProfile(User user) {
     	ContentValues args = new ContentValues();
-    	args.put(KEY_USERNAME, username);
-    	args.put(KEY_NAME, name);
-    	args.put(KEY_COMPANY, company);
-    	args.put(KEY_POSITION, position);
-    	args.put(KEY_IMAGE, image);
-    	args.put(KEY_TWITTERNAME, twittername);
-    	args.put(KEY_TWITTERPASS, twitterpass);
-    	return mDb.update(DATABASE_TABLE_PROFILES, args, KEY_USERNAME + "=" + username, null) > 0;
+    	args.put(KEY_USERNAME, user.getUsername());
+    	args.put(KEY_NAME, user.getName());
+    	args.put(KEY_COMPANY, user.getCompany());
+    	args.put(KEY_POSITION, user.getPosition());
+    	args.put(KEY_IMAGE, user.getImage());
+    	args.put(KEY_TWITTER, user.getTwitter());
+    	return mDb.update(DATABASE_TABLE_PROFILES, args, KEY_USERNAME + "=" + user.getUsername(), null) > 0;
     }
     
     
@@ -208,7 +205,7 @@ public class MeetMeDbAdapter {
     public Cursor fetchProfile(String username) throws SQLException {
     	Cursor cursor =
             mDb.query(true, DATABASE_TABLE_PROFILES, new String[] {KEY_COMPANY, KEY_POSITION,
-            		KEY_IMAGE, KEY_TWITTERNAME, KEY_TWITTERPASS}, KEY_USERNAME + "=" + username,
+            		KEY_IMAGE, KEY_TWITTER}, KEY_USERNAME + "=" + username,
             		null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();

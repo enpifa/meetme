@@ -7,6 +7,15 @@ public class User {
 	private String name;
 	private String company;
 	private String position;
+	private String image; //TODO posar el tipus correcte a image
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	private String twitter;
 	private ArrayList<String> emails;
 	private ArrayList<String> phones;

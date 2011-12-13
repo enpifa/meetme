@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
+import com.meetme.search.User;
 
 public class LoginManager {
     
@@ -21,10 +22,13 @@ public class LoginManager {
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
      * @param password la contrassenya
-     * @return la id del nou user o -1 si no s'ha creat
      */
-    public long registerUser(String username, String password) {
-    	return mDbHelper.createUser(username, password); // retorna la rowId perquè el login/register li haurà de passar la rowId de l'usuari a l'activitat principal o guardarla en alguna property com a active user
+    public void registerUser(String username, String password) {
+    	mDbHelper.createUser(username, password);
+    	User user = new User();
+    	user.setUsername(username);
+    	mDbHelper.createProfile(user);
+    	setActiveUser(username);
     }
     
 	/**

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.R;
+import com.meetme.search.User;
 
 public class ProfileActivity extends Activity {
 
@@ -115,24 +116,18 @@ public class ProfileActivity extends Activity {
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
-		String name = mNameBox.getText().toString();
-		String company = mCompanyBox.getText().toString();
-		String position = mPositionBox.getText().toString();
-		String mail = mMailBox.getText().toString();
-		String phone = mPhoneBox.getText().toString();
-		String web = mWebBox.getText().toString();
+		//TODO comprovar que aix˜ tira
+		User user = new User();
 		
-		//TODO "chapuza" provisional
+		user.setName(mNameBox.getText().toString());
+		user.setCompany(mCompanyBox.getText().toString());
+		user.setPosition(mPositionBox.getText().toString());
+		user.addEmail(mMailBox.getText().toString());
+		user.addPhone(mPhoneBox.getText().toString());
+		user.addWeb(mWebBox.getText().toString());
 		
-		ArrayList<String> phones = new ArrayList<String>(1);
-		phones.set(0, phone);
-		ArrayList<String> mails = new ArrayList<String>(1);
-		mails.set(0, mail);
-		ArrayList<String> webs = new ArrayList<String>(1);
-		webs.set(0, web);
-		
+		pdm.updateProfile(user);
 		//crida pdm.updateUser
-		//TODO pdm.updateProfile(username, name, company, position, null, null, null, phones, mails, webs);
 		
 		//change to profile view
 		flipper.showPrevious();
