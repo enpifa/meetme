@@ -25,13 +25,14 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.R;
+import com.meetme.search.User;
 
 public class ProfileActivity extends Activity {
 
 	ViewFlipper flipper;
 	
 	//TODO private SharedPreferences 
-	private long mActiveUserId; //TODO a l'onCreate se li passarˆ la rowId corresponent
+//	private long mActiveUserId; //TODO SUBSTITUIT PER LES PREFS: a l'onCreate se li passarˆ la rowId corresponent
 	
 	private Uri mImageCaptureUri;
 	private ImageView mImageView;
@@ -131,9 +132,16 @@ public class ProfileActivity extends Activity {
 		ArrayList<String> webs = new ArrayList<String>(1);
 		webs.set(0, web);
 		
-		//crida pdm.updateUser
-		//TODO pdm.updateProfile(username, name, company, position, null, null, null, phones, mails, webs);
-		
+		User user = new User();
+		user.setUsername(username); //TODO pilla el username de les sharedpreferences
+		user.setName(name);
+		user.setCompany(company);
+		user.setPosition(position);
+		user.addEmail(mail);
+		user.addPhone(phone);
+		user.addWeb(web);
+		pdm.updateProfile(user);
+
 		//change to profile view
 		flipper.showPrevious();
 	}

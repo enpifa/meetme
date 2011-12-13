@@ -10,6 +10,13 @@ public class LoginManager {
 	private MeetMeDbAdapter mDbHelper;
     private SharedPreferences userPreferences;
     
+	void setActiveUser(String username) {
+		
+		SharedPreferences.Editor prefEditor = userPreferences.edit();
+		prefEditor.putString("activeUser", username);
+		prefEditor.commit();
+	}
+
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
@@ -17,7 +24,8 @@ public class LoginManager {
      * @return la id del nou user o -1 si no s'ha creat
      */
     public long registerUser(String username, String password) {
-    	return mDbHelper.createUser(username, password); // retorna la rowId perquè el login/register li haurà de passar la rowId de l'usuari a l'activitat principal o guardarla en alguna property com a active user
+    	return mDbHelper.createUser(username, password);
+    	this.setActiveUser(username);
     }
     
 	/**
@@ -50,10 +58,5 @@ public class LoginManager {
 		this.mDbHelper = mDbHelper;
 	}
 	
-	public void setActiveUser(String username) {
-		SharedPreferences.Editor prefEditor = userPreferences.edit();
-		prefEditor.putString("activeUser", username);
-		prefEditor.commit();
-	}
     
 }
