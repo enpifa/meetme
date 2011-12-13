@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-//TODO renombrar tot el que Žs mail a Email
+//TODO reanomenar tot el que Žs mail a Email
 
 public class MeetMeDbAdapter {
 	public static final String KEY_USERNAME = "username";
@@ -205,7 +205,7 @@ public class MeetMeDbAdapter {
     
     public Cursor fetchProfile(String username) throws SQLException {
     	Cursor cursor =
-            mDb.query(true, DATABASE_TABLE_PROFILES, new String[] {KEY_COMPANY, KEY_POSITION,
+            mDb.query(true, DATABASE_TABLE_PROFILES, new String[] {KEY_NAME, KEY_COMPANY, KEY_POSITION,
             		KEY_IMAGE, KEY_TWITTER}, KEY_USERNAME + "=" + "'" + username + "'",
             		null, null, null, null, null);
         if (cursor != null) {

@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -54,6 +55,45 @@ public class ProfileActivity extends Activity {
 
         pdm = new ProfileDataManager(this);
         setContentView(R.layout.profile);
+        User user = pdm.getProfile(pdm.getActiveUsername());
+        
+        if (user.getName() != null && !user.getName().equals("")) {
+            TextView name = (TextView) findViewById(R.id.profile_name_label);
+            name.setText(user.getName());
+        }
+        
+        if (user.getCompany() != null && !user.getCompany().equals("")) {
+            TextView company = (TextView) findViewById(R.id.profile_company_label);
+            company.setText(user.getCompany());
+        }
+        
+        if (user.getPosition() != null && !user.getPosition().equals("")) {
+            TextView position = (TextView) findViewById(R.id.profile_position_label);
+            position.setText(user.getPosition());
+        }
+        
+        if (user.getEmails() != null && !user.getEmails().isEmpty()) {
+            TextView email = (TextView) findViewById(R.id.profile_email_label);
+            email.setText(user.getEmails().get(0)); // TODO de moment només pot haver-hi 1, index 0 o 1?
+        }
+        
+        if (user.getPhones() != null && !user.getPhones().isEmpty()) {
+            TextView phone = (TextView) findViewById(R.id.profile_phone_label);
+            phone.setText(user.getPhones().get(0)); // TODO de moment només pot haver-hi 1, index 0 o 1?
+
+        }
+        
+        if (user.getWebs() != null && !user.getWebs().isEmpty()) {
+            TextView web = (TextView) findViewById(R.id.profile_web_label);
+            web.setText(user.getWebs().get(0)); // TODO de moment només pot haver-hi 1, index 0 o 1?
+
+        }
+        
+        if (user.getTwitter() != null && !user.getTwitter().equals("")) {
+            TextView twitter = (TextView) findViewById(R.id.profile_twitter_label);
+            twitter.setText(user.getTwitter());
+
+        }
         
         final String [] items			= new String [] {"Take from camera", "Select from gallery"};				
 		ArrayAdapter<String> adapter	= new ArrayAdapter<String> (this, android.R.layout.select_dialog_item,items);
