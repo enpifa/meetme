@@ -22,6 +22,7 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
@@ -88,6 +89,8 @@ public class LoginManager {
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+>>>>>>> parent of c5728a9... updateProfile ara t√© de par√†metre un User
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
@@ -108,6 +111,7 @@ public class LoginManager {
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
     public long registerUser(String username, String password) {
+<<<<<<< HEAD
     	return mDbHelper.createUser(username, password);
     	this.setActiveUser(username);
 =======
@@ -165,6 +169,9 @@ public class LoginManager {
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
+    	return mDbHelper.createUser(username, password); // retorna la rowId perquè el login/register li haurà de passar la rowId de l'usuari a l'activitat principal o guardarla en alguna property com a active user
+>>>>>>> parent of c5728a9... updateProfile ara t√© de par√†metre un User
     }
     
 	/**
@@ -192,6 +199,11 @@ public class LoginManager {
 		this.mDbHelper = mDbHelper;
 	}
 	
+	public void setActiveUser(String username) {
+		SharedPreferences.Editor prefEditor = userPreferences.edit();
+		prefEditor.putString("activeUser", username);
+		prefEditor.commit();
+	}
     
 	public String getActiveUsername(){
 		return userPreferences.getString("activeUser", null);

@@ -25,14 +25,13 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.R;
-import com.meetme.search.User;
 
 public class ProfileActivity extends Activity {
 
 	ViewFlipper flipper;
 	
 	//TODO private SharedPreferences 
-//	private long mActiveUserId; //TODO SUBSTITUIT PER LES PREFS: a l'onCreate se li passarà la rowId corresponent
+	private long mActiveUserId; //TODO a l'onCreate se li passarà la rowId corresponent
 	
 	private Uri mImageCaptureUri;
 	private ImageView mImageView;
@@ -138,6 +137,7 @@ public class ProfileActivity extends Activity {
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
 		
+<<<<<<< HEAD
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
@@ -165,6 +165,10 @@ public class ProfileActivity extends Activity {
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		pdm.updateProfile(user);
 		//crida pdm.updateUser
+=======
+		//crida pdm.updateUser
+		//TODO pdm.updateProfile(username, name, company, position, null, null, null, phones, mails, webs);
+>>>>>>> parent of c5728a9... updateProfile ara t√© de par√†metre un User
 		
 		//change to profile view
 		flipper.showPrevious();

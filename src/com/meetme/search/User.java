@@ -17,6 +17,7 @@ public class User {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 72f7056... emmerda per a solucionar l'error
 =======
@@ -60,6 +61,8 @@ public class User {
 		this.image = image;
 	}
 
+=======
+>>>>>>> parent of c5728a9... updateProfile ara té de paràmetre un User
 	private String twitter;
 	private ArrayList<String> emails;
 	private ArrayList<String> phones;
