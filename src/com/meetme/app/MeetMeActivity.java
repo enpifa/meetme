@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.widget.TabHost;
 
 import com.meetme.contacts.ContactsActivity;
-import com.meetme.login.LoginActivity;
 import com.meetme.profile.ProfileActivity;
 import com.meetme.search.SearchActivity;
+import com.meetme.settings.SettingsActivity;
 
 public class MeetMeActivity extends TabActivity {
 	
@@ -52,8 +52,8 @@ public class MeetMeActivity extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
         
-        intent = new Intent().setClass(this, LoginActivity.class);
-        spec = tabHost.newTabSpec("settings").setIndicator("Login",
+        intent = new Intent().setClass(this, SettingsActivity.class);
+        spec = tabHost.newTabSpec("settings").setIndicator("Settings",
                           res.getDrawable(R.drawable.ic_tab_settings))
                       .setContent(intent);
         tabHost.addTab(spec);

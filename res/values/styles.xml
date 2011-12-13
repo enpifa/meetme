@@ -18,8 +18,9 @@
 
   <style name="MyButtonStyle" parent="android:style/Widget.Button">
      <item name="android:background">@drawable/button_background</item>
-     <item name="android:layout_margin">5dip</item>
-     <item name="android:padding">2dip</item>
+     <item name="android:layout_margin">3dip</item>
+     <item name="android:padding">3dip</item>
+     <item name="android:minWidth">70dip</item>
   </style>
   
   <style name="MyImageButtonStyle" parent="android:style/Widget.ImageButton">

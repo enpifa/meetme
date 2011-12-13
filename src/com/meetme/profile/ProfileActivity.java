@@ -116,22 +116,17 @@ public class ProfileActivity extends Activity {
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
-		String name = mNameBox.getText().toString();
-		String company = mCompanyBox.getText().toString();
-		String position = mPositionBox.getText().toString();
-		String mail = mMailBox.getText().toString();
-		String phone = mPhoneBox.getText().toString();
-		String web = mWebBox.getText().toString();
+		//TODO comprovar que aix˜ tira
+		User user = new User();
 		
-		//TODO "chapuza" provisional
+		user.setName(mNameBox.getText().toString());
+		user.setCompany(mCompanyBox.getText().toString());
+		user.setPosition(mPositionBox.getText().toString());
+		user.addEmail(mMailBox.getText().toString());
+		user.addPhone(mPhoneBox.getText().toString());
+		user.addWeb(mWebBox.getText().toString());
 		
-		ArrayList<String> phones = new ArrayList<String>(1);
-		phones.set(0, phone);
-		ArrayList<String> mails = new ArrayList<String>(1);
-		mails.set(0, mail);
-		ArrayList<String> webs = new ArrayList<String>(1);
-		webs.set(0, web);
-		
+<<<<<<< HEAD
 		User user = new User();
 		user.setUsername(username); //TODO pilla el username de les sharedpreferences
 		user.setName(name);
@@ -142,6 +137,11 @@ public class ProfileActivity extends Activity {
 		user.addWeb(web);
 		pdm.updateProfile(user);
 
+=======
+		pdm.updateProfile(user);
+		//crida pdm.updateUser
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		//change to profile view
 		flipper.showPrevious();
 	}

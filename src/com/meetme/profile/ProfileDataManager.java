@@ -10,19 +10,33 @@ public class ProfileDataManager {
     private MeetMeDbAdapter mDbHelper;
 
 	 public boolean updateProfile(User user) {
+<<<<<<< HEAD
 		 
 		 	String username = user.getUsername();
+=======
+			
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	/**
 	    	 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
 	    	 */
 		 
+<<<<<<< HEAD
 	    	mDbHelper.updateProfile(username, user.getName(), user.getCompany(), user.getPosition(),
 	    			user.getImage(), user.getTwitter(), user.getTwitterPass());
+=======
+	    	mDbHelper.updateProfile(user);
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	
 	    	/**
 	    	 * PER A SIMPLIFICAR-HO FARƒ QUE S'ESBORRIN TOTES LES FILES DE L'USUARI
 	    	 * A LES TAULES AUXILIARS I QUE S'INSEREIXIN LES DELS ARRAYS
 	    	 */
+	    	
+	    	String username = user.getUsername();
+	    	ArrayList<String> phones = user.getPhones();
+	    	ArrayList<String> emails = user.getEmails();	    	
+	    	ArrayList<String> webs = user.getWebs();
+
 	    	
 	    	// ESBORRAT
 	    	if (!mDbHelper.deletePhonesOfUser(username)) return false;

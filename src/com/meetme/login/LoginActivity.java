@@ -1,6 +1,7 @@
 package com.meetme.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.meetme.app.MeetMeActivity;
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.R;
 
@@ -15,9 +17,7 @@ public class LoginActivity extends Activity {
 
 	ViewFlipper flipper;
 	Button login;
-	Button register;
 	Button create;
-	Button btLogin;
 	TextView errorText;
 	EditText et1;
 	EditText et2;
@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
         mDbHelper = new MeetMeDbAdapter(this);
         mDbHelper.open();
         
-        lm = new LoginManager(mDbHelper);
+        lm = new LoginManager(this, mDbHelper);
         
         
         
@@ -56,9 +56,7 @@ public class LoginActivity extends Activity {
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
         login = (Button)findViewById(R.id.login_button);
-        register = (Button)findViewById(R.id.register_button);
         create = (Button)findViewById(R.id.create_button);
-        btLogin = (Button)findViewById(R.id.back_to_login_button);
         errorText = (TextView)findViewById(R.id.login_error_message);
         et1 = (EditText)findViewById(R.id.username_box);
         et2 = (EditText)findViewById(R.id.password_box);
@@ -68,23 +66,16 @@ public class LoginActivity extends Activity {
 				String username = et1.getEditableText().toString();
 				String password = et2.getEditableText().toString();
 				if (lm.correctUserAndPassword(username, password)) {
-					errorText.setText("El login s'ha fet correctament");
-					//TODO Crear SharedPreference per a l'activeUser
+					//posar el username de l'usuari actual a les shared
 					lm.setActiveUser(username);
-					//TODO INICIAR ACTIVITY MEETME
-					
+					//Iniciar l'aplicaci—
+					changeToApp();
 				}
 				else
 					errorText.setText("ERROR: username or password are not correct " + username + " " + password);
 				//Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
 				//startActivity(i);
 				//carregar la pagina de perfil amb el nom d'usuari
-			}
-		});
-        
-        register.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				changeToRegister(v);
 			}
 		});
         
@@ -99,24 +90,17 @@ public class LoginActivity extends Activity {
 					if (lm.existsUser(username)) errorText.setText("ERROR CREATING NEW USER: The user already exists");
 					else {
 						lm.registerUser(username, password);
-						errorText.setText("You have created a new user successfully"); 
 						lm.setActiveUser(username);
 						//TODO iniciar activity meetme
-
+						changeToApp();
 					}
 				}
 				else errorText.setText("ERROR: Passwords do not match");
 			}
         });
         
-        btLogin.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				changeToLogin(v);
-			}
-		});
-        
-        
 	}
+	
 	/**
 	 * Funci— per quan premen el bot— de Register, que carrega el layout corresponent.
 	 * @param view
@@ -133,5 +117,10 @@ public class LoginActivity extends Activity {
 	public void changeToLogin(View view) {
 		//aixo torna al primer layout dins el flipper
 		flipper.showPrevious();
+	}
+	
+	private void changeToApp(){
+		Intent mainIntent = new Intent(this, MeetMeActivity.class);
+		startActivity(mainIntent);
 	}
 }

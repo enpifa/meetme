@@ -1,15 +1,18 @@
 package com.meetme.login;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
+import com.meetme.search.User;
 
 public class LoginManager {
     
 	private MeetMeDbAdapter mDbHelper;
     private SharedPreferences userPreferences;
     
+<<<<<<< HEAD
 	void setActiveUser(String username) {
 		
 		SharedPreferences.Editor prefEditor = userPreferences.edit();
@@ -17,15 +20,31 @@ public class LoginManager {
 		prefEditor.commit();
 	}
 
+=======
+    public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
+		super();
+		this.mDbHelper = mDbHelper;
+		userPreferences = context.getSharedPreferences("general", 0);
+	}
+    
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
      * @param password la contrassenya
-     * @return la id del nou user o -1 si no s'ha creat
      */
+<<<<<<< HEAD
     public long registerUser(String username, String password) {
     	return mDbHelper.createUser(username, password);
     	this.setActiveUser(username);
+=======
+    public void registerUser(String username, String password) {
+    	mDbHelper.createUser(username, password);
+    	User user = new User();
+    	user.setUsername(username);
+    	mDbHelper.createProfile(user);
+    	setActiveUser(username);
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     }
     
 	/**
@@ -52,11 +71,9 @@ public class LoginManager {
 	public void setmDbHelper(MeetMeDbAdapter mDbHelper) {
 		this.mDbHelper = mDbHelper;
 	}
-
-	public LoginManager(MeetMeDbAdapter mDbHelper) {
-		super();
-		this.mDbHelper = mDbHelper;
-	}
 	
     
+	public String getActiveUsername(){
+		return userPreferences.getString("activeUser", null);
+	}
 }
