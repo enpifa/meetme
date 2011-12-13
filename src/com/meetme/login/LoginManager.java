@@ -11,167 +11,25 @@ public class LoginManager {
     
 	private MeetMeDbAdapter mDbHelper;
     private SharedPreferences userPreferences;
-    
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-	void setActiveUser(String username) {
-		
-		SharedPreferences.Editor prefEditor = userPreferences.edit();
-		prefEditor.putString("activeUser", username);
-		prefEditor.commit();
-	}
 
-=======
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+
     public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
 		super();
 		this.mDbHelper = mDbHelper;
 		userPreferences = context.getSharedPreferences("general", 0);
 	}
-    
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> parent of c5728a9... updateProfile ara t√© de par√†metre un User
+
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
      * @param username el nom d'usuari
      * @param password la contrassenya
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-    public long registerUser(String username, String password) {
-<<<<<<< HEAD
-    	return mDbHelper.createUser(username, password);
-    	this.setActiveUser(username);
-=======
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     public void registerUser(String username, String password) {
     	mDbHelper.createUser(username, password);
     	User user = new User();
     	user.setUsername(username);
     	mDbHelper.createProfile(user);
     	setActiveUser(username);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-    	return mDbHelper.createUser(username, password); // retorna la rowId perquè el login/register li haurà de passar la rowId de l'usuari a l'activitat principal o guardarla en alguna property com a active user
->>>>>>> parent of c5728a9... updateProfile ara t√© de par√†metre un User
     }
     
 	/**
