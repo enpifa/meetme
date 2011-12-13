@@ -3,6 +3,7 @@ package com.meetme.profile;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.search.User;
@@ -58,5 +59,15 @@ public class ProfileDataManager {
 		}
 
 		return true;
+	}
+	
+	public User getProfile(String username) {
+		Cursor cursor = mDbHelper.fetchProfile(username);
+		
+		User user = new User();
+		
+		user.setUsername(username);
+		user.setName(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_NAME)));
+		return user;
 	}
 }
