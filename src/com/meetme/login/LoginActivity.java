@@ -17,9 +17,7 @@ public class LoginActivity extends Activity {
 
 	ViewFlipper flipper;
 	Button login;
-	Button register;
 	Button create;
-	Button btLogin;
 	TextView errorText;
 	EditText et1;
 	EditText et2;
@@ -58,9 +56,7 @@ public class LoginActivity extends Activity {
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
         login = (Button)findViewById(R.id.login_button);
-        register = (Button)findViewById(R.id.register_button);
         create = (Button)findViewById(R.id.create_button);
-        btLogin = (Button)findViewById(R.id.back_to_login_button);
         errorText = (TextView)findViewById(R.id.login_error_message);
         et1 = (EditText)findViewById(R.id.username_box);
         et2 = (EditText)findViewById(R.id.password_box);
@@ -80,12 +76,6 @@ public class LoginActivity extends Activity {
 				//Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
 				//startActivity(i);
 				//carregar la pagina de perfil amb el nom d'usuari
-			}
-		});
-        
-        register.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				changeToRegister(v);
 			}
 		});
         
@@ -109,14 +99,8 @@ public class LoginActivity extends Activity {
 			}
         });
         
-        btLogin.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				changeToLogin(v);
-			}
-		});
-        
-        
 	}
+	
 	/**
 	 * Funci— per quan premen el bot— de Register, que carrega el layout corresponent.
 	 * @param view
