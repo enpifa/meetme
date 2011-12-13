@@ -6,7 +6,7 @@
     <string name="login_username">username</string>
     <string name="login_password">password</string>
     <string name="login_confirm_button">Login</string>
-    <string name="register_confirm_button">Register</string>
+    <string name="register_confirm_button">New user</string>
     <string name="create_confirm_button">Create</string>
     <string name="back">Back</string>
     <string name="blank_text">    </string>

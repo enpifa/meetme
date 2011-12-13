@@ -105,13 +105,6 @@ public class MeetMeDbAdapter {
         mDbHelper.close();
     }
     
-    
-    
-    
-    
-    
-    
-    
     /**
      * TAULA USERS: USERNAME I PASSWORD
      */
@@ -122,11 +115,12 @@ public class MeetMeDbAdapter {
      * @param password la contrassenya associada al nom d'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createUser(String username, String password) {
+    public boolean createUser(String username, String password) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_PASSWORD, password);
-    	return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
+    	long result = mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
+    	return (result > -1);
     }
     
     public boolean updateUser(String username, String password) {
@@ -146,22 +140,28 @@ public class MeetMeDbAdapter {
      * @return nomŽs retorna la password perqu el username ja el sabem
      * @throws SQLException
      */
-    public Cursor fetchUser(String username)  throws SQLException {
-		Cursor cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + "'" + username + "'",
+    public User fetchUser(String username)  throws SQLException {
+		User user = new User();
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + "'" + username + "'",
 				null, null, null, null, null);
     	
         if (cursor != null) {
             cursor.moveToFirst();
+            user.setUsername(username);
+            user.setPassword(cursor.getString(cursor.getColumnIndex(KEY_PASSWORD)));
+            cursor.close();
         }
-        return cursor;
+        
+        return user;
     }
     
     public boolean existsUser(String username) {
     	Cursor cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + "'" + username + "'",
 				null, null, null, null, null);
     	
-        if (cursor != null) {
-            return cursor.moveToFirst();
+        if (cursor != null && cursor.moveToFirst()) {
+            cursor.close();
+        	return true;
         }
         return false;
     }
@@ -175,7 +175,7 @@ public class MeetMeDbAdapter {
      */
     
     
-    public long createProfile(User user) {
+    public boolean createProfile(User user) {
     	
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, user.getUsername());
@@ -184,7 +184,8 @@ public class MeetMeDbAdapter {
     	initialValues.put(KEY_POSITION, user.getPosition());
     	initialValues.put(KEY_IMAGE, user.getImage());
     	initialValues.put(KEY_TWITTER, user.getTwitter());
-    	return mDb.insert(DATABASE_TABLE_PROFILES, null, initialValues);
+    	return (mDb.insert(DATABASE_TABLE_PROFILES, null, initialValues) > -1);
+    	
     }
     
     public boolean updateProfile(User user) {
@@ -203,15 +204,26 @@ public class MeetMeDbAdapter {
         return mDb.delete(DATABASE_TABLE_PROFILES, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
-    public Cursor fetchProfile(String username) throws SQLException {
+    public User fetchProfile(String username) throws SQLException {
+    	User user = new User();
+    	user.setUsername(username);
     	Cursor cursor =
             mDb.query(true, DATABASE_TABLE_PROFILES, new String[] {KEY_NAME, KEY_COMPANY, KEY_POSITION,
             		KEY_IMAGE, KEY_TWITTER}, KEY_USERNAME + "=" + "'" + username + "'",
             		null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
+            user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+            user.setCompany(cursor.getString(cursor.getColumnIndex(KEY_COMPANY)));
+            user.setPosition(cursor.getString(cursor.getColumnIndex(KEY_POSITION)));
+            user.setImage(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+            user.setTwitter(cursor.getString(cursor.getColumnIndex(KEY_TWITTER)));
+            cursor.close();
+            fetchPhonesOf(user);
+            fetchMailsOf(user);
+            fetchWebsOf(user);
         }
-        return cursor;
+        return user;
     }
     
     
@@ -230,11 +242,11 @@ public class MeetMeDbAdapter {
      * @param phoneNumber un dels nœmeros de telfon de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createPhone(String username, String phoneNumber) {
+    public boolean createPhone(String username, String phoneNumber) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_PHONE, phoneNumber);
-    	return mDb.insert(DATABASE_TABLE_PHONES, null, initialValues);
+    	return (mDb.insert(DATABASE_TABLE_PHONES, null, initialValues) > -1);
     	
     }
     
@@ -272,9 +284,13 @@ public class MeetMeDbAdapter {
      * @return cursor sobre els telfons de l'usuari amb id userId
      * @throws SQLException
      */
-    public Cursor fetchPhonesOf(String username) throws SQLException {
-    	return mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_ROWID,
-    			KEY_PHONE}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);
+    private void fetchPhonesOf(User user) throws SQLException {
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_ROWID,
+    			KEY_PHONE}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);
+    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+			user.addPhone(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_PHONE)));
+		}
+    	cursor.close();
     }	
     	
 
@@ -293,11 +309,11 @@ public class MeetMeDbAdapter {
      * @param mail un dels mails de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createMail(String username, String mail) {
+    public boolean createMail(String username, String mail) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_MAIL, mail);
-    	return mDb.insert(DATABASE_TABLE_MAILS, null, initialValues);  	
+    	return (mDb.insert(DATABASE_TABLE_MAILS, null, initialValues) > -1);  	
     }
     
     /**
@@ -332,9 +348,13 @@ public class MeetMeDbAdapter {
      * @return cursor sobre els mails de l'usuari amb id userId
      * @throws SQLException
      */
-    public Cursor fetchMailsOf(String username) throws SQLException {
-    	return mDb.query(true, DATABASE_TABLE_MAILS, new String[] {KEY_ROWID,
-    			KEY_MAIL}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);    	
+    private void fetchMailsOf(User user) throws SQLException {
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_MAILS, new String[] {KEY_ROWID,
+    			KEY_MAIL}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);  
+    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+			user.addEmail(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_MAIL)));
+		}
+    	cursor.close();
     }
     
     
@@ -357,11 +377,11 @@ public class MeetMeDbAdapter {
      * @param webPage una de les webs de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public long createWeb(String username, String webPage) {
+    public boolean createWeb(String username, String webPage) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_WEB, webPage);
-    	return mDb.insert(DATABASE_TABLE_WEBS, null, initialValues);
+    	return (mDb.insert(DATABASE_TABLE_WEBS, null, initialValues) > -1);
     	
     }
     
@@ -397,9 +417,13 @@ public class MeetMeDbAdapter {
      * @return cursor sobre les webs de l'usuari amb id userId
      * @throws SQLException
      */
-    public Cursor fetchWebsOf(String username) throws SQLException {
-    	return mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
-    			KEY_WEB}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);    	
+    private void fetchWebsOf(User user) throws SQLException {
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
+    			KEY_WEB}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);   
+    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+			user.addWeb(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_WEB)));
+		}
+    	cursor.close();
     }
     
     
