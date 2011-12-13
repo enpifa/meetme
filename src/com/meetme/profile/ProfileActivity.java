@@ -25,6 +25,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.R;
+import com.meetme.search.User;
 
 public class ProfileActivity extends Activity {
 
@@ -117,58 +118,26 @@ public class ProfileActivity extends Activity {
 		
 		//TODO comprovar que aix� tira
 		User user = new User();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		user.setUsername(username) //TODO pilla el username de les preferences
-=======
-		
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-		
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-		user.setUsername(username) //TODO pilla el username de les preferences
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
-		user.setUsername(username) //TODO pilla el username de les preferences
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
-		
-<<<<<<< HEAD
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
 		user.setPosition(mPositionBox.getText().toString());
 		user.addEmail(mMailBox.getText().toString());
 		user.addPhone(mPhoneBox.getText().toString());
 		user.addWeb(mWebBox.getText().toString());
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-		
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
->>>>>>> parent of 72f7056... emmerda per a solucionar l'error
-=======
-		
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+
 		pdm.updateProfile(user);
-		//crida pdm.updateUser
-=======
-		//crida pdm.updateUser
-		//TODO pdm.updateProfile(username, name, company, position, null, null, null, phones, mails, webs);
->>>>>>> parent of c5728a9... updateProfile ara té de paràmetre un User
+
+		
+		user.setName(mNameBox.getText().toString());
+		user.setCompany(mCompanyBox.getText().toString());
+		user.setPosition(mPositionBox.getText().toString());
+		user.addEmail(mMailBox.getText().toString());
+		user.addPhone(mPhoneBox.getText().toString());
+		user.addWeb(mWebBox.getText().toString());
+		
+		pdm.updateProfile(user);
 		
 		//change to profile view
 		flipper.showPrevious();
