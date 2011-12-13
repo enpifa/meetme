@@ -13,6 +13,7 @@ public class LoginManager {
     private SharedPreferences userPreferences;
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setActiveUser(String username) {
 		
 		SharedPreferences.Editor prefEditor = userPreferences.edit();
@@ -21,12 +22,17 @@ public class LoginManager {
 	}
 
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     public LoginManager(Context context, MeetMeDbAdapter mDbHelper) {
 		super();
 		this.mDbHelper = mDbHelper;
 		userPreferences = context.getSharedPreferences("general", 0);
 	}
     
+<<<<<<< HEAD
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     /**
      * Per a registrar un nou usuari. Es cridarà després d'haver comprovat que no existeix.
@@ -34,16 +40,22 @@ public class LoginManager {
      * @param password la contrassenya
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public long registerUser(String username, String password) {
     	return mDbHelper.createUser(username, password);
     	this.setActiveUser(username);
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     public void registerUser(String username, String password) {
     	mDbHelper.createUser(username, password);
     	User user = new User();
     	user.setUsername(username);
     	mDbHelper.createProfile(user);
     	setActiveUser(username);
+<<<<<<< HEAD
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
     }
     

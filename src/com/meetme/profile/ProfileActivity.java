@@ -127,6 +127,7 @@ public class ProfileActivity extends Activity {
 		user.addWeb(mWebBox.getText().toString());
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		User user = new User();
 		user.setUsername(username); //TODO pilla el username de les sharedpreferences
 		user.setName(name);
@@ -138,6 +139,8 @@ public class ProfileActivity extends Activity {
 		pdm.updateProfile(user);
 
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 		pdm.updateProfile(user);
 		//crida pdm.updateUser
 		
