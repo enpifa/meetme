@@ -13,9 +13,12 @@ public class ProfileDataManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 
 		 	String username = user.getUsername();
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
@@ -29,8 +32,12 @@ public class ProfileDataManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    	mDbHelper.updateProfile(username, user.getName(), user.getCompany(), user.getPosition(),
 	    			user.getImage(), user.getTwitter(), user.getTwitterPass());
+=======
+	    	mDbHelper.updateProfile(user);
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 	    	mDbHelper.updateProfile(user);
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
