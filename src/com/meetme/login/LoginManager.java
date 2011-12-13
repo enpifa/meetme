@@ -1,22 +1,22 @@
 package com.meetme.login;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
+import com.meetme.app.PreferencesAdapter;
 import com.meetme.search.User;
 
 public class LoginManager {
     
 	private MeetMeDbAdapter mDbHelper;
-    private SharedPreferences userPreferences;
+    private PreferencesAdapter pa;
     
     public LoginManager(Context context) {
 		super();
 		mDbHelper = new MeetMeDbAdapter(context);
 		mDbHelper.open();
-		userPreferences = context.getSharedPreferences("general", 0);
+		pa = new PreferencesAdapter(context);
 	}
     
     /**
@@ -29,7 +29,7 @@ public class LoginManager {
     	User user = new User();
     	user.setUsername(username);
     	mDbHelper.createProfile(user);
-    	setActiveUser(username);
+    	pa.setActiveUser(username);
     }
     
 	/**
@@ -57,13 +57,7 @@ public class LoginManager {
 		this.mDbHelper = mDbHelper;
 	}
 	
-	public void setActiveUser(String username) {
-		SharedPreferences.Editor prefEditor = userPreferences.edit();
-		prefEditor.putString("activeUser", username);
-		prefEditor.commit();
-	}
-    
-	public String getActiveUsername(){
-		return userPreferences.getString("activeUser", null);
+	public void setActiveUser(String username){
+		pa.setActiveUser(username);
 	}
 }
