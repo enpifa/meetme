@@ -11,8 +11,11 @@ public class ProfileDataManager {
 
 	 public boolean updateProfile(User user) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 			
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	/**
@@ -20,7 +23,10 @@ public class ProfileDataManager {
 	    	 */
 		 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	mDbHelper.updateProfile(user);

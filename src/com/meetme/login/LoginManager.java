@@ -18,6 +18,7 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setActiveUser(String username) {
 		
 		SharedPreferences.Editor prefEditor = userPreferences.edit();
@@ -26,6 +27,8 @@ public class LoginManager {
 	}
 
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
@@ -47,6 +50,9 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
@@ -69,10 +75,13 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public long registerUser(String username, String password) {
     	return mDbHelper.createUser(username, password);
     	this.setActiveUser(username);
 =======
+=======
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
@@ -94,6 +103,9 @@ public class LoginManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+=======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c

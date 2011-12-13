@@ -119,7 +119,11 @@ public class ProfileActivity extends Activity {
 		//TODO comprovar que aix˜ tira
 		User user = new User();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		user.setUsername(username) //TODO pilla el username de les preferences
+=======
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 		
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
@@ -130,6 +134,10 @@ public class ProfileActivity extends Activity {
 		user.addPhone(mPhoneBox.getText().toString());
 		user.addWeb(mWebBox.getText().toString());
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 =======
 		
 >>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
