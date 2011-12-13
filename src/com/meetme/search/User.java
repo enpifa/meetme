@@ -11,6 +11,8 @@ public class User {
 	private ArrayList<String> emails;
 	private ArrayList<String> phones;
 	private ArrayList<String> webs;
+	private String comment;
+	private String location;
 	
 	public User(){
 		username = null;
@@ -21,6 +23,8 @@ public class User {
 		emails = new ArrayList<String>();
 		phones = new ArrayList<String>();
 		webs = new ArrayList<String>();
+		comment = null;
+		location = null;
 	}
 	
 	public String getUsername(){
@@ -53,6 +57,14 @@ public class User {
 	
 	public ArrayList<String> getWebs(){
 		return webs;
+	}
+	
+	public String getComment(){
+		return comment;
+	}
+	
+	public String getLocation(){
+		return location;
 	}
 	
 	public void setUsername(String newUsername){
@@ -97,5 +109,13 @@ public class User {
 	
 	public void addWeb(String newWeb){
 		webs.add(newWeb);
+	}
+	
+	public void setComment(String newComment){
+		comment = newComment;
+	}
+	
+	public void setLocation(String newLocation){
+		location = newLocation;
 	}
 }
