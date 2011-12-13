@@ -175,6 +175,10 @@ public class ProfileActivity extends Activity {
 		flipper.showPrevious();
 	}
 	
+	public void syncDataWithWeb(View view){
+		pdm.syncData();
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (resultCode != RESULT_OK) return;
