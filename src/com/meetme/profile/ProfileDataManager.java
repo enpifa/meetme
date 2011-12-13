@@ -20,6 +20,11 @@ public class ProfileDataManager {
 	}
 
 
+	/**
+	 * Mètode encarregat d'actualitzar totes les dades del perfil d'un usuari.
+	 * @param user conté el username i els valors a donar als atributs del profile
+	 * @return cert si no ha donat cap error
+	 */
 	public boolean updateProfile(User user) {
 
 		/**
@@ -61,6 +66,13 @@ public class ProfileDataManager {
 		return true;
 	}
 	
+	
+	/**
+	 * Mètode que a partir d'un username retorna les dades del perfil d'aquest usuari
+	 * encapsulades en una instància de User.
+	 * @param username identificador de l'usuari del perfil que es vol obtenir
+	 * @return instància de User amb les dades del perfil de l'usuari username
+	 */
 	public User getProfile(String username) {
 		Cursor cursor; 
 		
