@@ -10,43 +10,13 @@ public class ProfileDataManager {
     private MeetMeDbAdapter mDbHelper;
 
 	 public boolean updateProfile(User user) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-		 
-		 	String username = user.getUsername();
-=======
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-			
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
+
 	    	/**
 	    	 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
 	    	 */
 		 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	    	mDbHelper.updateProfile(username, user.getName(), user.getCompany(), user.getPosition(),
-	    			user.getImage(), user.getTwitter(), user.getTwitterPass());
-=======
+
 	    	mDbHelper.updateProfile(user);
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-	    	mDbHelper.updateProfile(user);
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-	    	mDbHelper.updateProfile(user);
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
-=======
-	    	mDbHelper.updateProfile(user);
->>>>>>> 3015c695c5eb378fa6e6252bdb151771c283969c
 	    	
 	    	/**
 	    	 * PER A SIMPLIFICAR-HO FARƒ QUE S'ESBORRIN TOTES LES FILES DE L'USUARI
@@ -64,10 +34,6 @@ public class ProfileDataManager {
 	    	if (!mDbHelper.deleteMailsOfUSer(username)) return false;
 	    	if (!mDbHelper.deleteWebsOfUser(username)) return false;
 	    	
-	    	ArrayList<String> phones = user.getPhones();
-	    	ArrayList<String> emails = user.getEmails();
-	    	ArrayList<String> webs = user.getWebs();
-
 	    	
 	    	//INSERCIî
 	    	for (int i = 0; i < phones.size(); ++i) {
