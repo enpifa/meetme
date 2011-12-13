@@ -8,14 +8,6 @@ public class User {
 	private String company;
 	private String position;
 	private String image; //TODO posar el tipus correcte a image
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	private String twitter;
 	private ArrayList<String> emails;
 	private ArrayList<String> phones;
@@ -76,6 +68,10 @@ public class User {
 		return location;
 	}
 	
+	public String getImage() {
+		return image;
+	}
+	
 	public void setUsername(String newUsername){
 		username = newUsername;
 	}
@@ -126,5 +122,9 @@ public class User {
 	
 	public void setLocation(String newLocation){
 		location = newLocation;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
