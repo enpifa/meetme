@@ -6,19 +6,24 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
+import com.meetme.app.PreferencesAdapter;
 import com.meetme.search.User;
 
 public class ProfileDataManager {
 
 	private MeetMeDbAdapter mDbHelper;
-
+	private PreferencesAdapter pa;
 	
-	public ProfileDataManager(Context ctx) {
+	public ProfileDataManager(Context context) {
 		super();
-		mDbHelper = new MeetMeDbAdapter(ctx);
+		mDbHelper = new MeetMeDbAdapter(context);
 		mDbHelper.open();
+		pa = new PreferencesAdapter(context);
 	}
 
+	public String getActiveUsername() {
+		return pa.getActiveUsername();
+	}
 
 	/**
 	 * Mètode encarregat d'actualitzar totes les dades del perfil d'un usuari.

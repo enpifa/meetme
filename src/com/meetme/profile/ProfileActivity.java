@@ -118,13 +118,15 @@ public class ProfileActivity extends Activity {
 		
 		//TODO comprovar que aix˜ tira
 		User user = new User();
-		
+		user.setUsername(pdm.getActiveUsername());
 		user.setName(mNameBox.getText().toString());
 		user.setCompany(mCompanyBox.getText().toString());
 		user.setPosition(mPositionBox.getText().toString());
 		user.addEmail(mMailBox.getText().toString());
 		user.addPhone(mPhoneBox.getText().toString());
 		user.addWeb(mWebBox.getText().toString());
+		
+		
 		
 		pdm.updateProfile(user);
 		//crida pdm.updateUser

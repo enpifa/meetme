@@ -133,11 +133,11 @@ public class MeetMeDbAdapter {
     	ContentValues args = new ContentValues();
     	args.put(KEY_USERNAME, username);
     	args.put(KEY_PASSWORD, password);
-    	return mDb.update(DATABASE_TABLE_USERS, args, KEY_USERNAME + "=" + username, null) > 0;
+    	return mDb.update(DATABASE_TABLE_USERS, args, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
     public boolean deleteUser(String username) {
-        return mDb.delete(DATABASE_TABLE_USERS, KEY_USERNAME + "=" + username, null) > 0;
+        return mDb.delete(DATABASE_TABLE_USERS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
     /**
@@ -195,18 +195,18 @@ public class MeetMeDbAdapter {
     	args.put(KEY_POSITION, user.getPosition());
     	args.put(KEY_IMAGE, user.getImage());
     	args.put(KEY_TWITTER, user.getTwitter());
-    	return mDb.update(DATABASE_TABLE_PROFILES, args, KEY_USERNAME + "=" + user.getUsername(), null) > 0;
+    	return mDb.update(DATABASE_TABLE_PROFILES, args, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null) > 0;
     }
     
     
     public boolean deleteProfile(String username) {
-        return mDb.delete(DATABASE_TABLE_PROFILES, KEY_USERNAME + "=" + username, null) > 0;
+        return mDb.delete(DATABASE_TABLE_PROFILES, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
     public Cursor fetchProfile(String username) throws SQLException {
     	Cursor cursor =
             mDb.query(true, DATABASE_TABLE_PROFILES, new String[] {KEY_COMPANY, KEY_POSITION,
-            		KEY_IMAGE, KEY_TWITTER}, KEY_USERNAME + "=" + username,
+            		KEY_IMAGE, KEY_TWITTER}, KEY_USERNAME + "=" + "'" + username + "'",
             		null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -256,13 +256,13 @@ public class MeetMeDbAdapter {
      * @return cert si s'ha esborrat la fila correctament
      */
     public boolean deletePhoneOfUser(String phoneNumber, String username) {
-    	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + username + 
+    	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + "'" + username + "'" + 
     			" and " + KEY_PHONE + "=" + phoneNumber, null) > 0;
     }
     
     
     public boolean deletePhonesOfUser(String username) {
-    	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + username, null) > 0;
+    	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     
     }
     
@@ -274,7 +274,7 @@ public class MeetMeDbAdapter {
      */
     public Cursor fetchPhonesOf(String username) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_ROWID,
-    			KEY_PHONE}, KEY_USERNAME + "=" + username, null, null, null, null, null);
+    			KEY_PHONE}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);
     }	
     	
 
@@ -316,13 +316,13 @@ public class MeetMeDbAdapter {
      * @return cert si s'ha esborrat la fila correctament
      */
     public boolean deleteMailOfUser(String mail, String username) {
-    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + username + 
+    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + "'" + username + "'" + 
     			" and " + KEY_MAIL + "=" + mail, null) > 0;
     }
     
     
     public boolean deleteMailsOfUSer(String username) {
-    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + username, null) > 0;
+    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
     
@@ -334,7 +334,7 @@ public class MeetMeDbAdapter {
      */
     public Cursor fetchMailsOf(String username) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_MAILS, new String[] {KEY_ROWID,
-    			KEY_MAIL}, KEY_USERNAME + "=" + username, null, null, null, null, null);    	
+    			KEY_MAIL}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);    	
     }
     
     
@@ -382,13 +382,13 @@ public class MeetMeDbAdapter {
      * @return cert si s'ha esborrat la fila correctament
      */
     public boolean deleteWebOfUser(String webPage, String username) {
-    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + username + 
+    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + "'" + username + "'" + 
     			" and " + KEY_WEB + "=" + webPage, null) > 0;
     }
     
     
     public boolean deleteWebsOfUser(String username) {
-    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + username, null) > 0;
+    	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
     /**
@@ -399,7 +399,7 @@ public class MeetMeDbAdapter {
      */
     public Cursor fetchWebsOf(String username) throws SQLException {
     	return mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
-    			KEY_WEB}, KEY_USERNAME + "=" + username, null, null, null, null, null);    	
+    			KEY_WEB}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);    	
     }
     
     

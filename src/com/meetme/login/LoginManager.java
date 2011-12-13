@@ -29,7 +29,6 @@ public class LoginManager {
     	User user = new User();
     	user.setUsername(username);
     	mDbHelper.createProfile(user);
-    	pa.setActiveUser(username);
     }
     
 	/**
