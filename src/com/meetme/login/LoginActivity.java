@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.MeetMeActivity;
-import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.R;
 
 public class LoginActivity extends Activity {
@@ -23,16 +22,11 @@ public class LoginActivity extends Activity {
 	EditText et2;
 	EditText et3;
 	LoginManager lm;
-	
-	private MeetMeDbAdapter mDbHelper;
-	
+		
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        mDbHelper = new MeetMeDbAdapter(this);
-        mDbHelper.open();
-        
-        lm = new LoginManager(this, mDbHelper);
+                
+        lm = new LoginManager(this);
         
         
         
