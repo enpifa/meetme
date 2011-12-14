@@ -20,8 +20,6 @@ public class MeetMeDbAdapter {
 	public static final String KEY_POSITION = "position";
 	public static final String KEY_IMAGE = "image";
 	public static final String KEY_TWITTER = "twitter";
-
-
 	public static final String KEY_PHONE = "phonenumber";
 	public static final String KEY_WEB = "webpage";
 	public static final String KEY_MAIL = "mail";
