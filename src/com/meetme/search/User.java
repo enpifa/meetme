@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class User {
 	private String username;
+	private String password;
 	private String name;
 	private String company;
 	private String position;
@@ -17,6 +18,7 @@ public class User {
 	
 	public User(){
 		username = null;
+		password = null;
 		name = null;
 		company = null;
 		position = null;
@@ -28,6 +30,14 @@ public class User {
 		location = null;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getUsername(){
 		return username;
 	}

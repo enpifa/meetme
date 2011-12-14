@@ -2,8 +2,6 @@ package com.meetme.search;
 
 import java.util.ArrayList;
 
-import com.meetme.app.R;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -15,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import com.meetme.app.R;
 
 public class SearchActivity extends Activity implements OnClickListener {
 
