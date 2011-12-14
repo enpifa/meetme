@@ -145,6 +145,8 @@ public class ProfileActivity extends Activity {
 				dialog.show();
 			}
 		});
+		
+		
         
         flipper = (ViewFlipper)findViewById(R.id.flipper);
     }
