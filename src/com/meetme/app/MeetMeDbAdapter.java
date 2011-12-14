@@ -17,6 +17,7 @@ import com.meetme.search.User;
 //TODO pillar el username de les shared preferences sempre que s'hagin d'agafar coses del user o crear-le/updatejar-les
 //TODO segur que val la pena? no implica un acoblament i perd reusabilitat a sac?
 
+//TODO quan s'esborra un User s'esborren totes les coses user-related? 
 public class MeetMeDbAdapter {
 	private static final String KEY_USERNAME = "username";
 	private static final String KEY_PASSWORD = "password";
@@ -482,6 +483,9 @@ public class MeetMeDbAdapter {
     	return mDb.delete(DATABASE_TABLE_CONTACTS, KEY_USERNAME + "=" + "'" + username + "'" + " and " + KEY_CONTACT + "=" + "'" + contact + "'", null) > 0;
     }
     
+    public boolean deleteContactsOfUser(String username) {
+    	return mDb.delete(DATABASE_TABLE_CONTACTS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
+    }
     
 /*
     
