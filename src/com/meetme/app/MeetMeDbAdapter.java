@@ -13,14 +13,17 @@ import android.util.Log;
 //TODO reanomenar tot el que Žs mail a Email
 
 public class MeetMeDbAdapter {
-	public static final String KEY_USERNAME = "username";
-	public static final String KEY_PASSWORD = "password";
-	public static final String KEY_NAME = "name";
-	public static final String KEY_COMPANY = "company";
-	public static final String KEY_POSITION = "position";
-	public static final String KEY_IMAGE = "image";
-	public static final String KEY_TWITTER = "twitter";
-
+	private static final String KEY_USERNAME = "username";
+	private static final String KEY_PASSWORD = "password";
+	private static final String KEY_NAME = "name";
+	private static final String KEY_COMPANY = "company";
+	private static final String KEY_POSITION = "position";
+	private static final String KEY_IMAGE = "image";
+	private static final String KEY_TWITTER = "twitter";
+	private static final String KEY_CONTACT = "contact";
+	private static final String KEY_COMMENT = "comment";
+	private static final String KEY_LOCATION = "location";
+	
 
 	public static final String KEY_PHONE = "phonenumber";
 	public static final String KEY_WEB = "webpage";
@@ -55,12 +58,17 @@ public class MeetMeDbAdapter {
 		"create table mails (_id integer primary key autoincrement, "
 		+ "username text not null, mail text not null)";
 	
+	private static final String DATABASE_CREATE_CONTACTS = 
+		"create table contacts (_id integer primary key autoincrement, "
+		+ "username text not null, contact text not null, comment text, location text";
+	
 	private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
     private static final String DATABASE_TABLE_PROFILES = "profiles";
     private static final String DATABASE_TABLE_PHONES = "phones";
 	private static final String DATABASE_TABLE_WEBS = "webs";
 	private static final String DATABASE_TABLE_MAILS = "mails";
+	private static final String DATABASE_TABLE_CONTACTS = "mails";
 
     private static final int DATABASE_VERSION = 1;
 	
@@ -78,6 +86,7 @@ public class MeetMeDbAdapter {
     		db.execSQL(DATABASE_CREATE_PHONES);
     		db.execSQL(DATABASE_CREATE_WEBS);
     		db.execSQL(DATABASE_CREATE_MAILS);
+    		db.execSQL(DATABASE_CREATE_CONTACTS);
     	}
     	
 
@@ -401,7 +410,20 @@ public class MeetMeDbAdapter {
     	return mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
     			KEY_WEB}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null, null);    	
     }
+  
     
+    /**
+     * TAULA CONTACTS: username, contacte, comment, location
+     */
+    
+    public long createContact(String username, String contact, String comment, String location) {
+    	ContentValues initialValues = new ContentValues();
+    	initialValues.put(KEY_USERNAME, username);
+    	initialValues.put(KEY_CONTACT, contact);
+    	initialValues.put(KEY_COMMENT, comment);
+    	initialValues.put(KEY_LOCATION, location);
+    	
+    	return mDb.insert(DATABASE_TABLE_CONTACTS, null, initialValues);    }
     
 /*
     
