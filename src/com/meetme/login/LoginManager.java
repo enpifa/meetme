@@ -1,6 +1,7 @@
 package com.meetme.login;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
@@ -38,8 +39,8 @@ public class LoginManager {
      */
     public boolean correctUserAndPassword(String username, String password) {
     	if (!existsUser(username)) return false;
-    	User user = mDbHelper.fetchUser(username);
-    	return user.getPassword().equals(password);
+    	Cursor user = mDbHelper.fetchUser(username);
+    	return user.getString(user.getColumnIndex(MeetMeDbAdapter.KEY_PASSWORD)).equals(password);
     }
     
     /**

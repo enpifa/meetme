@@ -43,17 +43,11 @@ public class ProfileActivity extends Activity {
 	private EditText mPhoneBox;
 	private EditText mWebBox;
 	
-	private User mUser;
-	
 	private ProfileDataManager pdm;
 	
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int CROP_FROM_CAMERA = 2;
 	private static final int PICK_FROM_FILE = 3;
-	
-	private boolean hasText(String s) {
-		return !(s == null || s.equals(""));
-	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,43 +55,43 @@ public class ProfileActivity extends Activity {
 
         pdm = new ProfileDataManager(this);
         setContentView(R.layout.profile);
-        mUser = pdm.getProfile(pdm.getActiveUsername());
+        User user = pdm.getProfile(pdm.getActiveUsername());
         
-        if (hasText(mUser.getName())) {
+        if (user.getName() != null && !user.getName().equals("")) {
             TextView name = (TextView) findViewById(R.id.profile_name_label);
-            name.setText(mUser.getName());
+            name.setText(user.getName());
         }
         
-        if (hasText(mUser.getCompany())) {
+        if (user.getCompany() != null && !user.getCompany().equals("")) {
             TextView company = (TextView) findViewById(R.id.profile_company_label);
-            company.setText(mUser.getCompany());
+            company.setText(user.getCompany());
         }
         
-        if (hasText(mUser.getPosition())) {
+        if (user.getPosition() != null && !user.getPosition().equals("")) {
             TextView position = (TextView) findViewById(R.id.profile_position_label);
-            position.setText(mUser.getPosition());
+            position.setText(user.getPosition());
         }
         
-        if (mUser.getEmails().size() > 0 && hasText(mUser.getEmails().get(0))) {
+        if (user.getEmails() != null && !user.getEmails().isEmpty()) {
             TextView email = (TextView) findViewById(R.id.profile_email_label);
-            email.setText(mUser.getEmails().get(0)); // TODO de moment nomŽs pot haver-hi 1, index 0 o 1?
+            email.setText(user.getEmails().get(0)); // TODO de moment nomŽs pot haver-hi 1, index 0 o 1?
         }
         
-        if (mUser.getPhones().size() > 0 && hasText(mUser.getPhones().get(0))) {
+        if (user.getPhones() != null && !user.getPhones().isEmpty()) {
             TextView phone = (TextView) findViewById(R.id.profile_phone_label);
-            phone.setText(mUser.getPhones().get(0)); // TODO de moment nomŽs pot haver-hi 1, index 0 o 1?
+            phone.setText(user.getPhones().get(0)); // TODO de moment nomŽs pot haver-hi 1, index 0 o 1?
 
         }
         
-        if (mUser.getWebs().size() > 0 && hasText(mUser.getWebs().get(0))) {
+        if (user.getWebs() != null && !user.getWebs().isEmpty()) {
             TextView web = (TextView) findViewById(R.id.profile_web_label);
-            web.setText(mUser.getWebs().get(0)); // TODO de moment nomŽs pot haver-hi 1, index 0 o 1?
+            web.setText(user.getWebs().get(0)); // TODO de moment nomŽs pot haver-hi 1, index 0 o 1?
 
         }
         
-        if (hasText(mUser.getTwitter())) {
+        if (user.getTwitter() != null && !user.getTwitter().equals("")) {
             TextView twitter = (TextView) findViewById(R.id.profile_twitter_label);
-            twitter.setText(mUser.getTwitter());
+            twitter.setText(user.getTwitter());
 
         }
         
@@ -145,27 +139,11 @@ public class ProfileActivity extends Activity {
 				dialog.show();
 			}
 		});
-		
-		
         
         flipper = (ViewFlipper)findViewById(R.id.flipper);
     }
 	
 	public void changeToEditView(View view){
-		mNameBox = (EditText) findViewById(R.id.profile_name_box);
-		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
-		mPositionBox = (EditText) findViewById(R.id.profile_position_box);
-		mMailBox = (EditText) findViewById(R.id.profile_email_box);
-		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
-		mWebBox = (EditText) findViewById(R.id.profile_web_box);
-		
-		if (hasText(mUser.getName())) mNameBox.setText(mUser.getName());
-		if (hasText(mUser.getCompany())) mCompanyBox.setText(mUser.getCompany()); 
-		if (hasText(mUser.getPosition())) mPositionBox.setText(mUser.getPosition());
-		if (mUser.getEmails().size() > 0 && hasText(mUser.getEmails().get(0))) mMailBox.setText(mUser.getEmails().get(0)); 
-		if (mUser.getPhones().size() > 0 && hasText(mUser.getPhones().get(0))) mPhoneBox.setText(mUser.getPhones().get(0)); 
-		if (mUser.getWebs().size() > 0 && hasText(mUser.getWebs().get(0))) mWebBox.setText(mUser.getWebs().get(0)); 
-
 		flipper.showNext();
 	}
 	

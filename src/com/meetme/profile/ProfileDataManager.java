@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.meetme.app.MeetMeDbAdapter;
@@ -72,15 +73,15 @@ public class ProfileDataManager {
 
 		//INSERCIî
 		for (int i = 0; i < phones.size(); ++i) {
-			if (!mDbHelper.createPhone(username, phones.get(i))) return false;	
+			if (mDbHelper.createPhone(username, phones.get(i)) < 0) return false;	
 		}
 
 		for (int i = 0; i < emails.size(); ++i) {
-			if (!mDbHelper.createMail(username, emails.get(i))) return false;
+			if (mDbHelper.createMail(username, emails.get(i)) < 0) return false;
 		}
 
 		for (int i = 0; i < webs.size(); ++i) {
-			if (!mDbHelper.createWeb(username, webs.get(i))) return false;
+			if (mDbHelper.createWeb(username, webs.get(i)) < 0) return false;
 		}
 
 		return true;
@@ -94,7 +95,38 @@ public class ProfileDataManager {
 	 * @return instˆncia de User amb les dades del perfil de l'usuari username
 	 */
 	public User getProfile(String username) {
-		User user = mDbHelper.fetchProfile(username);
+		Cursor cursor; 
+		
+		/**
+		 * Recuperar les dades de la taula de profiles
+		 */
+		cursor = mDbHelper.fetchProfile(username);
+		User user = new User();
+		user.setUsername(username);
+		user.setName(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_NAME)));
+		user.setCompany(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMPANY)));
+		user.setPosition(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_POSITION)));
+		user.setImage(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_IMAGE)));
+		user.setTwitter(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_TWITTER)));
+
+		/**
+		 * Recuperar les dades de les taules phones, emails i webs
+		 */
+		cursor = mDbHelper.fetchPhonesOf(username);
+		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+			user.addPhone(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_PHONE)));
+		}
+		
+		cursor = mDbHelper.fetchMailsOf(username);
+		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+			user.addEmail(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_MAIL)));
+		}
+		
+		cursor = mDbHelper.fetchWebsOf(username);
+		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+			user.addWeb(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_WEB)));
+		}
+		
 		return user;
 	}
 	

@@ -30,7 +30,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	User currentViewedUser;
 	
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

@@ -23,7 +23,6 @@ public class LoginActivity extends Activity {
 	EditText et3;
 	LoginManager lm;
 		
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 
