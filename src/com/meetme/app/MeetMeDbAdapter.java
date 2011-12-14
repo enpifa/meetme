@@ -1,6 +1,6 @@
 package com.meetme.app;
 
-import com.meetme.search.User;
+import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.meetme.search.User;
+
 //TODO reanomenar tot el que Žs mail a Email
+
+//TODO pillar el username de les shared preferences sempre que s'hagin d'agafar coses del user o crear-le/updatejar-les
+//TODO segur que val la pena? no implica un acoblament i perd reusabilitat a sac?
 
 public class MeetMeDbAdapter {
 	private static final String KEY_USERNAME = "username";
@@ -23,15 +28,11 @@ public class MeetMeDbAdapter {
 	private static final String KEY_CONTACT = "contact";
 	private static final String KEY_COMMENT = "comment";
 	private static final String KEY_LOCATION = "location";
+	private static final String KEY_PHONE = "phonenumber";
+	private static final String KEY_WEB = "webpage";
+	private static final String KEY_MAIL = "mail";
 	
-
-	public static final String KEY_PHONE = "phonenumber";
-	public static final String KEY_WEB = "webpage";
-	public static final String KEY_MAIL = "mail";
-	
-
-
-	public static final String KEY_ROWID = "_id";
+	private static final String KEY_ROWID = "_id";
 	
 	private static final String TAG = "MeetMeDbAdapter";
 	private DatabaseHelper mDbHelper;
@@ -224,8 +225,8 @@ public class MeetMeDbAdapter {
             		KEY_IMAGE, KEY_TWITTER}, KEY_USERNAME + "=" + "'" + username + "'",
             		null, null, null, null, null);
         if (cursor != null) {
-            cursor.moveToFirst();
-            user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+           cursor.moveToFirst();
+           user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
            user.setCompany(cursor.getString(cursor.getColumnIndex(KEY_COMPANY)));
            user.setPosition(cursor.getString(cursor.getColumnIndex(KEY_POSITION)));
            user.setImage(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
@@ -430,6 +431,7 @@ public class MeetMeDbAdapter {
      * @throws SQLException
      */
     private void fetchWebsOf(User user) throws SQLException {
+    	//TODO distinct true?
     	Cursor cursor = mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
     		KEY_WEB}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);   
     	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
@@ -443,14 +445,43 @@ public class MeetMeDbAdapter {
      * TAULA CONTACTS: username, contacte, comment, location
      */
     
-    public long createContact(String username, String contact, String comment, String location) {
+    public boolean createContact(String username, String contact, String comment, String location) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_CONTACT, contact);
     	initialValues.put(KEY_COMMENT, comment);
     	initialValues.put(KEY_LOCATION, location);
     	
-    	return mDb.insert(DATABASE_TABLE_CONTACTS, null, initialValues);    }
+    	return mDb.insert(DATABASE_TABLE_CONTACTS, null, initialValues) > -1;
+    }
+    
+    public boolean updateContact(String username, String contact, String comment, String location) {
+    	ContentValues args = new ContentValues();
+    	args.put(KEY_USERNAME, username);
+    	args.put(KEY_CONTACT, contact);
+    	args.put(KEY_COMMENT, comment);
+    	args.put(KEY_LOCATION, location);
+    	
+    	return mDb.update(DATABASE_TABLE_CONTACTS, args, KEY_USERNAME + "=" + "'" + username + "'" + " and " + KEY_CONTACT + "=" + "'" + contact + "'", null) > 0;
+    }
+    
+    public ArrayList<User> fetchContacts(String username) {
+    	ArrayList<User> result = new ArrayList<User>();
+    	Cursor cursor = mDb.query(DATABASE_TABLE_CONTACTS, new String[] {KEY_CONTACT, KEY_COMMENT, KEY_LOCATION}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null); 
+    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+    		User auxUser = new User();
+    		auxUser.setUsername(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_CONTACT)));
+    		auxUser.setComment(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMMENT)));
+    		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
+    		result.add(auxUser);
+    	}
+    	return result;
+    }
+    
+    public boolean deleteContact(String username, String contact) {
+    	return mDb.delete(DATABASE_TABLE_CONTACTS, KEY_USERNAME + "=" + "'" + username + "'" + " and " + KEY_CONTACT + "=" + "'" + contact + "'", null) > 0;
+    }
+    
     
 /*
     
