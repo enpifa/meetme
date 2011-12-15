@@ -71,15 +71,16 @@ public class ProfileDataManager {
 
 
 		//INSERCIî
-		for (int i = 0; i < phones.size(); ++i) {
+		for (int i = 0; i < phones.size(); i++) {
 			if (!mDbHelper.createPhone(username, phones.get(i))) return false;	
 		}
 
-		for (int i = 0; i < emails.size(); ++i) {
+		String email = emails.get(0);
+		for (int i = 0; i < emails.size(); i++) {
 			if (!mDbHelper.createMail(username, emails.get(i))) return false;
 		}
 
-		for (int i = 0; i < webs.size(); ++i) {
+		for (int i = 0; i < webs.size(); i++) {
 			if (!mDbHelper.createWeb(username, webs.get(i))) return false;
 		}
 

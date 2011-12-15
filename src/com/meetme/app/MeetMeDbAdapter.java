@@ -29,9 +29,7 @@ public class MeetMeDbAdapter {
 	private static final String KEY_PHONE = "phonenumber";
 	private static final String KEY_WEB = "webpage";
 	private static final String KEY_MAIL = "email";
-	
-	private static final String KEY_ROWID = "_id";
-	
+		
 	private static final String TAG = "MeetMeDbAdapter";
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
@@ -46,20 +44,20 @@ public class MeetMeDbAdapter {
 		+ "position text, image blob, twitter text)";
 	
 	private static final String DATABASE_CREATE_PHONES =
-		"create table phones (_id integer primary key autoincrement, "
-		+ "username text not null, phonenumber text not null)";
+		"create table phones (username text not null, phonenumber text not null, " +
+		"primary key (username, phonenumber))";
 	
 	private static String DATABASE_CREATE_WEBS = 
-		"create table webs (_id integer primary key autoincrement, "
-		+ "username text not null, webpage text not null)";
+		"create table webs (username text not null, webpage text not null, " +
+		"primary key (username, webpage))";
 	
 	private static final String DATABASE_CREATE_EMAILS = 
-		"create table emails (_id integer primary key autoincrement, "
-		+ "username text not null, email text not null)";
+		"create table emails (username text not null, email text not null, " +
+		"primary key (username, email))";
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
-		"create table contacts (_id integer primary key autoincrement, "
-		+ "username text not null, contact text not null, comment text, location text)";
+		"create table contacts (username text not null, contact text not null, comment text, location text, " +
+		"primary key (username, contact))";
 	
 	private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
@@ -86,6 +84,7 @@ public class MeetMeDbAdapter {
     		db.execSQL(DATABASE_CREATE_WEBS);
     		db.execSQL(DATABASE_CREATE_EMAILS);
     		db.execSQL(DATABASE_CREATE_CONTACTS);
+    		
     	}
     	
 
@@ -268,15 +267,6 @@ public class MeetMeDbAdapter {
     }
     
     
-    /**
-     * Esborra la fila de la taula phones amb id rowId
-     * @param rowId id de la fila
-     * @return cert si s'ha esborrat correctament
-     */
-    public boolean deletePhone(long rowId) {
-        return mDb.delete(DATABASE_TABLE_PHONES, KEY_ROWID + "=" + rowId, null) > 0;
-    }
-    
     
     /**
      * Esborra el telfon phoneNumber de l'usuari username.
@@ -302,8 +292,8 @@ public class MeetMeDbAdapter {
      * @throws SQLException
      */
     public void fetchPhonesOf(User user) throws SQLException {
-    	Cursor cursor = mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_ROWID,
-    		KEY_PHONE}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_PHONE}, 
+    			KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);
     	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
     		user.addPhone(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_PHONE)));
     	}
@@ -333,14 +323,6 @@ public class MeetMeDbAdapter {
     	return mDb.insert(DATABASE_TABLE_EMAILS, null, initialValues) > -1;  	
     }
     
-    /**
-     * Esborra la fila de la taula mails amb id rowId
-     * @param rowId id de la fila
-     * @return cert si s'ha esborrat correctament
-     */
-    public boolean deleteMail(long rowId) {
-        return mDb.delete(DATABASE_TABLE_EMAILS, KEY_ROWID + "=" + rowId, null) > 0;
-    }
     
     /**
      * Esborra el mail mail de l'usuari username.
@@ -366,8 +348,8 @@ public class MeetMeDbAdapter {
      * @throws SQLException
      */
     private void fetchEmailsOf(User user) throws SQLException {
-    	Cursor cursor = mDb.query(true, DATABASE_TABLE_EMAILS, new String[] {KEY_ROWID,
-    		KEY_MAIL}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);  
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_EMAILS, new String[] {KEY_MAIL}, 
+    			KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);  
     	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
     		user.addEmail(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_MAIL)));
     	}
@@ -401,15 +383,6 @@ public class MeetMeDbAdapter {
     	
     }
     
-    /**
-     * Esborra la fila de la taula webs amb id rowId
-     * @param rowId id de la fila
-     * @return cert si s'ha esborrat correctament
-     */
-    public boolean deleteWeb(long rowId) {
-        return mDb.delete(DATABASE_TABLE_WEBS, KEY_ROWID + "=" + rowId, null) > 0;
-    }
-    
     
     /**
      * Esborra la web webPage de l'usuari username.
@@ -435,8 +408,7 @@ public class MeetMeDbAdapter {
      */
     private void fetchWebsOf(User user) throws SQLException {
     	//TODO distinct true?
-    	Cursor cursor = mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_ROWID,
-    		KEY_WEB}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);   
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_WEB}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);   
     	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
     		user.addWeb(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_WEB)));
     	}
