@@ -17,10 +17,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.meetme.app.MeetMeDbAdapter;
+import com.meetme.app.PreferencesAdapter;
+
+import android.content.Context;
 import android.util.Log;
 
 public class SearchManager {
 
+	MeetMeDbAdapter mda;
+	Context mContext;
+	
+	public SearchManager(Context context){
+		mContext = context;
+		mda = new MeetMeDbAdapter(context);
+	}
+	
 	public ArrayList<User> searchForUsers(String query){
 		ArrayList<User> result = new ArrayList<User>();
 		String urlAmieggs = "http://www.amieggs.com/meetme/getUsers.php";
@@ -160,5 +172,11 @@ public class SearchManager {
 		}
 		
 		return user;
+	}
+	
+	public void addContact(User contact){
+		PreferencesAdapter pa = new PreferencesAdapter(mContext);
+        String username = pa.getActiveUsername();
+		mda.createContact(username, contact.getUsername(), contact.getComment(), contact.getLocation());
 	}
 }

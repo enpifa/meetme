@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableRow;
@@ -33,7 +34,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sm = new SearchManager();
+        sm = new SearchManager(this);
         
         this.setContentView(R.layout.search);
         
@@ -115,7 +116,20 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	public void addContact(){
 		//TODO: guardar el contacte
+		EditText commentBox = (EditText)addContactDialog.findViewById(R.id.add_contact_comment_box);
+		if (commentBox.getText().toString() != "")
+		currentViewedUser.setComment(commentBox.getText().toString());
+		
+		EditText locationBox = (EditText)addContactDialog.findViewById(R.id.add_contact_location_box);
+		if(locationBox.getText().toString() != "")
+		currentViewedUser.setLocation(locationBox.getText().toString());
+		
+		sm.addContact(currentViewedUser);
+		
 		addContactDialog.dismiss();
+		
+		Button addContactButton = (Button)findViewById(R.id.user_save_contact);
+		addContactButton.setEnabled(false);
 	}
 
 	@Override

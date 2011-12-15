@@ -62,7 +62,7 @@ public class MeetMeDbAdapter {
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
 		"create table contacts (_id integer primary key autoincrement, "
-		+ "username text not null, contact text not null, comment text, location text";
+		+ "username text not null, contact text not null, comment text, location text)";
 	
 	private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
@@ -176,7 +176,13 @@ public class MeetMeDbAdapter {
 				null, null, null, null, null);
     	
         if (cursor != null) {
-            return cursor.moveToFirst();
+            if(cursor.moveToFirst()){
+            	cursor.close();
+            	return true;
+            }
+            cursor.close();
+            return false;
+           
         }
         return false;
     }
@@ -469,12 +475,15 @@ public class MeetMeDbAdapter {
     public ArrayList<User> fetchContacts(String username) {
     	ArrayList<User> result = new ArrayList<User>();
     	Cursor cursor = mDb.query(DATABASE_TABLE_CONTACTS, new String[] {KEY_CONTACT, KEY_COMMENT, KEY_LOCATION}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null); 
-    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
-    		User auxUser = new User();
-    		auxUser.setUsername(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_CONTACT)));
-    		auxUser.setComment(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMMENT)));
-    		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
-    		result.add(auxUser);
+    	if(cursor != null){
+    		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+        		User auxUser = new User();
+        		auxUser.setUsername(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_CONTACT)));
+        		auxUser.setComment(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMMENT)));
+        		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
+        		result.add(auxUser);
+        	}
+    		cursor.close();
     	}
     	return result;
     }

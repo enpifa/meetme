@@ -3,6 +3,7 @@ package com.meetme.contacts;
 import java.util.ArrayList;
 
 import com.meetme.app.R;
+import com.meetme.search.User;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ContactAdapter extends ArrayAdapter<Contact>{
-	private ArrayList<Contact> contacts;
+public class ContactAdapter extends ArrayAdapter<User>{
+	private ArrayList<User> contacts;
 	
-	public ContactAdapter(Context context, int textViewResourceId, ArrayList<Contact> contacts){
+	public ContactAdapter(Context context, int textViewResourceId, ArrayList<User> contacts){
 		super(context, textViewResourceId, contacts);
 		
 		this.contacts = contacts;
@@ -27,21 +28,24 @@ public class ContactAdapter extends ArrayAdapter<Contact>{
             LayoutInflater vi = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.contact_item, null);
 		}
-		Contact contact = contacts.get(position);
+		User contact = contacts.get(position);
 		if(contact != null){
 			TextView name = (TextView)v.findViewById(R.id.contact_name);
 			TextView company = (TextView)v.findViewById(R.id.contact_company);
 			TextView com_position = (TextView)v.findViewById(R.id.contact_position);
 			
-			if(name != null){
+			if(name != null && contact.getName() != null){
 				name.setText(contact.getName());
 			}
-			if(company != null){
+			else if(name != null)name.setText("");
+			if(company != null && contact.getCompany() != null){
 				company.setText(contact.getCompany());
 			}
-			if(com_position != null){
+			else if(company != null) company.setText("");
+			if(com_position != null && contact.getPosition() != null){
 				com_position.setText(contact.getPosition());
 			}
+			else if(com_position != null) com_position.setText("");
 		}
     
 		return v;
