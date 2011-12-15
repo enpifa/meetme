@@ -40,7 +40,7 @@ public class MeetMeDbAdapter {
 
 	
 	private static final String DATABASE_CREATE_PROFILES = 
-		"create table profiles (username primary key, name text, company text, "
+		"create table profiles (username text primary key, name text, company text, "
 		+ "position text, image blob, twitter text)";
 	
 	private static final String DATABASE_CREATE_PHONES =
@@ -56,7 +56,7 @@ public class MeetMeDbAdapter {
 		"primary key (username, email))";
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
-		"create table contacts (username text not null, contact text not null, comment text, location text, " +
+		"create table contacts (username text, contact text, comment text, location text, " +
 		"primary key (username, contact))";
 	
 	private static final String DATABASE_NAME = "data";
