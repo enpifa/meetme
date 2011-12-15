@@ -33,7 +33,8 @@ public class ContactAdapter extends ArrayAdapter<User>{
 			TextView name = (TextView)v.findViewById(R.id.contact_name);
 			TextView company = (TextView)v.findViewById(R.id.contact_company);
 			TextView com_position = (TextView)v.findViewById(R.id.contact_position);
-
+			TextView username = (TextView)v.findViewById(R.id.contact_username);
+			if(username != null) username.setText(contact.getUsername());
 			if(name != null && contact.getName() != null){
 				name.setText(contact.getName());
 			}
