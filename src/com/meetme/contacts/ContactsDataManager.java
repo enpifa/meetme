@@ -35,6 +35,7 @@ public class ContactsDataManager {
 	
 	public ArrayList<User> getContacts(){
 		mda  = new MeetMeDbAdapter(mContext);
+		mda.open();
         PreferencesAdapter pa = new PreferencesAdapter(mContext);
         String username = pa.getActiveUsername();
         ArrayList<User> contacts = mda.fetchContacts(username);
