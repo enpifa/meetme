@@ -66,7 +66,7 @@ public class ProfileDataManager {
 
 		// ESBORRAT
 		if (!mDbHelper.deletePhonesOfUser(username)) return false;
-		if (!mDbHelper.deleteMailsOfUSer(username)) return false;
+		if (!mDbHelper.deleteEmailsOfUSer(username)) return false;
 		if (!mDbHelper.deleteWebsOfUser(username)) return false;
 
 

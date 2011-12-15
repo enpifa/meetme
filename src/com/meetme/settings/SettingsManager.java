@@ -11,7 +11,7 @@ public class SettingsManager {
 		mDbHelper.deleteContactsOfUser(username);
 		mDbHelper.deletePhonesOfUser(username);
 		mDbHelper.deleteWebsOfUser(username);
-		mDbHelper.deleteMailsOfUSer(username);
+		mDbHelper.deleteEmailsOfUSer(username);
 		mDbHelper.deleteUser(username);	
 	}
 	
