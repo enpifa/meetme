@@ -54,7 +54,7 @@ public class MeetMeDbAdapter {
 		+ "username text not null, webpage text not null)";
 	
 	private static final String DATABASE_CREATE_EMAILS = 
-		"create table mails (_id integer primary key autoincrement, "
+		"create table emails (_id integer primary key autoincrement, "
 		+ "username text not null, email text not null)";
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
