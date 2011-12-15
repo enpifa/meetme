@@ -59,7 +59,7 @@ public class MeetMeDbAdapter {
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
 		"create table contacts (_id integer primary key autoincrement, "
-		+ "username text not null, contact text not null, comment text, location text";
+		+ "username text not null, contact text not null, comment text, location text)";
 	
 	private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
