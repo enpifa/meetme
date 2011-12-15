@@ -44,6 +44,7 @@ public class ProfileActivity extends Activity {
 	private EditText mWebBox;
 	
 	private ProfileDataManager pdm;
+	private User mUser;
 	
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int CROP_FROM_CAMERA = 2;
@@ -55,45 +56,12 @@ public class ProfileActivity extends Activity {
 
         pdm = new ProfileDataManager(this);
         setContentView(R.layout.profile);
-        User user = pdm.getProfile(pdm.getActiveUsername());
-        
-        if (user.getName() != null && !user.getName().equals("")) {
-            TextView name = (TextView) findViewById(R.id.profile_name_label);
-            name.setText(user.getName());
+        if (mUser == null) {
+        	mUser = new User();
+            mUser.setUsername(pdm.getActiveUsername());
         }
         
-        if (user.getCompany() != null && !user.getCompany().equals("")) {
-            TextView company = (TextView) findViewById(R.id.profile_company_label);
-            company.setText(user.getCompany());
-        }
-        
-        if (user.getPosition() != null && !user.getPosition().equals("")) {
-            TextView position = (TextView) findViewById(R.id.profile_position_label);
-            position.setText(user.getPosition());
-        }
-        
-        if (user.getEmails() != null && !user.getEmails().isEmpty()) {
-            TextView email = (TextView) findViewById(R.id.profile_email_label);
-            email.setText(user.getEmails().get(0)); // TODO de moment només pot haver-hi 1, index 0 o 1?
-        }
-        
-        if (user.getPhones() != null && !user.getPhones().isEmpty()) {
-            TextView phone = (TextView) findViewById(R.id.profile_phone_label);
-            phone.setText(user.getPhones().get(0)); // TODO de moment només pot haver-hi 1, index 0 o 1?
-
-        }
-        
-        if (user.getWebs() != null && !user.getWebs().isEmpty()) {
-            TextView web = (TextView) findViewById(R.id.profile_web_label);
-            web.setText(user.getWebs().get(0)); // TODO de moment només pot haver-hi 1, index 0 o 1?
-
-        }
-        
-        if (user.getTwitter() != null && !user.getTwitter().equals("")) {
-            TextView twitter = (TextView) findViewById(R.id.profile_twitter_label);
-            twitter.setText(user.getTwitter());
-
-        }
+        fillProfileView();
         
         final String [] items			= new String [] {"Take from camera", "Select from gallery"};				
 		ArrayAdapter<String> adapter	= new ArrayAdapter<String> (this, android.R.layout.select_dialog_item,items);
@@ -144,6 +112,20 @@ public class ProfileActivity extends Activity {
     }
 	
 	public void changeToEditView(View view){
+		mNameBox = (EditText) findViewById(R.id.profile_name_box);
+		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
+		mPositionBox = (EditText) findViewById(R.id.profile_position_box);
+		mMailBox = (EditText) findViewById(R.id.profile_email_box);
+		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
+		mWebBox = (EditText) findViewById(R.id.profile_web_box);
+		
+		if (hasText(mUser.getName())) mNameBox.setText(mUser.getName());
+		if (hasText(mUser.getCompany())) mCompanyBox.setText(mUser.getCompany()); 
+		if (hasText(mUser.getPosition())) mPositionBox.setText(mUser.getPosition());
+		if (mUser.getEmails().size() > 0 && hasText(mUser.getEmails().get(0))) mMailBox.setText(mUser.getEmails().get(0)); 
+		if (mUser.getPhones().size() > 0 && hasText(mUser.getPhones().get(0))) mPhoneBox.setText(mUser.getPhones().get(0)); 
+		if (mUser.getWebs().size() > 0 && hasText(mUser.getWebs().get(0))) mWebBox.setText(mUser.getWebs().get(0)); 
+		
 		flipper.showNext();
 	}
 	
@@ -157,19 +139,18 @@ public class ProfileActivity extends Activity {
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
 		//TODO comprovar que això tira
-		User user = new User();
-		user.setUsername(pdm.getActiveUsername());
-		user.setName(mNameBox.getText().toString());
-		user.setCompany(mCompanyBox.getText().toString());
-		user.setPosition(mPositionBox.getText().toString());
-		user.addEmail(mMailBox.getText().toString());
-		user.addPhone(mPhoneBox.getText().toString());
-		user.addWeb(mWebBox.getText().toString());
+		//User user = new User();
+		mUser.setUsername(pdm.getActiveUsername());
+		mUser.setName(mNameBox.getText().toString());
+		mUser.setCompany(mCompanyBox.getText().toString());
+		mUser.setPosition(mPositionBox.getText().toString());
+		mUser.addEmail(mMailBox.getText().toString());
+		mUser.addPhone(mPhoneBox.getText().toString());
+		mUser.addWeb(mWebBox.getText().toString());
 		
 		
 		
-		pdm.updateProfile(user);
-		//crida pdm.updateUser
+		pdm.updateProfile(mUser);
 		
 		//change to profile view
 		flipper.showPrevious();
@@ -212,6 +193,49 @@ public class ProfileActivity extends Activity {
 		        break;
 
 	    }
+	}
+	
+	private boolean hasText(String s) {
+		return !(s == null || s.equals(""));
+	}
+	
+	private void fillProfileView() {
+		//mUser = pdm.getProfile(pdm.getActiveUsername());
+  
+        if (hasText(mUser.getName())) {
+            TextView name = (TextView) findViewById(R.id.profile_name_label);
+            name.setText(mUser.getName());
+        }
+        
+        if (hasText(mUser.getCompany())) {
+            TextView company = (TextView) findViewById(R.id.profile_company_label);
+            company.setText(mUser.getCompany());
+        }
+        
+        if (hasText(mUser.getPosition())) {
+            TextView position = (TextView) findViewById(R.id.profile_position_label);
+            position.setText(mUser.getPosition());
+        }
+        
+        if (mUser.getEmails().size() > 0 && hasText(mUser.getEmails().get(0))) {
+            TextView email = (TextView) findViewById(R.id.profile_email_label);
+            email.setText(mUser.getEmails().get(0)); // TODO de moment nomes pot haver-hi 1, index 0 o 1?
+        }
+        
+        if (mUser.getPhones().size() > 0 && hasText(mUser.getPhones().get(0))) {
+            TextView phone = (TextView) findViewById(R.id.profile_phone_label);
+            phone.setText(mUser.getPhones().get(0)); // TODO de moment nomes pot haver-hi 1, index 0 o 1?
+        }
+        
+        if (mUser.getWebs().size() > 0 && hasText(mUser.getWebs().get(0))) {
+            TextView web = (TextView) findViewById(R.id.profile_web_label);
+            web.setText(mUser.getWebs().get(0)); // TODO de moment nomes pot haver-hi 1, index 0 o 1?
+        }
+        
+        if (hasText(mUser.getTwitter())) {
+            TextView twitter = (TextView) findViewById(R.id.profile_twitter_label);
+            twitter.setText(mUser.getTwitter());
+        }
 	}
     
     private void doCrop() {

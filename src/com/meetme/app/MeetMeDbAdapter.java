@@ -14,10 +14,7 @@ import com.meetme.search.User;
 
 //TODO reanomenar tot el que Žs mail a Email
 
-//TODO pillar el username de les shared preferences sempre que s'hagin d'agafar coses del user o crear-le/updatejar-les
-//TODO segur que val la pena? no implica un acoblament i perd reusabilitat a sac?
 
-//TODO quan s'esborra un User s'esborren totes les coses user-related? 
 public class MeetMeDbAdapter {
 	private static final String KEY_USERNAME = "username";
 	private static final String KEY_PASSWORD = "password";
@@ -31,7 +28,7 @@ public class MeetMeDbAdapter {
 	private static final String KEY_LOCATION = "location";
 	private static final String KEY_PHONE = "phonenumber";
 	private static final String KEY_WEB = "webpage";
-	private static final String KEY_MAIL = "mail";
+	private static final String KEY_MAIL = "email";
 	
 	private static final String KEY_ROWID = "_id";
 	
@@ -56,9 +53,9 @@ public class MeetMeDbAdapter {
 		"create table webs (_id integer primary key autoincrement, "
 		+ "username text not null, webpage text not null)";
 	
-	private static final String DATABASE_CREATE_MAILS = 
-		"create table mails (_id integer primary key autoincrement, "
-		+ "username text not null, mail text not null)";
+	private static final String DATABASE_CREATE_EMAILS = 
+		"create table emails (_id integer primary key autoincrement, "
+		+ "username text not null, email text not null)";
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
 		"create table contacts (_id integer primary key autoincrement, "
@@ -69,8 +66,8 @@ public class MeetMeDbAdapter {
     private static final String DATABASE_TABLE_PROFILES = "profiles";
     private static final String DATABASE_TABLE_PHONES = "phones";
 	private static final String DATABASE_TABLE_WEBS = "webs";
-	private static final String DATABASE_TABLE_MAILS = "mails";
-	private static final String DATABASE_TABLE_CONTACTS = "mails";
+	private static final String DATABASE_TABLE_EMAILS = "emails";
+	private static final String DATABASE_TABLE_CONTACTS = "contacts";
 
     private static final int DATABASE_VERSION = 1;
 	
@@ -87,7 +84,7 @@ public class MeetMeDbAdapter {
     		db.execSQL(DATABASE_CREATE_PROFILES);
     		db.execSQL(DATABASE_CREATE_PHONES);
     		db.execSQL(DATABASE_CREATE_WEBS);
-    		db.execSQL(DATABASE_CREATE_MAILS);
+    		db.execSQL(DATABASE_CREATE_EMAILS);
     		db.execSQL(DATABASE_CREATE_CONTACTS);
     	}
     	
@@ -240,7 +237,7 @@ public class MeetMeDbAdapter {
            user.setTwitter(cursor.getString(cursor.getColumnIndex(KEY_TWITTER)));
            cursor.close();
            fetchPhonesOf(user);
-           fetchMailsOf(user);
+           fetchEmailsOf(user);
            fetchWebsOf(user);
         }
         return user;
@@ -284,7 +281,7 @@ public class MeetMeDbAdapter {
     /**
      * Esborra el telfon phoneNumber de l'usuari username.
      * @param phoneNumber nœmero de telfon a esborrar
-     * @param username identificador de l'usuari associat al mail
+     * @param username identificador de l'usuari associat al telfon
      * @return cert si s'ha esborrat la fila correctament
      */
     public boolean deletePhoneOfUser(String phoneNumber, String username) {
@@ -319,21 +316,21 @@ public class MeetMeDbAdapter {
     	
     	
     /**
-     * TAULA MAILS: username + mail	
+     * TAULA EMAILS: username + email	
      */
     	
 	/**
      * Es crea una fila a la taula mails per a representar que
      * l'usuaru userId tŽ el mail mail.
      * @param userId la rowId de l'usuari
-     * @param mail un dels mails de l'usuari
+     * @param email un dels mails de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public boolean createMail(String username, String mail) {
+    public boolean createMail(String username, String email) {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
-    	initialValues.put(KEY_MAIL, mail);
-    	return mDb.insert(DATABASE_TABLE_MAILS, null, initialValues) > -1;  	
+    	initialValues.put(KEY_MAIL, email);
+    	return mDb.insert(DATABASE_TABLE_EMAILS, null, initialValues) > -1;  	
     }
     
     /**
@@ -342,7 +339,7 @@ public class MeetMeDbAdapter {
      * @return cert si s'ha esborrat correctament
      */
     public boolean deleteMail(long rowId) {
-        return mDb.delete(DATABASE_TABLE_MAILS, KEY_ROWID + "=" + rowId, null) > 0;
+        return mDb.delete(DATABASE_TABLE_EMAILS, KEY_ROWID + "=" + rowId, null) > 0;
     }
     
     /**
@@ -351,14 +348,14 @@ public class MeetMeDbAdapter {
      * @param username identificador de l'usuari associat al mail
      * @return cert si s'ha esborrat la fila correctament
      */
-    public boolean deleteMailOfUser(String mail, String username) {
-    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + "'" + username + "'" + 
-    			" and " + KEY_MAIL + "=" + mail, null) > 0;
+    public boolean deleteEmailOfUser(String email, String username) {
+    	return mDb.delete(DATABASE_TABLE_EMAILS, KEY_USERNAME + "=" + "'" + username + "'" + 
+    			" and " + KEY_MAIL + "=" + email, null) > 0;
     }
     
     
-    public boolean deleteMailsOfUSer(String username) {
-    	return mDb.delete(DATABASE_TABLE_MAILS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
+    public boolean deleteEmailsOfUSer(String username) {
+    	return mDb.delete(DATABASE_TABLE_EMAILS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
     
@@ -368,15 +365,14 @@ public class MeetMeDbAdapter {
      * @return cursor sobre els mails de l'usuari amb id userId
      * @throws SQLException
      */
-    private void fetchMailsOf(User user) throws SQLException {
-    	Cursor cursor = mDb.query(true, DATABASE_TABLE_MAILS, new String[] {KEY_ROWID,
+    private void fetchEmailsOf(User user) throws SQLException {
+    	Cursor cursor = mDb.query(true, DATABASE_TABLE_EMAILS, new String[] {KEY_ROWID,
     		KEY_MAIL}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);  
     	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
     		user.addEmail(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_MAIL)));
     	}
     	cursor.close();
     }
-    
     
     
     
@@ -485,6 +481,7 @@ public class MeetMeDbAdapter {
         	}
     		cursor.close();
     	}
+    	cursor.close();
     	return result;
     }
     

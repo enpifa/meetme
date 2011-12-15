@@ -7,11 +7,20 @@ import android.os.Bundle;
 
 public class SettingsActivity extends Activity {
 
+	private SettingsManager sm;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.settings);
     }
+	
+	public void logout() {
+		sm.logout();
+		finish();
+	}
+	
+
 	
 }
