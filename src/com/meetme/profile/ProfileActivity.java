@@ -56,10 +56,7 @@ public class ProfileActivity extends Activity {
 
         pdm = new ProfileDataManager(this);
         setContentView(R.layout.profile);
-        if (mUser == null) {
-        	mUser = new User();
-            mUser.setUsername(pdm.getActiveUsername());
-        }
+        if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
         fillProfileView();
         
@@ -151,7 +148,7 @@ public class ProfileActivity extends Activity {
 		
 		
 		pdm.updateProfile(mUser);
-		
+		fillProfileView();
 		//change to profile view
 		flipper.showPrevious();
 	}
