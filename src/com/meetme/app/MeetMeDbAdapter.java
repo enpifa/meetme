@@ -67,7 +67,7 @@ public class MeetMeDbAdapter {
     private static final String DATABASE_TABLE_PHONES = "phones";
 	private static final String DATABASE_TABLE_WEBS = "webs";
 	private static final String DATABASE_TABLE_EMAILS = "emails";
-	private static final String DATABASE_TABLE_CONTACTS = "mails";
+	private static final String DATABASE_TABLE_CONTACTS = "contacts";
 
     private static final int DATABASE_VERSION = 1;
 	
