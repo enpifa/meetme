@@ -472,6 +472,7 @@ public class MeetMeDbAdapter {
     		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
     		result.add(auxUser);
     	}
+    	cursor.close();
     	return result;
     }
     
