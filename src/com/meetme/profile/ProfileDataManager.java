@@ -75,7 +75,6 @@ public class ProfileDataManager {
 			if (!mDbHelper.createPhone(username, phones.get(i))) return false;	
 		}
 
-		String email = emails.get(0);
 		for (int i = 0; i < emails.size(); i++) {
 			if (!mDbHelper.createMail(username, emails.get(i))) return false;
 		}

@@ -31,29 +31,36 @@ public class ContactsDataManager {
 	
 	public ContactsDataManager(Context context){
 		mContext = context;
+		mda  = new MeetMeDbAdapter(mContext);
 	}
 	
 	public ArrayList<User> getContacts(){
-		mda  = new MeetMeDbAdapter(mContext);
+		
         PreferencesAdapter pa = new PreferencesAdapter(mContext);
         String username = pa.getActiveUsername();
         ArrayList<User> contacts = mda.fetchContacts(username);
         //actualitzar per web la resta de dades basiques
-        addWebInfoToContacts(contacts);
+        if(contacts.size() > 0) addWebInfoToContacts(contacts);
         
         return contacts;
 	}
 	
 	public void addWebInfoToContacts(ArrayList<User> contacts){
     	String urlAmieggs = "http://www.amieggs.com/meetme/getUsersBasicData.php";
-		
+
 		//preparem dades a enviar
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		JSONArray usernames = new JSONArray();
 		for(User contact : contacts){
 			usernames.put(contact.getUsername());
 		}
-		nameValuePairs.add(new BasicNameValuePair("usernames", usernames.toString()));
+		JSONObject json_object = new JSONObject();
+		try {
+			json_object.put("usernames", usernames);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		nameValuePairs.add(new BasicNameValuePair("data", json_object.toString()));
 		    
 		//http post
 		InputStream is = null;
@@ -94,7 +101,8 @@ public class ContactsDataManager {
 				JSONObject user_data = json_data.getJSONObject(i);
 				String json_username = user_data.getString("username");
 				for(User contact : contacts){
-					if(contact.getUsername() == json_username){
+					if(contact.getUsername().equals(json_username)){
+						contact.setName(user_data.getString("name"));
 						contact.setCompany(user_data.getString("company"));
 						contact.setPosition(user_data.getString("position"));
 					}
