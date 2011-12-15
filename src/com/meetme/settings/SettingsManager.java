@@ -1,11 +1,23 @@
 package com.meetme.settings;
 
+import android.content.Context;
+
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
 
 public class SettingsManager {
 	private MeetMeDbAdapter mDbHelper;
 	private PreferencesAdapter pa;
+	
+	
+	
+	public SettingsManager(Context context) {
+		super();
+		mDbHelper = new MeetMeDbAdapter(context);
+		pa = new PreferencesAdapter(context);
+
+	}
+
 	public void deleteUser(String username) {
 		mDbHelper.deleteProfile(username);
 		mDbHelper.deleteContactsOfUser(username);

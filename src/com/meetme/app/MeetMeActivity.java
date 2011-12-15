@@ -13,14 +13,10 @@ import com.meetme.settings.SettingsActivity;
 
 public class MeetMeActivity extends TabActivity {
 	
-	private MeetMeDbAdapter mDbHelper;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-
-    	mDbHelper = new MeetMeDbAdapter(this);
-        mDbHelper.open();
 
     	System.out.println("OK");
         setContentView(R.layout.main);

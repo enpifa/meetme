@@ -100,6 +100,7 @@ public class MeetMeDbAdapter {
     
     public MeetMeDbAdapter(Context ctx) {
     	mCtx = ctx;
+    	open();
     }
     
     public MeetMeDbAdapter open() throws SQLException {

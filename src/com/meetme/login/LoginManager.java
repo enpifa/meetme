@@ -14,7 +14,6 @@ public class LoginManager {
     public LoginManager(Context context) {
 		super();
 		mDbHelper = new MeetMeDbAdapter(context);
-		mDbHelper.open();
 		pa = new PreferencesAdapter(context);
 	}
     
