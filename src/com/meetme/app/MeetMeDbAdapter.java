@@ -481,7 +481,6 @@ public class MeetMeDbAdapter {
         	}
     		cursor.close();
     	}
-    	cursor.close();
     	return result;
     }
     
