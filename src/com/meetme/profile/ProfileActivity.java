@@ -56,7 +56,7 @@ public class ProfileActivity extends Activity {
 
         pdm = new ProfileDataManager(this);
         setContentView(R.layout.profile);
-        if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
+        mUser = pdm.getProfile(pdm.getActiveUsername());
         
         fillProfileView();
         
@@ -109,6 +109,8 @@ public class ProfileActivity extends Activity {
     }
 	
 	public void changeToEditView(View view){
+		System.out.print("edit");
+
 		mNameBox = (EditText) findViewById(R.id.profile_name_box);
 		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
 		mPositionBox = (EditText) findViewById(R.id.profile_position_box);
@@ -128,6 +130,8 @@ public class ProfileActivity extends Activity {
 	
 	public void saveChangesAndChangeToProfileView(View view){
 		//pilla info
+		System.out.print("saveChangesAndChangeToProfileView");
+
 		mNameBox = (EditText) findViewById(R.id.profile_name_box);
 		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
 		mPositionBox = (EditText) findViewById(R.id.profile_position_box);
@@ -136,23 +140,27 @@ public class ProfileActivity extends Activity {
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
 		//TODO comprovar que aix˜ tira
-		//User user = new User();
-		mUser.setUsername(pdm.getActiveUsername());
-		mUser.setName(mNameBox.getText().toString());
-		mUser.setCompany(mCompanyBox.getText().toString());
-		mUser.setPosition(mPositionBox.getText().toString());
-		mUser.addEmail(mMailBox.getText().toString());
-		mUser.addPhone(mPhoneBox.getText().toString());
-		mUser.addWeb(mWebBox.getText().toString());
+		User user = new User();
+		user.setUsername(pdm.getActiveUsername());
+		user.setName(mNameBox.getText().toString());
+		user.setCompany(mCompanyBox.getText().toString());
+		user.setPosition(mPositionBox.getText().toString());
+		user.addEmail(mMailBox.getText().toString());
+		user.addPhone(mPhoneBox.getText().toString());
+		user.addWeb(mWebBox.getText().toString());
+		pdm.updateProfile(user);
 		
-		
-		
-		pdm.updateProfile(mUser);
 		fillProfileView();
 		//change to profile view
 		flipper.showPrevious();
 	}
 	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		pdm.closeDb();
+	}
+
 	public void syncDataWithWeb(View view){
 		pdm.syncData();
 	}

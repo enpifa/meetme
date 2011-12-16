@@ -37,6 +37,10 @@ public class ContactsDataManager {
         return contacts;
 	}
 	
+	public void closeDb() {
+		if (mda != null) mda.close();
+	}
+	
 	public void addWebInfoToContacts(ArrayList<User> contacts){
     	String url = "http://www.amieggs.com/meetme/getUsersBasicData.php";
 

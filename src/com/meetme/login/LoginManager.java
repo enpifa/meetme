@@ -52,6 +52,10 @@ public class LoginManager {
     	return mDbHelper.existsUser(username);
     }
     
+    public void closeDb() {
+    	if (mDbHelper != null) mDbHelper.close();
+    }
+    
     public ArrayList<User> getUsers() {
     	return mDbHelper.fetchAllProfiles();
     }

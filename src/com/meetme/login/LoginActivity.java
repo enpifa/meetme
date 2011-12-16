@@ -45,6 +45,9 @@ public class LoginActivity extends Activity {
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
         
         users = lm.getUsers();
+       // User prova = new User();
+       // prova.setName("prova");
+      //  users.add(prova);
 
         usersList = (ListView) findViewById(R.id.users_list);
         adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
@@ -98,6 +101,14 @@ public class LoginActivity extends Activity {
         
 	}
 	
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		lm.closeDb();
+	}
+
+
 	/**
 	 * Funci— per quan premen el bot— de Register, que carrega el layout corresponent.
 	 * @param view
@@ -116,7 +127,7 @@ public class LoginActivity extends Activity {
 		flipper.showPrevious();
 	}
 	
-	private void changeToApp(){
+	private void changeToApp() {
 		Intent mainIntent = new Intent(this, MeetMeActivity.class);
 		startActivity(mainIntent);
 	}
