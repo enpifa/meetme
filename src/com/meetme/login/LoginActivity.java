@@ -23,33 +23,18 @@ public class LoginActivity extends Activity {
 	EditText et3;
 	LoginManager lm;
 		
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 
         lm = new LoginManager(this);
         
-        
-        
-        /**
-         * PROVA 
-         */
-        
-        
-       // if (lm.registerUser("prova", "pass") != -1) System.out.print("inserci—");
-      //  Boolean a = true;
-      //  if (a) System.out.print("a");
-      //  if (lm.existsUser("prova")) System.out.print("Correcto!");
-        
-        
-        /**
-         * FI PROVA
-         */
         //load login.xml from layout
         setContentView(R.layout.login);
         
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
-        login = (Button)findViewById(R.id.login_button);
+        login = (Button) findViewById(R.id.login_button);
         create = (Button)findViewById(R.id.create_button);
         errorText = (TextView)findViewById(R.id.login_error_message);
         et1 = (EditText)findViewById(R.id.username_box);
