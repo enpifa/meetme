@@ -14,6 +14,7 @@ import com.meetme.settings.SettingsActivity;
 
 public class MeetMeActivity extends TabActivity {
 	
+	
 	TabHost tabHost;
     /** Called when the activity is first created. */
     @Override

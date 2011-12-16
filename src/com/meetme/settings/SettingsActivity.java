@@ -7,6 +7,12 @@ import android.os.Bundle;
 
 public class SettingsActivity extends Activity {
 
+	@Override
+	protected void onDestroy() {
+		sm.closeDb();
+		super.onDestroy();
+	}
+
 	private SettingsManager sm;
 	
 	@Override

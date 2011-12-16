@@ -102,4 +102,8 @@ public class SearchManager {
         String username = pa.getActiveUsername();
 		mda.createContact(username, contact.getUsername(), contact.getComment(), contact.getLocation());
 	}
+	
+	public void closeDb() {
+		if (mda != null) mda.close();
+	}
 }

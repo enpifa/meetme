@@ -80,8 +80,8 @@ public class ContactsActivity extends Activity {
     
     @Override
 	protected void onDestroy() {
-		super.onDestroy();
 		cdm.closeDb();
+    	super.onDestroy();
     }
 
 	public void changeToSearchView(View view){

@@ -157,8 +157,8 @@ public class ProfileActivity extends Activity {
 	
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		pdm.closeDb();
+		super.onDestroy();
 	}
 
 	public void syncDataWithWeb(View view){

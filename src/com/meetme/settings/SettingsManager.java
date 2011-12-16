@@ -36,4 +36,7 @@ public class SettingsManager {
 		mDbHelper.updateUser(pa.getActiveUsername(), password);
 	}
 	
+	public void closeDb() {
+		if (mDbHelper != null) mDbHelper.close();
+	}
 }
