@@ -32,7 +32,6 @@ public class ProfileDataManager {
 	public ProfileDataManager(Context context) {
 		super();
 		mDbHelper = new MeetMeDbAdapter(context);
-		mDbHelper.open();
 		pa = new PreferencesAdapter(context);
 	}
 
