@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.meetme.app.R;
+import com.meetme.app.User;
 
 public class UsersAdapter  extends ArrayAdapter<User>{
 	private ArrayList<User> users;

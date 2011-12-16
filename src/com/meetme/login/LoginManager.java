@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
-import com.meetme.search.User;
+import com.meetme.app.User;
 
 public class LoginManager {
     

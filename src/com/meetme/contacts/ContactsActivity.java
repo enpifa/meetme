@@ -3,8 +3,8 @@ package com.meetme.contacts;
 import java.util.ArrayList;
 
 import com.meetme.app.R;
+import com.meetme.app.User;
 import com.meetme.search.SearchManager;
-import com.meetme.search.User;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class ContactsActivity extends Activity {
         contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(@SuppressWarnings("rawtypes") AdapterView parent, View v, int position, long id){
                 // Start your Activity according to the item just clicked.
-            	TextView name = (TextView)v.findViewById(R.id.contact_username);
+            	TextView name = (TextView)v.findViewById(R.id.user_username);
             	changeToProfileView(name.getText().toString());
             }
         });

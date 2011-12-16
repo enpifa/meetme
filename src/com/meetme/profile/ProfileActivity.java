@@ -26,7 +26,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.R;
-import com.meetme.search.User;
+import com.meetme.app.User;
 
 public class ProfileActivity extends Activity {
 

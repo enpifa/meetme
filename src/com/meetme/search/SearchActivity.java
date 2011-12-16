@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.R;
+import com.meetme.app.User;
 
 public class SearchActivity extends Activity implements OnClickListener {
 

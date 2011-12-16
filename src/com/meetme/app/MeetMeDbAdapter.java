@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.meetme.search.User;
 
 //TODO reanomenar tot el que Žs mail a Email
 

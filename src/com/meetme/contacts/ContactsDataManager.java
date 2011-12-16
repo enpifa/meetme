@@ -11,8 +11,8 @@ import android.util.Log;
 
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
+import com.meetme.app.User;
 import com.meetme.app.WebAccessAdapter;
-import com.meetme.search.User;
 
 public class ContactsDataManager {
  //TODO fer el inserir un nou username comment i location i recuperar llista de usernames, i comment i location de un username

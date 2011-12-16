@@ -3,7 +3,7 @@ package com.meetme.contacts;
 import java.util.ArrayList;
 
 import com.meetme.app.R;
-import com.meetme.search.User;
+import com.meetme.app.User;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -26,14 +26,14 @@ public class ContactAdapter extends ArrayAdapter<User>{
 		View v = convertView;
 		if (v == null) {
             LayoutInflater vi = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.contact_item, null);
+            v = vi.inflate(R.layout.user_item, null);
 		}
 		User contact = contacts.get(position);
 		if(contact != null){
-			TextView name = (TextView)v.findViewById(R.id.contact_name);
-			TextView company = (TextView)v.findViewById(R.id.contact_company);
-			TextView com_position = (TextView)v.findViewById(R.id.contact_position);
-			TextView username = (TextView)v.findViewById(R.id.contact_username);
+			TextView name = (TextView)v.findViewById(R.id.user_name);
+			TextView company = (TextView)v.findViewById(R.id.user_company);
+			TextView com_position = (TextView)v.findViewById(R.id.user_position);
+			TextView username = (TextView)v.findViewById(R.id.user_username);
 			if(username != null) username.setText(contact.getUsername());
 			if(name != null && contact.getName() != null){
 				name.setText(contact.getName());

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
+import com.meetme.app.User;
 import com.meetme.app.WebAccessAdapter;
 
 import android.content.Context;
