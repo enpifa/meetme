@@ -29,4 +29,7 @@
 	
 	<string name="add_comment">Add a comment:</string>
 	<string name="add_location">Add a location</string>
+	
+	<string name="settings_logout">Logout</string>
+	<string name="settings_delete_user">Delete current user</string>
 </resources>
