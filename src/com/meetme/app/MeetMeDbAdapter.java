@@ -242,6 +242,27 @@ public class MeetMeDbAdapter {
         return user;
     }
     
+    public ArrayList<User> fetchAllProfiles() throws SQLException {
+    	Cursor cursor =
+    		mDb.query(DATABASE_TABLE_PROFILES, new String[] {KEY_USERNAME, KEY_NAME, KEY_COMPANY, KEY_POSITION}, null, null, null, null, null);
+    	ArrayList<User> users = new ArrayList<User>();
+    	if (cursor != null) {
+        	User user = new User();
+    		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {    			
+    			user.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USERNAME)));
+    			user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+    			user.setCompany(cursor.getString(cursor.getColumnIndex(KEY_COMPANY)));
+    			user.setPosition(cursor.getString(cursor.getColumnIndex(KEY_POSITION)));
+    			user.setImage(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+    			user.setTwitter(cursor.getString(cursor.getColumnIndex(KEY_TWITTER)));
+    			
+    			users.add(user);
+        	}
+    	}
+    	cursor.close();
+    	return users;
+    }
+    
     
     
     

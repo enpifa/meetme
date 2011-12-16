@@ -1,16 +1,21 @@
 package com.meetme.login;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.MeetMeActivity;
 import com.meetme.app.R;
+import com.meetme.app.User;
+import com.meetme.search.UsersAdapter;
 
 public class LoginActivity extends Activity {
 
@@ -21,8 +26,12 @@ public class LoginActivity extends Activity {
 	EditText et1;
 	EditText et2;
 	EditText et3;
+	ListView usersList;
 	LoginManager lm;
-		
+	UsersAdapter adapter;
+	ArrayList<User> users;
+
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +43,20 @@ public class LoginActivity extends Activity {
         
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
+        
+        users = lm.getUsers();
+
+        usersList = (ListView) findViewById(R.id.users_list);
+        adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
+        
+        usersList.setAdapter(adapter);
+
         login = (Button) findViewById(R.id.login_button);
         create = (Button)findViewById(R.id.create_button);
         errorText = (TextView)findViewById(R.id.login_error_message);
         et1 = (EditText)findViewById(R.id.username_box);
         et2 = (EditText)findViewById(R.id.password_box);
+        
 		
         login.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
