@@ -60,7 +60,6 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.flipper);
         
         flipper = (ViewFlipper)findViewById(R.id.flipper);
-<<<<<<< HEAD
         
         View profile;
         LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,16 +68,6 @@ public class ProfileActivity extends Activity {
         
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
-=======
-        
-        View profile;
-        LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        profile = vi.inflate(R.layout.profile, null);
-        pva = new ProfileViewAdapter(this, profile);
-        
-        if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
-        
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
         
@@ -164,24 +153,6 @@ public class ProfileActivity extends Activity {
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		//TODO comprovar que aix˜ tira
-		mUser = new User();
-		mUser.setUsername(pdm.getActiveUsername());
-		mUser.setName(mNameBox.getText().toString());
-		mUser.setCompany(mCompanyBox.getText().toString());
-		mUser.setPosition(mPositionBox.getText().toString());
-		mUser.addEmail(mMailBox.getText().toString());
-		mUser.addPhone(mPhoneBox.getText().toString());
-		mUser.addWeb(mWebBox.getText().toString());
-		pdm.updateProfile(mUser);
-		
-=======
-		
-=======
-		
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
@@ -195,10 +166,7 @@ public class ProfileActivity extends Activity {
 		pdm.updateProfile(mUser);
 		pva.loadUserInfo(mUser);
 
-<<<<<<< HEAD
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
+
 		//change to profile view
 		flipper.showPrevious();
 		fillProfileView();
@@ -269,8 +237,7 @@ public class ProfileActivity extends Activity {
 		return !(s == null || s.equals(""));
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	private void fillProfileView() {
 		mUser = pdm.getProfile(pdm.getActiveUsername());		
 		
@@ -309,10 +276,7 @@ public class ProfileActivity extends Activity {
             twitter.setText(mUser.getTwitter());
         }
 	}
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
+
     
     private void doCrop() {
 		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
