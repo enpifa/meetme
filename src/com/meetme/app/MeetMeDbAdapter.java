@@ -456,6 +456,15 @@ public class MeetMeDbAdapter {
     	return result;
     }
     
+    public ArrayList<String> getContactUsernames(String username){
+    	ArrayList<User> contacts = fetchContacts(username);
+    	ArrayList<String> usernames = new ArrayList<String>();
+    	for(User c : contacts){
+    		usernames.add(c.getUsername());
+    	}
+    	return usernames;
+    }
+    
     public boolean deleteContact(String username, String contact) {
     	return mDb.delete(DATABASE_TABLE_CONTACTS, KEY_USERNAME + "=" + "'" + username + "'" + " and " + KEY_CONTACT + "=" + "'" + contact + "'", null) > 0;
     }

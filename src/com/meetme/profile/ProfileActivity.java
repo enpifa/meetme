@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -16,15 +17,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.meetme.app.ProfileViewAdapter;
 import com.meetme.app.R;
 import com.meetme.app.User;
 
@@ -45,6 +47,7 @@ public class ProfileActivity extends Activity {
 	
 	private ProfileDataManager pdm;
 	private User mUser;
+	private ProfileViewAdapter pva;
 	
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int CROP_FROM_CAMERA = 2;
@@ -55,10 +58,23 @@ public class ProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         pdm = new ProfileDataManager(this);
-        setContentView(R.layout.profile);
+        setContentView(R.layout.flipper);
+        
+        flipper = (ViewFlipper)findViewById(R.id.flipper);
+        
+        View profile;
+        LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        profile = vi.inflate(R.layout.profile, null);
+        pva = new ProfileViewAdapter(this, profile);
+        
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
-        fillProfileView();
+        pva.loadUserInfo(mUser);
+        flipper.addView(profile);
+        
+        View editProfile;
+        editProfile = vi.inflate(R.layout.profile_edit, null);
+        flipper.addView(editProfile);
         
         final String [] items			= new String [] {"Take from camera", "Select from gallery"};				
 		ArrayAdapter<String> adapter	= new ArrayAdapter<String> (this, android.R.layout.select_dialog_item,items);
@@ -105,10 +121,10 @@ public class ProfileActivity extends Activity {
 			}
 		});
         
-        flipper = (ViewFlipper)findViewById(R.id.flipper);
+        
     }
 	
-	public void changeToEditView(View view){
+	private void changeToEditView(){
 		mNameBox = (EditText) findViewById(R.id.profile_name_box);
 		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
 		mPositionBox = (EditText) findViewById(R.id.profile_position_box);
@@ -126,7 +142,7 @@ public class ProfileActivity extends Activity {
 		flipper.showNext();
 	}
 	
-	public void saveChangesAndChangeToProfileView(View view){
+	private void saveChangesAndChangeToProfileView(){
 		//pilla info
 		mNameBox = (EditText) findViewById(R.id.profile_name_box);
 		mCompanyBox = (EditText) findViewById(R.id.profile_company_box);
@@ -137,23 +153,39 @@ public class ProfileActivity extends Activity {
 		
 		//TODO comprovar que aix˜ tira
 		//User user = new User();
-		mUser.setUsername(pdm.getActiveUsername());
+		//mUser.setUsername(pdm.getActiveUsername());
+		
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
-		mUser.addEmail(mMailBox.getText().toString());
-		mUser.addPhone(mPhoneBox.getText().toString());
-		mUser.addWeb(mWebBox.getText().toString());
+		if(!mUser.getEmails().contains(mMailBox.getText().toString()))
+			mUser.addEmail(mMailBox.getText().toString());
+		if(!mUser.getPhones().contains(mPhoneBox.getText().toString()))
+			mUser.addPhone(mPhoneBox.getText().toString());
+		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
+			mUser.addWeb(mWebBox.getText().toString());
 		
 		
 		
 		pdm.updateProfile(mUser);
-		fillProfileView();
+		pva.loadUserInfo(mUser);
 		//change to profile view
 		flipper.showPrevious();
 	}
 	
-	public void syncDataWithWeb(View view){
+	public void onClickButton(View view){
+		if(view.getId() == R.id.profile_sync_button){
+			syncDataWithWeb();
+		}
+		else if(view.getId() == R.id.profile_save_changes){
+			saveChangesAndChangeToProfileView();
+		}
+		else if(view.getId() == R.id.profile_edit_button){
+			changeToEditView();
+		}
+	}
+	
+	private void syncDataWithWeb(){
 		pdm.syncData();
 	}
 	
@@ -196,7 +228,7 @@ public class ProfileActivity extends Activity {
 		return !(s == null || s.equals(""));
 	}
 	
-	private void fillProfileView() {
+	/*private void fillProfileView() {
 		//mUser = pdm.getProfile(pdm.getActiveUsername());
   
         if (hasText(mUser.getName())) {
@@ -233,7 +265,7 @@ public class ProfileActivity extends Activity {
             TextView twitter = (TextView) findViewById(R.id.profile_twitter_label);
             twitter.setText(mUser.getTwitter());
         }
-	}
+	}*/
     
     private void doCrop() {
 		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();

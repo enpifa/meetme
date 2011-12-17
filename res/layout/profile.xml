@@ -4,361 +4,142 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical" >
-
-    <ViewFlipper
-        android:id="@+id/flipper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/beige"
-            android:gravity="right"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip" >
-
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:adjustViewBounds="true"
-                    android:background="@color/beige"
-                    android:src="@drawable/default_profile" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dip"
-                    android:layout_weight="0.7"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/profile_name_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_name"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/profile_company_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_company" />
-
-                    <TextView
-                        android:id="@+id/profile_position_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_position" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TableLayout
-                android:id="@+id/tableLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dip"
-                android:stretchColumns="*" >
-
-                <TableRow
-                    android:id="@+id/tableRow1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" >
-
-                    <TextView
-                        android:id="@+id/profile_email_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_email" />
-
-                    <ImageView
-                        android:id="@+id/ic_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_email" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/profile_phone_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_phone" />
-
-                    <ImageView
-                        android:id="@+id/ic_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_phone" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/profile_web_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_web" />
-
-                    <ImageView
-                        android:id="@+id/ic_web"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_web" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/profile_twitter_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:layout_margin="5dip"
-                        android:text="@string/profile_default_twitter" />
-
-                    <ImageView
-                        android:id="@+id/ic_twitter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_twitter" />
-                </TableRow>
-            </TableLayout>
-
-            <LinearLayout
-                android:id="@+id/buttons_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="10dip" >
-
-                <Button
-                    android:id="@+id/sync_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="syncDataWithWeb"
-                    android:text="@string/sync" />
-
-                <Button
-                    android:id="@+id/profile_save_changes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="changeToEditView"
-                    android:text="@string/edit_profile" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/beige"
-            android:gravity="right"
-            android:orientation="vertical"
-            android:paddingTop="10dip" >
-
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip" >
-
-                <ImageView
-                    android:id="@+id/profile_image_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:background="@color/beige"
-                    android:paddingBottom="10dip"
-                    android:paddingTop="5dip"
-                    android:src="@drawable/default_profile" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dip"
-                    android:layout_weight="0.7"
-                    android:orientation="vertical" >
-
-                    <EditText
-                        android:id="@+id/profile_name_box"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/profile_default_name"
-                        android:inputType="textPersonName" >
-
-                        <requestFocus />
-                    </EditText>
-
-                    <EditText
-                        android:id="@+id/profile_company_box"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/profile_default_company" />
-
-                    <EditText
-                        android:id="@+id/profile_position_box"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/profile_default_position" />
-
-                    <Button
-                        android:id="@+id/profile_change_image_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/change_profile_image" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TableLayout
-                android:id="@+id/tableLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dip"
-                android:shrinkColumns="0"
-                android:stretchColumns="0" >
-
-                <TableRow
-                    android:id="@+id/tableRow1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" >
-
-                    <EditText
-                        android:id="@+id/profile_email_box"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/profile_default_email"
-                        android:inputType="textEmailAddress" />
-
-                    <ImageView
-                        android:id="@+id/ic_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_email" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <EditText
-                        android:id="@+id/profile_phone_box"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/profile_default_phone"
-                        android:inputType="phone" />
-
-                    <ImageView
-                        android:id="@+id/ic_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_phone" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <EditText
-                        android:id="@+id/profile_web_box"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/profile_default_web" />
-
-                    <ImageView
-                        android:id="@+id/ic_web"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_margin="5dip"
-                        android:src="@drawable/ic_web" />
-                </TableRow>
-            </TableLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip" >
-
-                <TextView
-                    android:id="@+id/profile_twitter_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_twitter"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <ImageView
-                    android:id="@+id/ic_twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|left"
-                    android:layout_margin="5dip"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_twitter" />
-
-                <Button
-                    android:id="@+id/profile_change_twitter_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/change_twitter_account" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/profile_save_changes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="saveChangesAndChangeToProfileView"
-                android:text="@string/save_changes" />
-        </LinearLayout>
-    </ViewFlipper>
-
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@color/beige"
+	    android:gravity="right"
+	    android:orientation="vertical" >
+	
+	    <LinearLayout
+	        android:id="@+id/linearLayout1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5dip" >
+	
+	        <ImageView
+	            android:id="@+id/profile_image"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.3"
+	            android:adjustViewBounds="true"
+	            android:background="@color/beige"
+	            android:src="@drawable/default_profile" />
+	
+	        <LinearLayout
+	            android:id="@+id/linearLayout2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_margin="5dip"
+	            android:layout_weight="0.7"
+	            android:orientation="vertical" >
+	
+	            <TextView
+	                android:id="@+id/profile_name_label"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="@string/profile_default_name"
+	                android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	            <TextView
+	                android:id="@+id/profile_company_label"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="@string/profile_default_company" />
+	
+	            <TextView
+	                android:id="@+id/profile_position_label"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="@string/profile_default_position" />
+	        </LinearLayout>
+	    </LinearLayout>
+	
+	    <ListView
+	        android:id="@+id/profile_emails_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	    </ListView>
+	    
+	    <ListView
+	        android:id="@+id/profile_phones_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	    </ListView>
+	    
+	    <ListView
+	        android:id="@+id/profile_webs_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	    </ListView>
+	
+	    
+	
+	    <LinearLayout
+	        android:id="@+id/profile_twitter_layout"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+	
+	        <TextView
+	            android:id="@+id/profile_twitter_label"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical|right"
+	            android:layout_margin="5dip"
+	            android:text="@string/profile_default_twitter" />
+	
+	        <ImageView
+	            android:id="@+id/ic_twitter"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical|left"
+	            android:layout_margin="5dip"
+	            android:src="@drawable/ic_twitter" />
+	    </LinearLayout>
+	
+	
+	    <LinearLayout
+	        android:id="@+id/buttons_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginRight="10dip"
+	        android:layout_marginTop="10dip" >
+	
+	        <Button
+	            android:id="@+id/profile_sync_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:onClick="onClickButton"
+	            android:text="@string/sync" />
+	
+	        <Button
+	            android:id="@+id/profile_edit_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:onClick="onClickButton"
+	            android:text="@string/edit_profile" />
+	        
+	        <Button
+	            android:id="@+id/profile_save_contact_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dip"
+	            android:layout_marginRight="10dip"
+	            android:onClick="onClickButton"
+	            android:text="@string/add_contact" />
+	
+	        <Button
+	            android:id="@+id/profile_back_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dip"
+	            android:onClick="onClickButton"
+	            android:text="@string/back" />
+	
+	    </LinearLayout>
+	</LinearLayout>
 </ScrollView>
