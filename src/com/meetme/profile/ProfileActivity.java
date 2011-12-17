@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -165,7 +166,6 @@ public class ProfileActivity extends Activity {
 		
 		pdm.updateProfile(mUser);
 		pva.loadUserInfo(mUser);
-
 
 		//change to profile view
 		flipper.showPrevious();
