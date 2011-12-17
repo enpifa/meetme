@@ -18,7 +18,8 @@ public class SettingsManager {
 
 	}
 
-	public void deleteUser(String username) {
+	public void deleteCurrentUser() {
+		String username = pa.getActiveUsername();
 		mDbHelper.deleteProfile(username);
 		mDbHelper.deleteContactsOfUser(username);
 		mDbHelper.deletePhonesOfUser(username);
@@ -31,9 +32,6 @@ public class SettingsManager {
 		pa.setActiveUser(null);
 	}
 	
-	public void deleteCurrentUser() {
-		mDbHelper.deleteUser(pa.getActiveUsername());
-	}
 	
 	public void changePassword(String password) {
 		mDbHelper.updateUser(pa.getActiveUsername(), password);

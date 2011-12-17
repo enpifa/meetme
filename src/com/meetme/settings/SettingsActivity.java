@@ -10,18 +10,17 @@ public class SettingsActivity extends Activity {
 	private SettingsManager sm;
 
 	@Override
-	protected void onDestroy() {
-		sm.closeDb();
-		super.onDestroy();
-	}
-
-	
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sm = new SettingsManager(this);
         setContentView(R.layout.settings);
     }
+	
+	@Override
+	protected void onDestroy() {
+		sm.closeDb();
+		super.onDestroy();
+	}
 	
 	public void logout(View v) {
 		sm.logout();

@@ -23,9 +23,9 @@ public class LoginActivity extends Activity {
 	Button login;
 	Button create;
 	TextView errorText;
-	EditText et1;
-	EditText et2;
-	EditText et3;
+	EditText usernameBox;
+	EditText passwordBox;
+	EditText password2Box;
 	ListView usersList;
 	LoginManager lm;
 	UsersAdapter adapter;
@@ -44,23 +44,12 @@ public class LoginActivity extends Activity {
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
         
-        users = lm.getUsers();
+        fillLogin();
         
-        usersList = (ListView) findViewById(R.id.users_list);
-        adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
-        usersList.setAdapter(adapter);
-
-        login = (Button) findViewById(R.id.login_button);
-        create = (Button)findViewById(R.id.create_button);
-        errorText = (TextView)findViewById(R.id.login_error_message);
-        et1 = (EditText)findViewById(R.id.username_box);
-        et2 = (EditText)findViewById(R.id.password_box);
-        
-		
         login.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String username = et1.getEditableText().toString();
-				String password = et2.getEditableText().toString();
+				String username = usernameBox.getEditableText().toString();
+				String password = passwordBox.getEditableText().toString();
 				if (lm.correctUserAndPassword(username, password)) {
 					//posar el username de l'usuari actual a les shared
 					lm.setActiveUser(username);
@@ -69,25 +58,20 @@ public class LoginActivity extends Activity {
 				}
 				else
 					errorText.setText("ERROR: username or password are not correct " + username + " " + password);
-				//Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
-				//startActivity(i);
-				//carregar la pagina de perfil amb el nom d'usuari
 			}
 		});
         
         create.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				String username = et1.getEditableText().toString();
-				String password = et2.getEditableText().toString();
-				et3 = (EditText)findViewById(R.id.password_confirm_box);
-				String cPass = et3.getEditableText().toString();
+				String username = usernameBox.getEditableText().toString();
+				String password = passwordBox.getEditableText().toString();
+				String cPass = password2Box.getEditableText().toString();
 				if (password.equals(cPass)) { //passwords iguals
 					if (lm.existsUser(username)) errorText.setText("ERROR CREATING NEW USER: The user already exists");
 					else {
 						lm.registerUser(username, password);
 						lm.setActiveUser(username);
-						//TODO iniciar activity meetme
 						changeToApp();
 					}
 				}
@@ -99,12 +83,36 @@ public class LoginActivity extends Activity {
 	
 	
 	@Override
+	protected void onResume() {
+		fillLogin();
+		super.onResume();
+	}
+
+
+	@Override
 	protected void onDestroy() {
 		lm.closeDb();
 		super.onDestroy();
 	}
 
+	private void fillLogin() {
+        users = lm.getUsers();
+        
+        usersList = (ListView) findViewById(R.id.users_list);
+        adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
+        usersList.setAdapter(adapter);
 
+        login = (Button) findViewById(R.id.login_button);
+        create = (Button)findViewById(R.id.create_button);
+        errorText = (TextView)findViewById(R.id.login_error_message);
+        if (usernameBox == null) usernameBox = (EditText)findViewById(R.id.username_box);
+        else usernameBox.setText("");
+        if (passwordBox == null) passwordBox = (EditText)findViewById(R.id.password_box);
+        else passwordBox.setText("");
+        if (password2Box == null) password2Box = (EditText)findViewById(R.id.password_confirm_box);
+        else password2Box.setText("");
+	}
+	
 	/**
 	 * Funci— per quan premen el bot— de Register, que carrega el layout corresponent.
 	 * @param view
