@@ -48,7 +48,6 @@ public class LoginActivity extends Activity {
         
         usersList = (ListView) findViewById(R.id.users_list);
         adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
-        
         usersList.setAdapter(adapter);
 
         login = (Button) findViewById(R.id.login_button);

@@ -29,7 +29,10 @@ public class SettingsManager {
 	
 	public void logout() {
 		pa.setActiveUser(null);
-		
+	}
+	
+	public void deleteCurrentUser() {
+		mDbHelper.deleteUser(pa.getActiveUsername());
 	}
 	
 	public void changePassword(String password) {

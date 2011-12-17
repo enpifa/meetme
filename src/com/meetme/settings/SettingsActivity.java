@@ -1,11 +1,13 @@
 package com.meetme.settings;
 
-import com.meetme.app.R;
-
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+
+import com.meetme.app.R;
 
 public class SettingsActivity extends Activity {
+	private SettingsManager sm;
 
 	@Override
 	protected void onDestroy() {
@@ -13,20 +15,22 @@ public class SettingsActivity extends Activity {
 		super.onDestroy();
 	}
 
-	private SettingsManager sm;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sm = new SettingsManager(this);
         setContentView(R.layout.settings);
     }
 	
-	public void logout() {
+	public void logout(View v) {
 		sm.logout();
 		finish();
 	}
 	
-
-	
+	public void deleteCurrentUser(View v) {
+		sm.deleteCurrentUser();
+		sm.logout();
+		finish();
+	}
 }
