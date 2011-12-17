@@ -60,8 +60,6 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.flipper);
         
         flipper = (ViewFlipper)findViewById(R.id.flipper);
-<<<<<<< HEAD
-<<<<<<< HEAD
         
         View profile;
         LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -70,21 +68,6 @@ public class ProfileActivity extends Activity {
         
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
-=======
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-        
-        View profile;
-        LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        profile = vi.inflate(R.layout.profile, null);
-        pva = new ProfileViewAdapter(this, profile);
-        
-        if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
-        
-<<<<<<< HEAD
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
         
@@ -170,8 +153,7 @@ public class ProfileActivity extends Activity {
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
+		
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
@@ -182,32 +164,11 @@ public class ProfileActivity extends Activity {
 		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
 			mUser.addWeb(mWebBox.getText().toString());
 		
-=======
-		
-=======
-		
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-		mUser.setName(mNameBox.getText().toString());
-		mUser.setCompany(mCompanyBox.getText().toString());
-		mUser.setPosition(mPositionBox.getText().toString());
-		if(!mUser.getEmails().contains(mMailBox.getText().toString()))
-			mUser.addEmail(mMailBox.getText().toString());
-		if(!mUser.getPhones().contains(mPhoneBox.getText().toString()))
-			mUser.addPhone(mPhoneBox.getText().toString());
-		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
-			mUser.addWeb(mWebBox.getText().toString());
-		
-<<<<<<< HEAD
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
 		pdm.updateProfile(mUser);
 		pva.loadUserInfo(mUser);
 
 		//change to profile view
 		flipper.showPrevious();
-		fillProfileView();
-
 	}
 	
 
@@ -274,52 +235,6 @@ public class ProfileActivity extends Activity {
 		return !(s == null || s.equals(""));
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-	private void fillProfileView() {
-		mUser = pdm.getProfile(pdm.getActiveUsername());		
-		
-        if (hasText(mUser.getName())) {
-            TextView name = (TextView) findViewById(R.id.profile_name_label);
-            name.setText(mUser.getName());
-        }
-        
-        if (hasText(mUser.getCompany())) {
-            TextView company = (TextView) findViewById(R.id.profile_company_label);
-            company.setText(mUser.getCompany());
-        }
-        
-        if (hasText(mUser.getPosition())) {
-            TextView position = (TextView) findViewById(R.id.profile_position_label);
-            position.setText(mUser.getPosition());
-        }
-        
-        if (mUser.getEmails().size() > 0 && hasText(mUser.getEmails().get(0))) {
-            TextView email = (TextView) findViewById(R.id.profile_email_label);
-            email.setText(mUser.getEmails().get(0)); // TODO de moment nomes pot haver-hi 1, index 0 o 1?
-        }
-        
-        if (mUser.getPhones().size() > 0 && hasText(mUser.getPhones().get(0))) {
-            TextView phone = (TextView) findViewById(R.id.profile_phone_label);
-            phone.setText(mUser.getPhones().get(0)); // TODO de moment nomes pot haver-hi 1, index 0 o 1?
-        }
-        
-        if (mUser.getWebs().size() > 0 && hasText(mUser.getWebs().get(0))) {
-            TextView web = (TextView) findViewById(R.id.profile_web_label);
-            web.setText(mUser.getWebs().get(0)); // TODO de moment nomes pot haver-hi 1, index 0 o 1?
-        }
-        
-        if (hasText(mUser.getTwitter())) {
-            TextView twitter = (TextView) findViewById(R.id.profile_twitter_label);
-            twitter.setText(mUser.getTwitter());
-        }
-	}
-
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
-=======
->>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
     
     private void doCrop() {
 		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
