@@ -19,11 +19,13 @@ public class SearchManager {
 	MeetMeDbAdapter mda;
 	Context mContext;
 	WebAccessAdapter wad;
+	PreferencesAdapter pa;
 	
 	public SearchManager(Context context){
 		mContext = context;
 		mda = new MeetMeDbAdapter(context);
 		wad = WebAccessAdapter.getInstance();
+		pa = new PreferencesAdapter(context);
 	}
 	
 	public ArrayList<User> searchForUsers(String query){
@@ -42,11 +44,12 @@ public class SearchManager {
 		        tmp.setName(json_data.getString("name"));
 		        tmp.setCompany(json_data.getString("company"));
 		        tmp.setPosition(json_data.getString("position"));
-		        result.add(tmp);
+		        if(!pa.getActiveUsername().equals(tmp.getUsername())) result.add(tmp);
 		    }
 		}
 		catch(JSONException e){
 		        Log.e("log_tag", "Error parsing data "+e.toString());
+		        e.printStackTrace();
 		}
 		
 		return result;
@@ -57,6 +60,7 @@ public class SearchManager {
 		User user = new User();
 		
 		String recievedData = wad.getWebAccessData(url, username);
+		System.out.println(recievedData);
 		
 		//parse json data
 		try{

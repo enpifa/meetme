@@ -4,17 +4,19 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.meetme.app.ProfileViewAdapter;
 import com.meetme.app.R;
 import com.meetme.app.User;
 
@@ -31,6 +33,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	UsersAdapter adapter;
 	EditText searchBox;
 	ListView usersList;
+	ProfileViewAdapter pva;
 	
 	ViewFlipper flipper;
 	
@@ -78,30 +81,30 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private void changeToProfileView(String username){
 		User user = sm.searchForUser(username);
 		currentViewedUser = user;
-		TextView name = (TextView)findViewById(R.id.user_name_label);
-		name.setText(user.getName());
-		TextView company = (TextView)findViewById(R.id.user_company_label);
-		company.setText(user.getCompany());
-		TextView position = (TextView)findViewById(R.id.user_position_label);
-		position.setText(user.getPosition());
-		TextView twitter = (TextView)findViewById(R.id.user_twitter_label);
-		if(user.getTwitter() != null){
-			twitter.setText(user.getTwitter());
-		}
-		else{
-			TableRow twitterRow = (TableRow)findViewById(R.id.user_twitter_row);
-			twitterRow.setVisibility(View.GONE);
-		}
+		
+		View contactProfile;
+		LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		contactProfile = vi.inflate(R.layout.profile, null);
+		
+		pva = new ProfileViewAdapter(this, contactProfile);
+		pva.loadUserInfo(currentViewedUser);
+		flipper.addView(contactProfile);
 		flipper.showNext();
 		
 	}
 	
-	public void changeToSearchView(View view){
+	public void changeToSearchView(){
 		flipper.showPrevious();
+		flipper.removeViewAt(1);
 	}
 	
-	public void showAddContactDialog(View view){
+	public void showAddContactDialog(){
 		showDialog(0);
+	}
+	
+	public void onClickButton(View view){
+		if(view.getId() == R.id.profile_back_button) changeToSearchView();
+		else if (view.getId() == R.id.profile_save_contact_button) showAddContactDialog();
 	}
 	
 	@Override
@@ -136,7 +139,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 		
 		addContactDialog.dismiss();
 		
-		Button addContactButton = (Button)findViewById(R.id.user_save_contact);
+		Button addContactButton = (Button)findViewById(R.id.profile_save_contact_button);
 		addContactButton.setEnabled(false);
 	}
 
