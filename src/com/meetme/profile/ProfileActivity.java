@@ -61,6 +61,7 @@ public class ProfileActivity extends Activity {
         
         flipper = (ViewFlipper)findViewById(R.id.flipper);
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         View profile;
         LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -70,6 +71,8 @@ public class ProfileActivity extends Activity {
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
 =======
+=======
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
         
         View profile;
         LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -78,6 +81,9 @@ public class ProfileActivity extends Activity {
         
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
+<<<<<<< HEAD
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
+=======
 >>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
@@ -165,6 +171,7 @@ public class ProfileActivity extends Activity {
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
@@ -177,6 +184,9 @@ public class ProfileActivity extends Activity {
 		
 =======
 		
+=======
+		
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
@@ -187,6 +197,9 @@ public class ProfileActivity extends Activity {
 		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
 			mUser.addWeb(mWebBox.getText().toString());
 		
+<<<<<<< HEAD
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
+=======
 >>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
 		pdm.updateProfile(mUser);
 		pva.loadUserInfo(mUser);
@@ -262,6 +275,7 @@ public class ProfileActivity extends Activity {
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	private void fillProfileView() {
 		mUser = pdm.getProfile(pdm.getActiveUsername());		
@@ -302,6 +316,8 @@ public class ProfileActivity extends Activity {
         }
 	}
 
+=======
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
 =======
 >>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
     
