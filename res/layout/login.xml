@@ -5,9 +5,9 @@
     android:orientation="vertical" >
 
     <ListView
-        android:id="@+id/users_list"
+        android:id="@+id/android:list"
         android:layout_width="fill_parent"
-        android:layout_height="331dp"
+        android:layout_height="272dp"
         android:padding="5dip" >
 
     </ListView>
@@ -51,7 +51,7 @@
                 android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="changeToRegister"
+                android:onClick="createUser"
                 android:text="@string/register_confirm_button" />
         </LinearLayout>
 

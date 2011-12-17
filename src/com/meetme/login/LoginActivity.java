@@ -2,7 +2,9 @@ package com.meetme.login;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +19,7 @@ import com.meetme.app.R;
 import com.meetme.app.User;
 import com.meetme.search.UsersAdapter;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends ListActivity {
 
 	ViewFlipper flipper;
 	Button login;
@@ -31,7 +33,6 @@ public class LoginActivity extends Activity {
 	UsersAdapter adapter;
 	ArrayList<User> users;
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class LoginActivity extends Activity {
 					changeToApp();
 				}
 				else
-					errorText.setText("ERROR: username or password are not correct " + username + " " + password);
+					errorText.setText("ERROR: username or password are not correct.");
 			}
 		});
         
@@ -81,7 +82,36 @@ public class LoginActivity extends Activity {
         
 	}
 	
+	public void createUser(View v) {
+		AlertDialog createUserDialog = new AlertDialog.Builder(this).create();
+		createUserDialog.setTitle("New user");
+		//createUserDialog.setContentView(R.layout.create_user);
+		createUserDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		createUserDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Create", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		createUserDialog.show();
+	}
 	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onListItemClick(l, v, position, id);
+	}
+
+
 	@Override
 	protected void onResume() {
 		fillLogin();
@@ -98,7 +128,8 @@ public class LoginActivity extends Activity {
 	private void fillLogin() {
         users = lm.getUsers();
         
-        usersList = (ListView) findViewById(R.id.users_list);
+        usersList = (ListView) findViewById(android.R.id.list);
+        
         adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
         usersList.setAdapter(adapter);
 
