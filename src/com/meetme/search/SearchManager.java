@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
 import com.meetme.app.User;
 import com.meetme.app.WebAccessAdapter;

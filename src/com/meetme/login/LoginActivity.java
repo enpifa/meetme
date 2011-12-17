@@ -17,7 +17,6 @@ import android.widget.ViewFlipper;
 import com.meetme.app.MeetMeActivity;
 import com.meetme.app.R;
 import com.meetme.app.User;
-import com.meetme.search.UsersAdapter;
 
 public class LoginActivity extends ListActivity {
 
@@ -30,7 +29,7 @@ public class LoginActivity extends ListActivity {
 	EditText password2Box;
 	ListView usersList;
 	LoginManager lm;
-	UsersAdapter adapter;
+	LoginAdapter adapter;
 	ArrayList<User> users;
 
 	@Override
@@ -107,8 +106,12 @@ public class LoginActivity extends ListActivity {
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		if (usernameBox == null) usernameBox = (EditText) findViewById(R.id.username_box);
+		TextView username = (TextView)v.findViewById(R.id.login_username);
+		usernameBox.setText(username.getText().toString());
+		if (passwordBox == null) passwordBox = (EditText) findViewById(R.id.password_box);
+		passwordBox.requestFocus();
 	}
 
 
@@ -130,7 +133,7 @@ public class LoginActivity extends ListActivity {
         
         usersList = (ListView) findViewById(android.R.id.list);
         
-        adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
+        adapter = new LoginAdapter(this, android.R.layout.simple_list_item_1, users);
         usersList.setAdapter(adapter);
 
         login = (Button) findViewById(R.id.login_button);
