@@ -1,16 +1,21 @@
 package com.meetme.login;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.meetme.app.MeetMeActivity;
 import com.meetme.app.R;
+import com.meetme.app.User;
+import com.meetme.search.UsersAdapter;
 
 public class LoginActivity extends Activity {
 
@@ -21,39 +26,40 @@ public class LoginActivity extends Activity {
 	EditText et1;
 	EditText et2;
 	EditText et3;
+	ListView usersList;
 	LoginManager lm;
-		
+	UsersAdapter adapter;
+	ArrayList<User> users;
+
+	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 
         lm = new LoginManager(this);
         
-        
-        
-        /**
-         * PROVA 
-         */
-        
-        
-       // if (lm.registerUser("prova", "pass") != -1) System.out.print("inserci—");
-      //  Boolean a = true;
-      //  if (a) System.out.print("a");
-      //  if (lm.existsUser("prova")) System.out.print("Correcto!");
-        
-        
-        /**
-         * FI PROVA
-         */
         //load login.xml from layout
         setContentView(R.layout.login);
         
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
-        login = (Button)findViewById(R.id.login_button);
+        
+        users = lm.getUsers();
+       // User prova = new User();
+       // prova.setName("prova");
+      //  users.add(prova);
+
+        usersList = (ListView) findViewById(R.id.users_list);
+        adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
+        
+        usersList.setAdapter(adapter);
+
+        login = (Button) findViewById(R.id.login_button);
         create = (Button)findViewById(R.id.create_button);
         errorText = (TextView)findViewById(R.id.login_error_message);
         et1 = (EditText)findViewById(R.id.username_box);
         et2 = (EditText)findViewById(R.id.password_box);
+        
 		
         login.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -95,6 +101,14 @@ public class LoginActivity extends Activity {
         
 	}
 	
+	
+	@Override
+	protected void onDestroy() {
+		lm.closeDb();
+		super.onDestroy();
+	}
+
+
 	/**
 	 * Funci— per quan premen el bot— de Register, que carrega el layout corresponent.
 	 * @param view
@@ -113,7 +127,7 @@ public class LoginActivity extends Activity {
 		flipper.showPrevious();
 	}
 	
-	private void changeToApp(){
+	private void changeToApp() {
 		Intent mainIntent = new Intent(this, MeetMeActivity.class);
 		startActivity(mainIntent);
 	}

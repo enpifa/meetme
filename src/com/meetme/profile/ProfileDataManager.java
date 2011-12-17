@@ -62,12 +62,12 @@ public class ProfileDataManager {
 		ArrayList<String> emails = user.getEmails();	    	
 		ArrayList<String> webs = user.getWebs();
 
+		System.out.print("hola1");
 
 		// ESBORRAT
-		if (!mDbHelper.deletePhonesOfUser(username)) return false;
-		if (!mDbHelper.deleteEmailsOfUSer(username)) return false;
-		if (!mDbHelper.deleteWebsOfUser(username)) return false;
-
+		mDbHelper.deletePhonesOfUser(username);
+		mDbHelper.deleteEmailsOfUSer(username);
+		mDbHelper.deleteWebsOfUser(username);
 
 		//INSERCIî
 		for (int i = 0; i < phones.size(); i++) {
@@ -108,6 +108,11 @@ public class ProfileDataManager {
 	public void syncData(){
 		saveUserToWeb(getCurrentUserData());
 	}
+	
+    public void closeDb() {
+    	if (mDbHelper != null) mDbHelper.close();
+    }
+
 	
 	/**
 	 * Enviar les dades de l'usuari a la BD de web

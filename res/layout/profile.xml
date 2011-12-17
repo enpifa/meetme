@@ -177,7 +177,7 @@
                     android:text="@string/sync" />
 
                 <Button
-                    android:id="@+id/profile_save_changes"
+                    android:id="@+id/profile_edit_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="changeToEditView"

@@ -1,5 +1,7 @@
 package com.meetme.login;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 
 import com.meetme.app.MeetMeDbAdapter;
@@ -48,6 +50,14 @@ public class LoginManager {
      */
     public boolean existsUser(String username) {
     	return mDbHelper.existsUser(username);
+    }
+    
+    public void closeDb() {
+    	if (mDbHelper != null) mDbHelper.close();
+    }
+    
+    public ArrayList<User> getUsers() {
+    	return mDbHelper.fetchAllProfiles();
     }
 
 	public void setmDbHelper(MeetMeDbAdapter mDbHelper) {

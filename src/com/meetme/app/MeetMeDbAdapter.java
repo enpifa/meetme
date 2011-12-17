@@ -40,7 +40,7 @@ public class MeetMeDbAdapter {
 	
 	private static final String DATABASE_CREATE_PROFILES = 
 		"create table profiles (username text primary key, name text, company text, "
-		+ "position text, image blob, twitter text)";
+		+ "position text, image text, twitter text)";
 	
 	private static final String DATABASE_CREATE_PHONES =
 		"create table phones (username text not null, phonenumber text not null, " +
@@ -242,6 +242,27 @@ public class MeetMeDbAdapter {
         return user;
     }
     
+    public ArrayList<User> fetchAllProfiles() throws SQLException {
+    	Cursor cursor =
+    		mDb.query(DATABASE_TABLE_PROFILES, new String[] {KEY_USERNAME, KEY_NAME, KEY_COMPANY, KEY_POSITION}, null, null, null, null, null);
+    	ArrayList<User> users = new ArrayList<User>();
+    	if (cursor != null) {
+        	User user = new User();
+    		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {    			
+    			user.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USERNAME)));
+    			user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+    			user.setCompany(cursor.getString(cursor.getColumnIndex(KEY_COMPANY)));
+    			user.setPosition(cursor.getString(cursor.getColumnIndex(KEY_POSITION)));
+    			user.setImage(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+    			user.setTwitter(cursor.getString(cursor.getColumnIndex(KEY_TWITTER)));
+    			
+    			users.add(user);
+        	}
+    	}
+    	cursor.close();
+    	return users;
+    }
+    
     
     
     
@@ -258,11 +279,12 @@ public class MeetMeDbAdapter {
      * @param phoneNumber un dels nœmeros de telfon de l'usuari
      * @return rowId o -1 si ha fallat
      */
-    public boolean createPhone(String username, String phoneNumber) {
+    public boolean createPhone(String username, String phoneNumber) throws SQLException {
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_USERNAME, username);
     	initialValues.put(KEY_PHONE, phoneNumber);
-    	return mDb.insert(DATABASE_TABLE_PHONES, null, initialValues) > -1;
+    	long aux = mDb.insert(DATABASE_TABLE_PHONES, null, initialValues);
+    	return aux  > -1;
     	
     }
     

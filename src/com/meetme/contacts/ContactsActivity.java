@@ -78,7 +78,13 @@ public class ContactsActivity extends Activity {
 		
 	}
     
-    public void changeToSearchView(View view){
+    @Override
+	protected void onDestroy() {
+		cdm.closeDb();
+    	super.onDestroy();
+    }
+
+	public void changeToSearchView(View view){
 		flipper.showPrevious();
 	}
     

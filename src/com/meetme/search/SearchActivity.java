@@ -20,6 +20,12 @@ import com.meetme.app.User;
 
 public class SearchActivity extends Activity implements OnClickListener {
 
+	@Override
+	protected void onDestroy() {
+		sm.closeDb();
+		super.onDestroy();
+	}
+
 	SearchManager sm;
 	ArrayList<User> results;
 	UsersAdapter adapter;
@@ -32,6 +38,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	User currentViewedUser;
 	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
