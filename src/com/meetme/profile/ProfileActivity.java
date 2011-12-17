@@ -69,6 +69,14 @@ public class ProfileActivity extends Activity {
         
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
+        
+        View profile;
+        LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        profile = vi.inflate(R.layout.profile, null);
+        pva = new ProfileViewAdapter(this, profile);
+        
+        if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
+        
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
         
@@ -153,6 +161,16 @@ public class ProfileActivity extends Activity {
 		mMailBox = (EditText) findViewById(R.id.profile_email_box);
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
+		
+		mUser.setName(mNameBox.getText().toString());
+		mUser.setCompany(mCompanyBox.getText().toString());
+		mUser.setPosition(mPositionBox.getText().toString());
+		if(!mUser.getEmails().contains(mMailBox.getText().toString()))
+			mUser.addEmail(mMailBox.getText().toString());
+		if(!mUser.getPhones().contains(mPhoneBox.getText().toString()))
+			mUser.addPhone(mPhoneBox.getText().toString());
+		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
+			mUser.addWeb(mWebBox.getText().toString());
 		
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
