@@ -24,20 +24,22 @@
 
     <EditText
         android:id="@+id/password_box"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="@string/login_password"
+        android:layout_gravity="center"
         android:inputType="textPassword" />
 
     <ViewFlipper
         android:id="@+id/login_flip"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <LinearLayout
             android:id="@+id/login_buttons"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
 
             <Button
                 android:id="@+id/login_button"
@@ -51,7 +53,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="changeToRegister"
                 android:text="@string/register_confirm_button" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -59,18 +60,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-            
+
             <EditText
-		        android:id="@+id/password_confirm_box"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:hint="@string/login_password"
-		        android:inputType="textPassword" />
+                android:id="@+id/password_confirm_box"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"            
+                android:hint="@string/login_password"
+                android:inputType="textPassword" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
 
                 <Button
                     android:id="@+id/back_to_login_button"
@@ -84,11 +87,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/create_confirm_button" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ViewFlipper>
 
     <TextView
