@@ -31,6 +31,7 @@ public class ContactsDataManager {
         PreferencesAdapter pa = new PreferencesAdapter(mContext);
         String username = pa.getActiveUsername();
         ArrayList<User> contacts = mda.fetchContacts(username);
+        System.out.println("contacts: " + contacts.size());
         //actualitzar per web la resta de dades basiques
         if(contacts.size() > 0) addWebInfoToContacts(contacts);
         

@@ -2,16 +2,18 @@ package com.meetme.contacts;
 
 import java.util.ArrayList;
 
+import com.meetme.app.ProfileViewAdapter;
 import com.meetme.app.R;
 import com.meetme.app.User;
 import com.meetme.search.SearchManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -25,6 +27,8 @@ public class ContactsActivity extends Activity {
 	ViewFlipper flipper;
 	
 	User currentViewedUser;
+	
+	ProfileViewAdapter pva;
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,32 +64,35 @@ public class ContactsActivity extends Activity {
 		SearchManager sm = new SearchManager(this);
     	User user = sm.searchForUser(username);
 		currentViewedUser = user;
-		TextView name = (TextView)findViewById(R.id.contact_name_label);
-		name.setText(user.getName());
-		TextView company = (TextView)findViewById(R.id.contact_company_label);
-		company.setText(user.getCompany());
-		TextView position = (TextView)findViewById(R.id.contact_position_label);
-		position.setText(user.getPosition());
-		TextView twitter = (TextView)findViewById(R.id.contact_twitter_label);
-		if(user.getTwitter() != null){
-			twitter.setText(user.getTwitter());
-		}
-		else{
-			TableRow twitterRow = (TableRow)findViewById(R.id.contact_twitter_row);
-			twitterRow.setVisibility(View.GONE);
-		}
+		
+		View contactProfile;
+		LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		contactProfile = vi.inflate(R.layout.profile, null);
+		
+		pva = new ProfileViewAdapter(this, contactProfile);
+		pva.loadUserInfo(currentViewedUser);
+		flipper.addView(contactProfile);
+		
 		flipper.showNext();
 		
 	}
     
+
     @Override
 	protected void onDestroy() {
 		cdm.closeDb();
     	super.onDestroy();
     }
 
-	public void changeToSearchView(View view){
+    public void onClickButton(View view){
+    	if(view.getId() == R.id.profile_back_button){
+    		changeToSearchView();
+    	}
+    }
+    
+    public void changeToSearchView(){
 		flipper.showPrevious();
+		flipper.removeViewAt(1);
 	}
     
     public void showDeleteContactDialog(View view){

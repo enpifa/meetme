@@ -83,23 +83,23 @@ public class User {
 	}
 	
 	public void setUsername(String newUsername){
-		username = newUsername;
+		if(newUsername.length() > 0) username = newUsername;
 	}
 	
 	public void setName(String newName){
-		name = newName;
+		if(newName != null && newName.length() > 0) name = newName;
 	}
 	
 	public void setCompany(String newCompany){
-		company = newCompany;
+		if(newCompany != null && newCompany.length() > 0) company = newCompany;
 	}
 	
 	public void setPosition(String newPosition){
-		position = newPosition;
+		if(newPosition != null && newPosition.length() > 0) position = newPosition;
 	}
 	
 	public void setTwitter(String newTwitter){
-		twitter = newTwitter;
+		if(newTwitter != null && newTwitter.length() > 0) twitter = newTwitter;
 	}
 	
 	public void setEmails(ArrayList<String> newEmails){
@@ -107,7 +107,7 @@ public class User {
 	}
 	
 	public void addEmail(String newEmail){
-		emails.add(newEmail);
+		if(newEmail != null && newEmail.length() > 0) emails.add(newEmail);
 	}
 	
 	public void setPhones(ArrayList<String> newPhones){
@@ -115,7 +115,7 @@ public class User {
 	}
 	
 	public void addPhone(String newPhone){
-		phones.add(newPhone);
+		if(newPhone != null && newPhone.length() > 0) phones.add(newPhone);
 	}
 	
 	public void setWebs(ArrayList<String> newWebs){
@@ -123,15 +123,15 @@ public class User {
 	}
 	
 	public void addWeb(String newWeb){
-		webs.add(newWeb);
+		if(newWeb != null && newWeb.length() > 0) webs.add(newWeb);
 	}
 	
 	public void setComment(String newComment){
-		comment = newComment;
+		if(newComment != null && newComment.length() > 0) comment = newComment;
 	}
 	
 	public void setLocation(String newLocation){
-		location = newLocation;
+		if(newLocation != null && newLocation.length() > 0) location = newLocation;
 	}
 
 	public void setImage(String image) {
