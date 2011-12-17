@@ -140,19 +140,20 @@ public class ProfileActivity extends Activity {
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
 		//TODO comprovar que aix˜ tira
-		User user = new User();
-		user.setUsername(pdm.getActiveUsername());
-		user.setName(mNameBox.getText().toString());
-		user.setCompany(mCompanyBox.getText().toString());
-		user.setPosition(mPositionBox.getText().toString());
-		user.addEmail(mMailBox.getText().toString());
-		user.addPhone(mPhoneBox.getText().toString());
-		user.addWeb(mWebBox.getText().toString());
-		pdm.updateProfile(user);
+		mUser = new User();
+		mUser.setUsername(pdm.getActiveUsername());
+		mUser.setName(mNameBox.getText().toString());
+		mUser.setCompany(mCompanyBox.getText().toString());
+		mUser.setPosition(mPositionBox.getText().toString());
+		mUser.addEmail(mMailBox.getText().toString());
+		mUser.addPhone(mPhoneBox.getText().toString());
+		mUser.addWeb(mWebBox.getText().toString());
+		pdm.updateProfile(mUser);
 		
-		fillProfileView();
 		//change to profile view
 		flipper.showPrevious();
+		fillProfileView();
+
 	}
 	
 	@Override
@@ -205,8 +206,8 @@ public class ProfileActivity extends Activity {
 	}
 	
 	private void fillProfileView() {
-		//mUser = pdm.getProfile(pdm.getActiveUsername());
-  
+		mUser = pdm.getProfile(pdm.getActiveUsername());		
+		
         if (hasText(mUser.getName())) {
             TextView name = (TextView) findViewById(R.id.profile_name_label);
             name.setText(mUser.getName());

@@ -28,6 +28,7 @@ public class MeetMeDbAdapter {
 	private static final String KEY_PHONE = "phonenumber";
 	private static final String KEY_WEB = "webpage";
 	private static final String KEY_MAIL = "email";
+	//private static final String KEY_ROWID = "_id";
 		
 	private static final String TAG = "MeetMeDbAdapter";
 	private DatabaseHelper mDbHelper;
@@ -48,11 +49,11 @@ public class MeetMeDbAdapter {
 	
 	private static String DATABASE_CREATE_WEBS = 
 		"create table webs (username text not null, webpage text not null, " +
-		"primary key (username, webpage))";
+		"primary key (username, web))";
 	
 	private static final String DATABASE_CREATE_EMAILS = 
 		"create table emails (username text not null, email text not null, " +
-		"primary key (username, email))";
+ 		"primary key (username, email))";
 	
 	private static final String DATABASE_CREATE_CONTACTS = 
 		"create table contacts (username text, contact text, comment text, location text, " +
@@ -247,19 +248,18 @@ public class MeetMeDbAdapter {
     		mDb.query(DATABASE_TABLE_PROFILES, new String[] {KEY_USERNAME, KEY_NAME, KEY_COMPANY, KEY_POSITION}, null, null, null, null, null);
     	ArrayList<User> users = new ArrayList<User>();
     	if (cursor != null) {
-        	User user = new User();
-    		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {    			
-    			user.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USERNAME)));
+        	cursor.moveToFirst();
+        	while (!cursor.isAfterLast()) {
+            	User user = new User();
+        		user.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USERNAME)));
     			user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
     			user.setCompany(cursor.getString(cursor.getColumnIndex(KEY_COMPANY)));
     			user.setPosition(cursor.getString(cursor.getColumnIndex(KEY_POSITION)));
-    			user.setImage(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
-    			user.setTwitter(cursor.getString(cursor.getColumnIndex(KEY_TWITTER)));
-    			
-    			users.add(user);
+        		cursor.moveToNext();
+            	users.add(user);
         	}
+        	cursor.close();
     	}
-    	cursor.close();
     	return users;
     }
     
@@ -314,12 +314,18 @@ public class MeetMeDbAdapter {
      * @throws SQLException
      */
     public void fetchPhonesOf(User user) throws SQLException {
-    	Cursor cursor = mDb.query(true, DATABASE_TABLE_PHONES, new String[] {KEY_PHONE}, 
-    			KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);
-    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
-    		user.addPhone(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_PHONE)));
+    	Cursor cursor = 
+    		mDb.query(DATABASE_TABLE_PHONES, new String[] {KEY_PHONE}, 
+    				KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null);
+    	if (cursor != null ) {
+    		cursor.moveToFirst();
+    		while (!cursor.isAfterLast()) {
+        		user.addPhone(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_PHONE)));
+    			cursor.moveToNext();
+    		}
+        	cursor.close();
     	}
-    	cursor.close();   
+    	
     }	
     	
 
@@ -372,10 +378,14 @@ public class MeetMeDbAdapter {
     private void fetchEmailsOf(User user) throws SQLException {
     	Cursor cursor = mDb.query(true, DATABASE_TABLE_EMAILS, new String[] {KEY_MAIL}, 
     			KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);  
-    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
-    		user.addEmail(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_MAIL)));
+    	if (cursor != null) {
+    		cursor.moveToFirst();
+    		while (!cursor.isAfterLast()) {
+        		user.addEmail(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_MAIL)));
+    			cursor.moveToNext();
+    		}
+        	cursor.close();
     	}
-    	cursor.close();
     }
     
     
@@ -431,10 +441,14 @@ public class MeetMeDbAdapter {
     private void fetchWebsOf(User user) throws SQLException {
     	//TODO distinct true?
     	Cursor cursor = mDb.query(true, DATABASE_TABLE_WEBS, new String[] {KEY_WEB}, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null, null, null, null, null);   
-    	for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
-    		user.addWeb(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_WEB)));
+    	if (cursor != null) {
+    		cursor.moveToFirst();
+    		while (!cursor.isAfterLast()) {
+        		user.addWeb(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_WEB)));
+    			cursor.moveToNext();
+    		}
+           	cursor.close();    
     	}
-    	cursor.close();    
     }
   
     

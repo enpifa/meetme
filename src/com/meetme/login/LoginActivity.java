@@ -45,10 +45,7 @@ public class LoginActivity extends Activity {
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
         
         users = lm.getUsers();
-       // User prova = new User();
-       // prova.setName("prova");
-      //  users.add(prova);
-
+        
         usersList = (ListView) findViewById(R.id.users_list);
         adapter = new UsersAdapter(this, android.R.layout.simple_list_item_1, users);
         
