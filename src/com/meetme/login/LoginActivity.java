@@ -2,9 +2,7 @@ package com.meetme.login;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -81,28 +79,6 @@ public class LoginActivity extends ListActivity {
         
 	}
 	
-	public void createUser(View v) {
-		AlertDialog createUserDialog = new AlertDialog.Builder(this).create();
-		createUserDialog.setTitle("New user");
-		//createUserDialog.setContentView(R.layout.create_user);
-		createUserDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		createUserDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Create", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		createUserDialog.show();
-	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -110,6 +86,7 @@ public class LoginActivity extends ListActivity {
 		if (usernameBox == null) usernameBox = (EditText) findViewById(R.id.username_box);
 		TextView username = (TextView)v.findViewById(R.id.login_username);
 		usernameBox.setText(username.getText().toString());
+		changeToLogin(v);
 		if (passwordBox == null) passwordBox = (EditText) findViewById(R.id.password_box);
 		passwordBox.requestFocus();
 	}
