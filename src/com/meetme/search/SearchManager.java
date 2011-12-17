@@ -10,20 +10,19 @@ import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
 import com.meetme.app.User;
 import com.meetme.app.WebAccessAdapter;
+import com.meetme.contacts.ContactsDataManager;
 
 import android.content.Context;
 import android.util.Log;
 
 public class SearchManager {
 
-	MeetMeDbAdapter mda;
-	Context mContext;
+	//MeetMeDbAdapter mda;
 	WebAccessAdapter wad;
 	PreferencesAdapter pa;
+	ContactsDataManager cdm;
 	
 	public SearchManager(Context context){
-		mContext = context;
-		mda = new MeetMeDbAdapter(context);
 		wad = WebAccessAdapter.getInstance();
 		pa = new PreferencesAdapter(context);
 	}
@@ -102,12 +101,7 @@ public class SearchManager {
 	}
 	
 	public void addContact(User contact){
-		PreferencesAdapter pa = new PreferencesAdapter(mContext);
-        String username = pa.getActiveUsername();
-		mda.createContact(username, contact.getUsername(), contact.getComment(), contact.getLocation());
+		cdm.addContact(contact);
 	}
 	
-	public void closeDb() {
-		if (mda != null) mda.close();
-	}
 }

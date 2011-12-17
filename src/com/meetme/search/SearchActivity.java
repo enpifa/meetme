@@ -24,7 +24,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		sm.closeDb();
 		super.onDestroy();
 	}
 

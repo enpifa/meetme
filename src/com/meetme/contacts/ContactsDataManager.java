@@ -17,18 +17,24 @@ import com.meetme.app.WebAccessAdapter;
 public class ContactsDataManager {
  //TODO fer el inserir un nou username comment i location i recuperar llista de usernames, i comment i location de un username
 	MeetMeDbAdapter mda;
-	Context mContext;
+	//Context mContext;
 	WebAccessAdapter wad;
+	PreferencesAdapter pa;
 	
 	public ContactsDataManager(Context context){
-		mContext = context;
-		mda  = new MeetMeDbAdapter(mContext);
+		//mContext = context;
+		mda  = new MeetMeDbAdapter(context);
 		wad = WebAccessAdapter.getInstance();
+		pa = new PreferencesAdapter(context);
+	}
+	
+	public void addContact(User contact) {
+		mda.createContact(pa.getActiveUsername(), contact.getUsername(), contact.getComment(), contact.getLocation());
 	}
 	
 	public ArrayList<User> getContacts(){
 		
-        PreferencesAdapter pa = new PreferencesAdapter(mContext);
+        //PreferencesAdapter pa = new PreferencesAdapter(mContext);
         String username = pa.getActiveUsername();
         ArrayList<User> contacts = mda.fetchContacts(username);
         System.out.println("contacts: " + contacts.size());
