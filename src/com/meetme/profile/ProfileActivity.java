@@ -1,6 +1,9 @@
 package com.meetme.profile;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -70,6 +74,16 @@ public class ProfileActivity extends Activity {
         
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
+        
+        try {
+        	Bitmap image;
+        	image = getImage();
+        	ImageView profileImage = (ImageView)findViewById(R.id.profile_image);
+        	if(image != null) profileImage.setImageBitmap(image);
+        }
+        catch(Exception e){
+        	
+        }
         
         View editProfile;
         editProfile = vi.inflate(R.layout.profile_edit, null);
@@ -220,6 +234,13 @@ public class ProfileActivity extends Activity {
 		            Bitmap photo = extras.getParcelable("data");
 		            
 		            mImageView.setImageBitmap(photo);
+		            try {
+						saveImage(photo);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("error saving photo");
+						e.printStackTrace();
+					}
 		        }
 	
 		        File f = new File(mImageCaptureUri.getPath());            
@@ -229,6 +250,21 @@ public class ProfileActivity extends Activity {
 		        break;
 
 	    }
+	}
+	
+	private void saveImage(Bitmap photo) throws IOException{
+		String path = mUser.getUsername();
+		FileOutputStream fo = openFileOutput(path, MODE_PRIVATE);
+		photo.compress(Bitmap.CompressFormat.JPEG, 40, fo);
+		fo.close();
+	}
+	
+	private Bitmap getImage() throws IOException {
+		FileInputStream fi = openFileInput(mUser.getUsername());
+		fi = openFileInput(mUser.getUsername());
+		Bitmap result = BitmapFactory.decodeStream(fi);
+		fi.close();
+		return result;
 	}
 	
 	private boolean hasText(String s) {
