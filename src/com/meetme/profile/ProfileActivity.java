@@ -23,7 +23,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -61,6 +60,7 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.flipper);
         
         flipper = (ViewFlipper)findViewById(R.id.flipper);
+<<<<<<< HEAD
         
         View profile;
         LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,6 +69,7 @@ public class ProfileActivity extends Activity {
         
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
+=======
         
         View profile;
         LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -77,6 +78,7 @@ public class ProfileActivity extends Activity {
         
         if (mUser == null) mUser = pdm.getProfile(pdm.getActiveUsername());
         
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
         
@@ -162,6 +164,7 @@ public class ProfileActivity extends Activity {
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		
+<<<<<<< HEAD
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
@@ -171,6 +174,8 @@ public class ProfileActivity extends Activity {
 			mUser.addPhone(mPhoneBox.getText().toString());
 		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
 			mUser.addWeb(mWebBox.getText().toString());
+		
+=======
 		
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
@@ -182,6 +187,7 @@ public class ProfileActivity extends Activity {
 		if(!mUser.getWebs().contains(mWebBox.getText().toString()))
 			mUser.addWeb(mWebBox.getText().toString());
 		
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
 		pdm.updateProfile(mUser);
 		pva.loadUserInfo(mUser);
 
@@ -255,6 +261,7 @@ public class ProfileActivity extends Activity {
 		return !(s == null || s.equals(""));
 	}
 	
+<<<<<<< HEAD
 
 	private void fillProfileView() {
 		mUser = pdm.getProfile(pdm.getActiveUsername());		
@@ -295,6 +302,8 @@ public class ProfileActivity extends Activity {
         }
 	}
 
+=======
+>>>>>>> 198248d66d3d81d03552b6a701f5ce5aa9bc837d
     
     private void doCrop() {
 		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
