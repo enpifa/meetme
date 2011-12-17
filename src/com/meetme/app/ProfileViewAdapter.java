@@ -1,7 +1,13 @@
 package com.meetme.app;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -70,7 +76,24 @@ public class ProfileViewAdapter {
             editButton.setVisibility(View.GONE);
         }
         
+        try {
+        	Bitmap image;
+        	image = getImage(user);
+        	ImageView profileImage = (ImageView)profileView.findViewById(R.id.profile_image);
+        	if(image != null) profileImage.setImageBitmap(image);
+        }
+        catch(Exception e){
+        	
+        }
         
-        
+	}
+	
+
+	private Bitmap getImage(User user) throws IOException {
+		FileInputStream fi = mContext.openFileInput(user.getUsername());
+		fi = mContext.openFileInput(user.getUsername());
+		Bitmap result = BitmapFactory.decodeStream(fi);
+		fi.close();
+		return result;
 	}
 }
