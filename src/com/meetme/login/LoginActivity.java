@@ -104,13 +104,14 @@ public class LoginActivity extends Activity {
 
         login = (Button) findViewById(R.id.login_button);
         create = (Button)findViewById(R.id.create_button);
-        errorText = (TextView)findViewById(R.id.login_error_message);
-        if (usernameBox == null) usernameBox = (EditText)findViewById(R.id.username_box);
+        if (usernameBox == null) usernameBox = (EditText) findViewById(R.id.username_box);
         else usernameBox.setText("");
-        if (passwordBox == null) passwordBox = (EditText)findViewById(R.id.password_box);
+        if (passwordBox == null) passwordBox = (EditText) findViewById(R.id.password_box);
         else passwordBox.setText("");
-        if (password2Box == null) password2Box = (EditText)findViewById(R.id.password_confirm_box);
+        if (password2Box == null) password2Box = (EditText) findViewById(R.id.password_confirm_box);
         else password2Box.setText("");
+        if (errorText == null) errorText = (TextView) findViewById(R.id.login_error_message);
+        else errorText.setText("");
 	}
 	
 	/**
