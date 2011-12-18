@@ -29,6 +29,7 @@ public class LoginActivity extends ListActivity {
 	LoginManager lm;
 	LoginAdapter adapter;
 	ArrayList<User> users;
+	boolean inRegister;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class LoginActivity extends ListActivity {
         
         //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
-        
+        inRegister = false;
         fillLogin();
         
         login.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +87,7 @@ public class LoginActivity extends ListActivity {
 		if (usernameBox == null) usernameBox = (EditText) findViewById(R.id.username_box);
 		TextView username = (TextView)v.findViewById(R.id.login_username);
 		usernameBox.setText(username.getText().toString());
-		changeToLogin(v);
+		if (inRegister) changeToLogin(v);
 		if (passwordBox == null) passwordBox = (EditText) findViewById(R.id.password_box);
 		passwordBox.requestFocus();
 	}
@@ -131,6 +132,7 @@ public class LoginActivity extends ListActivity {
 	 */
 	public void changeToRegister(View view) {
 		//aixo carrega el segon layout dins el flipper
+		inRegister = true;
 		flipper.showNext();
 	}
 	
@@ -140,6 +142,7 @@ public class LoginActivity extends ListActivity {
 	 */
 	public void changeToLogin(View view) {
 		//aixo torna al primer layout dins el flipper
+		inRegister = false;
 		flipper.showPrevious();
 	}
 	
