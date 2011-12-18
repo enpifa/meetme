@@ -58,12 +58,14 @@ public class ContactsActivity extends Activity {
     public void onReload(){
     	System.out.println("reload contacts");
     	contacts = cdm.getContacts();
-    	adapter.notifyDataSetChanged();
+    	adapter = new ContactAdapter(this, android.R.layout.simple_list_item_1, contacts);
+    	contactsList.setAdapter(adapter);
     }
     
     private void changeToProfileView(String username){
 		SearchManager sm = new SearchManager(this);
     	User user = sm.searchForUser(username);
+    	contacts = cdm.getContacts();
 		currentViewedUser = user;
 		
 		for(User c : contacts){
@@ -78,7 +80,8 @@ public class ContactsActivity extends Activity {
 		pva = new ProfileViewAdapter(this, contactProfile);
 		pva.loadUserInfo(currentViewedUser);
 		flipper.addView(contactProfile);
-		
+		View saveContactButton = findViewById(R.id.profile_save_contact_button);
+		saveContactButton.setVisibility(View.GONE);
 		flipper.showNext();
 		
 	}
@@ -95,6 +98,7 @@ public class ContactsActivity extends Activity {
     		changeToSearchView();
     	}
     	else if(view.getId() == R.id.contacts_search_button){
+    		onReload();
     		EditText searchBox = (EditText)findViewById(R.id.contacts_search_box);
     		calculateSearch(searchBox.getText().toString());
     	}
@@ -119,7 +123,8 @@ public class ContactsActivity extends Activity {
         	}
         	contacts = new ArrayList<User>(tmp);
     	}
-    	adapter.notifyDataSetChanged();
+    	adapter = new ContactAdapter(this, android.R.layout.simple_list_item_1, contacts);
+    	contactsList.setAdapter(adapter);
     }
     
     public void showDeleteContactDialog(View view){

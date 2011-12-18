@@ -64,26 +64,7 @@ public class ProfileViewAdapter {
 		}
         
         if(user.userIsContact()){
-        	if(user.getComment() != null){
-        		TextView commentLabel = (TextView)profileView.findViewById(R.id.profile_comment_label);
-        		commentLabel.setText(user.getComment());
-        		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
-        		commentLayout.setVisibility(View.VISIBLE);
-        	}
-        	else {
-        		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
-        		commentLayout.setVisibility(View.GONE);
-        	}
-        	if(user.getLocation() != null){
-        		View locationLayout = profileView.findViewById(R.id.profile_location_layout);
-        		locationLayout.setVisibility(View.VISIBLE);
-        		TextView locationLabel = (TextView)profileView.findViewById(R.id.profile_location_label);
-        		locationLabel.setText(user.getLocation());
-        	}
-        	else {
-        		View locationLayout = profileView.findViewById(R.id.profile_location_layout);
-        		locationLayout.setVisibility(View.GONE);
-        	}
+        	
         }
         else {
         	View contactInfo = profileView.findViewById(R.id.contact_extras);
@@ -99,7 +80,31 @@ public class ProfileViewAdapter {
         }
         else {
         	if(!user.userIsContact()) saveContactButton.setEnabled(true);
-        	else saveContactButton.setEnabled(false);
+        	else {
+        		
+        		saveContactButton.setEnabled(false);
+        		
+        		if(user.getComment() != null){
+            		TextView commentLabel = (TextView)profileView.findViewById(R.id.profile_comment_label);
+            		commentLabel.setText(user.getComment());
+            		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
+            		commentLayout.setVisibility(View.VISIBLE);
+            	}
+            	else {
+            		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
+            		commentLayout.setVisibility(View.GONE);
+            	}
+            	if(user.getLocation() != null){
+            		View locationLayout = profileView.findViewById(R.id.profile_location_layout);
+            		locationLayout.setVisibility(View.VISIBLE);
+            		TextView locationLabel = (TextView)profileView.findViewById(R.id.profile_location_label);
+            		locationLabel.setText(user.getLocation());
+            	}
+            	else {
+            		View locationLayout = profileView.findViewById(R.id.profile_location_layout);
+            		locationLayout.setVisibility(View.GONE);
+            	}
+        	}
         	View syncButton = profileView.findViewById(R.id.profile_sync_button);
         	syncButton.setVisibility(View.GONE);
             View editButton = profileView.findViewById(R.id.profile_edit_button);
