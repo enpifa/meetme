@@ -476,14 +476,16 @@ public class MeetMeDbAdapter {
     	ArrayList<User> result = new ArrayList<User>();
     	Cursor cursor = mDb.query(DATABASE_TABLE_CONTACTS, new String[] {KEY_CONTACT, KEY_COMMENT, KEY_LOCATION}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null); 
     	if(cursor != null){
-    		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
-        		User auxUser = new User();
+    		cursor.moveToFirst();
+    		while (!cursor.isAfterLast()) {
+    			User auxUser = new User();
         		auxUser.setUsername(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_CONTACT)));
         		auxUser.setComment(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMMENT)));
         		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
         		auxUser.setContact(true);
         		result.add(auxUser);
-        	}
+        		cursor.moveToNext();
+    		}
     		cursor.close();
     	}
     	return result;
