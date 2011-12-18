@@ -44,6 +44,7 @@ public class ProfileActivity extends Activity {
 	private EditText mMailBox;
 	private EditText mPhoneBox;
 	private EditText mWebBox;
+	private EditText mTwitterBox;
 	
 	private ProfileDataManager pdm;
 	private User mUser;
@@ -135,10 +136,12 @@ public class ProfileActivity extends Activity {
 		mMailBox = (EditText) findViewById(R.id.profile_email_box);
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
+		mTwitterBox = (EditText) findViewById(R.id.profile_twitter_box);
 		
 		if (hasText(mUser.getName())) mNameBox.setText(mUser.getName());
 		if (hasText(mUser.getCompany())) mCompanyBox.setText(mUser.getCompany()); 
 		if (hasText(mUser.getPosition())) mPositionBox.setText(mUser.getPosition());
+		if (hasText(mUser.getTwitter())) mTwitterBox.setText(mUser.getTwitter());
 		if (mUser.getEmails().size() > 0 && hasText(mUser.getEmails().get(0))) mMailBox.setText(mUser.getEmails().get(0)); 
 		if (mUser.getPhones().size() > 0 && hasText(mUser.getPhones().get(0))) mPhoneBox.setText(mUser.getPhones().get(0)); 
 		if (mUser.getWebs().size() > 0 && hasText(mUser.getWebs().get(0))) mWebBox.setText(mUser.getWebs().get(0)); 
@@ -159,11 +162,13 @@ public class ProfileActivity extends Activity {
 		mMailBox = (EditText) findViewById(R.id.profile_email_box);
 		mPhoneBox = (EditText) findViewById(R.id.profile_phone_box);
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
+		mTwitterBox = (EditText) findViewById(R.id.profile_twitter_box);
 		
 		
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
+		mUser.setTwitter(mTwitterBox.getText().toString());
 		if(!mUser.getEmails().contains(mMailBox.getText().toString()))
 			mUser.addEmail(mMailBox.getText().toString());
 		if(!mUser.getPhones().contains(mPhoneBox.getText().toString()))

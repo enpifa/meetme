@@ -136,45 +136,38 @@
                         android:layout_margin="5dip"
                         android:src="@drawable/ic_web" />
                 </TableRow>
+                      
+                <TableRow 
+                    android_id="@+id/tableRow5"
+                   	android:layout_width="wrap_content"
+                   	android:layout_height="wrap_content" >
+                    
+                    <EditText
+                    android:id="@+id/profile_twitter_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/profile_default_twitter" />
+                        
+                    <ImageView
+                    	android:id="@+id/ic_twitter"
+                    	android:layout_width="wrap_content"
+                    	android:layout_height="wrap_content"
+                    	android:layout_margin="5dip"
+                    	android:src="@drawable/ic_twitter" />
+                    
+                </TableRow>
+                    
+                
+                    
             </TableLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip" >
-
-                <TextView
-                    android:id="@+id/profile_twitter_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_margin="5dip"
-                    android:text="@string/profile_default_twitter"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <ImageView
-                    android:id="@+id/ic_twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|left"
-                    android:layout_margin="5dip"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_twitter" />
-
-                <Button
-                    android:id="@+id/profile_change_twitter_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/change_twitter_account" />
-            </LinearLayout>
 
             <Button
                 android:id="@+id/profile_save_changes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClickButton"
+                android:layout_gravity="center_horizontal|right"
                 android:text="@string/save_changes" />
 
     

@@ -66,7 +66,8 @@ public class LoginActivity extends ListActivity {
 				String username = usernameBox.getEditableText().toString();
 				String password = passwordBox.getEditableText().toString();
 				String cPass = password2Box.getEditableText().toString();
-				if (password.equals(cPass)) { //passwords iguals
+				if (password.equals("")) errorText.setText("ERROR: password is empty");
+				else if (password.equals(cPass)) { //passwords iguals
 					if (lm.existsUser(username)) errorText.setText("ERROR CREATING NEW USER: The user already exists");
 					else {
 						lm.registerUser(username, password);
