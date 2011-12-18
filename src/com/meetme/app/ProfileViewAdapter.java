@@ -67,12 +67,16 @@ public class ProfileViewAdapter {
         	if(user.getComment() != null){
         		TextView commentLabel = (TextView)profileView.findViewById(R.id.profile_comment_label);
         		commentLabel.setText(user.getComment());
+        		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
+        		commentLayout.setVisibility(View.VISIBLE);
         	}
         	else {
         		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
         		commentLayout.setVisibility(View.GONE);
         	}
         	if(user.getLocation() != null){
+        		View locationLayout = profileView.findViewById(R.id.profile_location_layout);
+        		locationLayout.setVisibility(View.VISIBLE);
         		TextView locationLabel = (TextView)profileView.findViewById(R.id.profile_location_label);
         		locationLabel.setText(user.getLocation());
         	}

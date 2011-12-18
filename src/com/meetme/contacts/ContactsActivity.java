@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -65,6 +66,11 @@ public class ContactsActivity extends Activity {
     	User user = sm.searchForUser(username);
 		currentViewedUser = user;
 		
+		for(User c : contacts){
+			if(c.getUsername().equals(currentViewedUser.getUsername())){
+				currentViewedUser.setContact(true);
+			}
+		}
 		View contactProfile;
 		LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		contactProfile = vi.inflate(R.layout.profile, null);
@@ -88,12 +94,33 @@ public class ContactsActivity extends Activity {
     	if(view.getId() == R.id.profile_back_button){
     		changeToSearchView();
     	}
+    	else if(view.getId() == R.id.contacts_search_button){
+    		EditText searchBox = (EditText)findViewById(R.id.contacts_search_box);
+    		calculateSearch(searchBox.getText().toString());
+    	}
     }
     
     public void changeToSearchView(){
 		flipper.showPrevious();
 		flipper.removeViewAt(1);
 	}
+    
+    public void calculateSearch(String search){
+    	String lowercaseSearch = search.toLowerCase();
+    	contacts = cdm.getContacts();
+    	if(search.length() > 0){
+    		ArrayList<User> tmp = new ArrayList<User>();
+        	for(User c : contacts){
+        		
+        		if(c.getName().toLowerCase().indexOf(lowercaseSearch) != -1){
+        			System.out.println("checking " + c.getName());
+        			tmp.add(c);
+        		}
+        	}
+        	contacts = new ArrayList<User>(tmp);
+    	}
+    	adapter.notifyDataSetChanged();
+    }
     
     public void showDeleteContactDialog(View view){
 		//TODO: fer una confirmacio

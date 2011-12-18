@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +34,7 @@ import com.meetme.app.ProfileViewAdapter;
 import com.meetme.app.R;
 import com.meetme.app.User;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends Activity implements OnClickListener {
 
 	ViewFlipper flipper;
 	
@@ -53,6 +55,8 @@ public class ProfileActivity extends Activity {
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int CROP_FROM_CAMERA = 2;
 	private static final int PICK_FROM_FILE = 3;
+	
+	private Dialog confirmDialog;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -193,7 +197,7 @@ public class ProfileActivity extends Activity {
 
 	public void onClickButton(View view){
 		if(view.getId() == R.id.profile_sync_button){
-			syncDataWithWeb();
+			showConfirmationDialog();
 		}
 		else if(view.getId() == R.id.profile_save_changes){
 			saveChangesAndChangeToProfileView();
@@ -333,5 +337,36 @@ public class ProfileActivity extends Activity {
 		        alert.show();
         	}
         }
+	}
+    
+	
+	public void showConfirmationDialog(){
+		showDialog(0);
+	}
+	
+	@Override
+    protected Dialog onCreateDialog (int id){
+		Dialog dialog = new Dialog(this, R.style.CustomDialog);
+		dialog.setTitle(R.string.sync);
+		dialog.setContentView(R.layout.confirm_sync);
+		
+		View confirmButton = dialog.findViewById(R.id.sync_confirm_button);
+		confirmButton.setOnClickListener(this);
+		View cancelButton = dialog.findViewById(R.id.sync_cancel_button);
+		cancelButton.setOnClickListener(this);
+		confirmDialog = dialog;
+		return dialog;
+	}
+
+
+	@Override
+	public void onClick(View arg0) {
+		if(arg0.getId() == R.id.sync_confirm_button){
+			syncDataWithWeb();
+			confirmDialog.dismiss();
+		}
+		else if(arg0.getId() == R.id.sync_cancel_button){
+			confirmDialog.dismiss();
+		}
 	}
 }

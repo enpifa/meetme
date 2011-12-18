@@ -22,12 +22,15 @@ public class SearchManager {
 	PreferencesAdapter pa;
 	ContactsDataManager cdm;
 	MeetMeDbAdapter mda;
+	ArrayList<User> contacts;
 	
 	public SearchManager(Context context){
 		wad = WebAccessAdapter.getInstance();
 		pa = new PreferencesAdapter(context);
 		cdm = new ContactsDataManager(context);
 		mda  = new MeetMeDbAdapter(context);
+		String username = pa.getActiveUsername();
+		contacts = mda.fetchContacts(username);
 	}
 	
 	public ArrayList<User> searchForUsers(String query){
@@ -36,7 +39,7 @@ public class SearchManager {
 		
 		String recievedData = wad.getWebAccessData(url, query);//preparem dades a enviar
 		String username = pa.getActiveUsername();
-		ArrayList<User> contacts = mda.fetchContacts(username);
+		contacts = mda.fetchContacts(username);
 		//parse json data
 		try{
 		    JSONArray jArray = new JSONArray(recievedData);
@@ -47,9 +50,7 @@ public class SearchManager {
 		        tmp.setName(json_data.getString("name"));
 		        tmp.setCompany(json_data.getString("company"));
 		        tmp.setPosition(json_data.getString("position"));
-		        for(User c : contacts){
-		        	if(c.getUsername().equals(tmp.getUsername())) tmp.setContact(true);
-		        }
+		        checkIfUserIsContact(tmp);
 		        if(!pa.getActiveUsername().equals(tmp.getUsername())) result.add(tmp);
 		    }
 		}
@@ -59,6 +60,13 @@ public class SearchManager {
 		}
 		
 		return result;
+	}
+	
+	public void checkIfUserIsContact(User user){
+		
+		for(User c : contacts){
+        	if(c.getUsername().equals(user.getUsername())) user.setContact(true);
+        }
 	}
 	
 	public User searchForUser(String username) {
@@ -98,7 +106,7 @@ public class SearchManager {
 		    	user.addWeb(json_webs.getString(i));
 		    }
 		    
-		    
+		    checkIfUserIsContact(user);
 		}
 		catch(JSONException e){
 		        Log.e("log_tag", "Error parsing data "+e.toString());
@@ -109,6 +117,8 @@ public class SearchManager {
 	
 	public void addContact(User contact){
 		cdm.addContact(contact);
+		String username = pa.getActiveUsername();
+		contacts = mda.fetchContacts(username);
 	}
 	
 }

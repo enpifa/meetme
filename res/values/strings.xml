@@ -34,4 +34,7 @@
 	
 	<string name="settings_logout">Logout</string>
 	<string name="settings_delete_user">Delete current user</string>
+	<string name="sync_confirm">By sending your data to the web, you are making it accessible to all users of this application. Are you sure you want to do it?</string>
+	<string name="sync_ok">Ok</string>
+	<string name="sync_cancel">Cancel</string>
 </resources>

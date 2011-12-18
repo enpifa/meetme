@@ -162,6 +162,7 @@
 	            android:id="@+id/profile_sync_button"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_marginRight="5dip"
 	            android:onClick="onClickButton"
 	            android:text="@string/sync" />
 
@@ -169,6 +170,7 @@
 	            android:id="@+id/profile_edit_button"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_marginRight="5dip"
 	            android:onClick="onClickButton"
 	            android:text="@string/edit_profile" />
 

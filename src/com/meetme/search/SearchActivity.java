@@ -123,6 +123,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 		addContactDialog = dialog;
 		return dialog;
 	}
+
 	
 	public void addContact(){
 		//TODO: guardar el contacte
