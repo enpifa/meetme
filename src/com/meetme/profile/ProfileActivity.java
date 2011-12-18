@@ -164,7 +164,7 @@ public class ProfileActivity extends Activity {
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		mTwitterBox = (EditText) findViewById(R.id.profile_twitter_box);
 		
-		
+		mUser = new User();
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());

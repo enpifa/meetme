@@ -50,6 +50,7 @@ public class ProfileDataManager {
 		 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
 		 */
 
+		user.setUsername(pa.getActiveUsername());
 		mDbHelper.updateProfile(user);
 
 		/**

@@ -76,8 +76,6 @@
 	        android:layout_height="wrap_content" >
 	    </ListView>
 
-
-
 	    <LinearLayout
 	        android:id="@+id/profile_twitter_layout"
 	        android:layout_width="wrap_content"
@@ -85,9 +83,9 @@
 
 	        <TextView
 	            android:id="@+id/profile_twitter_label"
-	            android:layout_width="wrap_content"
+	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_gravity="center_vertical|right"
+	            android:layout_gravity="center_vertical|left"
 	            android:layout_margin="5dip"
 	            android:text="@string/profile_default_twitter" />
 
@@ -95,7 +93,7 @@
 	            android:id="@+id/ic_twitter"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_gravity="center_vertical|left"
+	            android:layout_gravity="center_vertical|right"
 	            android:layout_margin="5dip"
 	            android:src="@drawable/ic_twitter" />
 	    </LinearLayout>
