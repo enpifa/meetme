@@ -53,6 +53,8 @@ public class ProfileViewAdapter {
         }
         
         if(user.getTwitter() != null){
+        	View twitterRow = (View)profileView.findViewById(R.id.profile_twitter_layout);
+			twitterRow.setVisibility(View.VISIBLE);
         	TextView twitter = (TextView)profileView.findViewById(R.id.profile_twitter_label);
         	twitter.setText(user.getTwitter());
 		}
@@ -60,6 +62,29 @@ public class ProfileViewAdapter {
 			View twitterRow = (View)profileView.findViewById(R.id.profile_twitter_layout);
 			twitterRow.setVisibility(View.GONE);
 		}
+        
+        if(user.userIsContact()){
+        	if(user.getComment() != null){
+        		TextView commentLabel = (TextView)profileView.findViewById(R.id.profile_comment_label);
+        		commentLabel.setText(user.getComment());
+        	}
+        	else {
+        		View commentLayout = profileView.findViewById(R.id.profile_comment_layout);
+        		commentLayout.setVisibility(View.GONE);
+        	}
+        	if(user.getLocation() != null){
+        		TextView locationLabel = (TextView)profileView.findViewById(R.id.profile_location_label);
+        		locationLabel.setText(user.getLocation());
+        	}
+        	else {
+        		View locationLayout = profileView.findViewById(R.id.profile_location_layout);
+        		locationLayout.setVisibility(View.GONE);
+        	}
+        }
+        else {
+        	View contactInfo = profileView.findViewById(R.id.contact_extras);
+        	contactInfo.setVisibility(View.GONE);
+        }
         
         PreferencesAdapter pa = new PreferencesAdapter(mContext);
         View saveContactButton = profileView.findViewById(R.id.profile_save_contact_button);
@@ -69,7 +94,8 @@ public class ProfileViewAdapter {
             backButton.setVisibility(View.GONE);
         }
         else {
-        	saveContactButton.setEnabled(true);
+        	if(!user.userIsContact()) saveContactButton.setEnabled(true);
+        	else saveContactButton.setEnabled(false);
         	View syncButton = profileView.findViewById(R.id.profile_sync_button);
         	syncButton.setVisibility(View.GONE);
             View editButton = profileView.findViewById(R.id.profile_edit_button);

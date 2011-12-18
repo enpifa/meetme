@@ -481,6 +481,7 @@ public class MeetMeDbAdapter {
         		auxUser.setUsername(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_CONTACT)));
         		auxUser.setComment(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMMENT)));
         		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
+        		auxUser.setContact(true);
         		result.add(auxUser);
         	}
     		cursor.close();

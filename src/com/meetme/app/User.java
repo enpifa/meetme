@@ -15,6 +15,7 @@ public class User {
 	private ArrayList<String> webs;
 	private String comment;
 	private String location;
+	private boolean isContact;
 	
 	public User(){
 		username = null;
@@ -28,6 +29,7 @@ public class User {
 		webs = new ArrayList<String>();
 		comment = null;
 		location = null;
+		isContact = false;
 	}
 	
 	public String getPassword() {
@@ -136,5 +138,13 @@ public class User {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public boolean userIsContact(){
+		return isContact;
+	}
+	
+	public void setContact(boolean isContact){
+		this.isContact = isContact;
 	}
 }

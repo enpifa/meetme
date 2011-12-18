@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
 import com.meetme.app.User;
 import com.meetme.app.WebAccessAdapter;
@@ -20,11 +21,13 @@ public class SearchManager {
 	WebAccessAdapter wad;
 	PreferencesAdapter pa;
 	ContactsDataManager cdm;
+	MeetMeDbAdapter mda;
 	
 	public SearchManager(Context context){
 		wad = WebAccessAdapter.getInstance();
 		pa = new PreferencesAdapter(context);
 		cdm = new ContactsDataManager(context);
+		mda  = new MeetMeDbAdapter(context);
 	}
 	
 	public ArrayList<User> searchForUsers(String query){
@@ -32,7 +35,8 @@ public class SearchManager {
 		String url = "http://www.amieggs.com/meetme/getUsers.php";
 		
 		String recievedData = wad.getWebAccessData(url, query);//preparem dades a enviar
-		
+		String username = pa.getActiveUsername();
+		ArrayList<User> contacts = mda.fetchContacts(username);
 		//parse json data
 		try{
 		    JSONArray jArray = new JSONArray(recievedData);
@@ -43,6 +47,9 @@ public class SearchManager {
 		        tmp.setName(json_data.getString("name"));
 		        tmp.setCompany(json_data.getString("company"));
 		        tmp.setPosition(json_data.getString("position"));
+		        for(User c : contacts){
+		        	if(c.getUsername().equals(tmp.getUsername())) tmp.setContact(true);
+		        }
 		        if(!pa.getActiveUsername().equals(tmp.getUsername())) result.add(tmp);
 		    }
 		}

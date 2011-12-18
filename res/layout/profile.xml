@@ -100,6 +100,57 @@
 	            android:src="@drawable/ic_twitter" />
 	    </LinearLayout>
 
+	    <LinearLayout
+	        android:id="@+id/contact_extras"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+
+	        <LinearLayout
+	            android:id="@+id/profile_comment_layout"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" >
+
+	            <TextView
+	                android:id="@+id/textView3"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="@string/profile_comment"
+	                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	            <TextView
+	                android:id="@+id/profile_comment_label"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="TextView" />
+
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/profile_location_layout"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" >
+
+	            <TextView
+	                android:id="@+id/textView4"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="@string/profile_location"
+	                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	            <TextView
+	                android:id="@+id/profile_location_label"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dip"
+	                android:text="TextView" />
+
+	        </LinearLayout>
+
+	    </LinearLayout>
 
 	    <LinearLayout
 	        android:id="@+id/buttons_layout"

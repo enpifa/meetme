@@ -46,6 +46,10 @@ public class UsersAdapter  extends ArrayAdapter<User>{
 			if(username != null){
 				username.setText(user.getUsername());
 			}
+			if(user.userIsContact()){
+				View isContactImage = v.findViewById(R.id.is_contact_image);
+				isContactImage.setVisibility(View.VISIBLE);
+			}
 		}
 		
 		return v;
