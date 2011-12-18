@@ -24,6 +24,7 @@ public class SearchManager {
 	public SearchManager(Context context){
 		wad = WebAccessAdapter.getInstance();
 		pa = new PreferencesAdapter(context);
+		cdm = new ContactsDataManager(context);
 	}
 	
 	public ArrayList<User> searchForUsers(String query){
