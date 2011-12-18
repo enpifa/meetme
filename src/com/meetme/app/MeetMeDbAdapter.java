@@ -45,7 +45,7 @@ public class MeetMeDbAdapter {
 	
 	private static String DATABASE_CREATE_WEBS = 
 		"create table webs (username text not null, webpage text not null, " +
-		"primary key (username, web))";
+		"primary key (username, webpage))";
 	
 	private static final String DATABASE_CREATE_EMAILS = 
 		"create table emails (username text not null, email text not null, " +
