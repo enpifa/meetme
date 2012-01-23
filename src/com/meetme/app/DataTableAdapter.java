@@ -15,6 +15,14 @@ public class DataTableAdapter extends ArrayAdapter<String>{
 	private ArrayList<String> dataSet;
 	private int iconId;
 	
+	/**
+	 * Defineix les dades de la classe
+	 * @param context el context actual
+	 * @param textViewResourceId número per identificar el camp
+	 * @param objects llista d'objectes
+	 * @param ic_id número per identificar l'icone
+	 */
+	
 	public DataTableAdapter(Context context, int textViewResourceId,
 			ArrayList<String> objects, int ic_id) {
 		super(context, textViewResourceId, objects);
@@ -22,6 +30,14 @@ public class DataTableAdapter extends ArrayAdapter<String>{
 		iconId = ic_id;
 	}
 
+	/**
+	 * Posa els camps de la taula de dades a la vista
+	 * @param position número per identificar el la informació
+	 * @param convertView la vista actual
+	 * @param parent
+	 * @return la nova vista amb les dades afegides
+	 */
+	
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;

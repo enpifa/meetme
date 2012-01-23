@@ -29,6 +29,11 @@ public class ProfileDataManager {
 	private MeetMeDbAdapter mDbHelper;
 	private PreferencesAdapter pa;
 	
+	/**
+	 * Crea les variables de la classe
+	 * @param context el context actual
+	 */
+	
 	public ProfileDataManager(Context context) {
 		super();
 		mDbHelper = new MeetMeDbAdapter(context);
@@ -40,7 +45,7 @@ public class ProfileDataManager {
 	}
 
 	/**
-	 * Mètode encarregat d'actualitzar totes les dades del perfil d'un usuari.
+	 * MËtode encarregat d'actualitzar totes les dades del perfil d'un usuari.
 	 * @param user conté el username i els valors a donar als atributs del profile
 	 * @return cert si no ha donat cap error
 	 */
@@ -50,7 +55,6 @@ public class ProfileDataManager {
 		 * UPDATE NORMAL DE LA FILA DE LA TAULA PROFILES
 		 */
 
-		user.setUsername(pa.getActiveUsername());
 		mDbHelper.updateProfile(user);
 
 		/**
@@ -88,7 +92,7 @@ public class ProfileDataManager {
 	
 	
 	/**
-	 * Mètode que a partir d'un username retorna les dades del perfil d'aquest usuari
+	 * MËtode que a partir d'un username retorna les dades del perfil d'aquest usuari
 	 * encapsulades en una instància de User.
 	 * @param username identificador de l'usuari del perfil que es vol obtenir
 	 * @return instància de User amb les dades del perfil de l'usuari username
@@ -106,9 +110,17 @@ public class ProfileDataManager {
 		return getProfile(pa.getActiveUsername());
 	}
 	
+	/**
+	 * Enviar les dades de l'usuari a la BD de web
+	 */
+	
 	public void syncData(){
 		saveUserToWeb(getCurrentUserData());
 	}
+	
+	/**
+	 * Tanca la base de dades
+	 */
 	
     public void closeDb() {
     	if (mDbHelper != null) mDbHelper.close();

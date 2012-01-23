@@ -17,9 +17,13 @@ import com.meetme.app.WebAccessAdapter;
 public class ContactsDataManager {
  //TODO fer el inserir un nou username comment i location i recuperar llista de usernames, i comment i location de un username
 	MeetMeDbAdapter mda;
-	//Context mContext;
 	WebAccessAdapter wad;
 	PreferencesAdapter pa;
+	
+	/**
+	 * Defineix les variables de la classe
+	 * @param context el context actual
+	 */
 	
 	public ContactsDataManager(Context context){
 		//mContext = context;
@@ -28,9 +32,19 @@ public class ContactsDataManager {
 		pa = new PreferencesAdapter(context);
 	}
 	
+	/**
+	 * Afegeix un contacte
+	 * @param contact l'usuari que volem afegir com a contacte
+	 */
+	
 	public void addContact(User contact) {
 		mda.createContact(pa.getActiveUsername(), contact.getUsername(), contact.getComment(), contact.getLocation());
 	}
+	
+	/**
+	 * Obté els contactes d'un usuari
+	 * @return llista d'usuaris que figuren com a contactes
+	 */
 	
 	public ArrayList<User> getContacts(){
 		
@@ -44,9 +58,18 @@ public class ContactsDataManager {
         return contacts;
 	}
 	
+	/**
+	 * Tanca la base de dades
+	 */
+	
 	public void closeDb() {
 		if (mda != null) mda.close();
 	}
+	
+	/**
+	 * Aconsegueix la informació dels contactes d'un usuari per mostrar-la per la pantalla de contactes
+	 * @param contacts llista d'usuaris que són contactes
+	 */
 	
 	public void addWebInfoToContacts(ArrayList<User> contacts){
     	String url = "http://www.amieggs.com/meetme/getUsersBasicData.php";

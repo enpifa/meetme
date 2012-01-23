@@ -13,6 +13,11 @@ public class LoginManager {
 	private MeetMeDbAdapter mDbHelper;
     private PreferencesAdapter pa;
     
+    /**
+	 * Funció que crea les variables de la classe
+	 * @param context context actual
+	 */
+    
     public LoginManager(Context context) {
 		super();
 		mDbHelper = new MeetMeDbAdapter(context);
@@ -24,6 +29,7 @@ public class LoginManager {
      * @param username el nom d'usuari
      * @param password la contrassenya
      */
+    
     public void registerUser(String username, String password) {
     	mDbHelper.createUser(username, password);
     	User user = new User();
@@ -32,7 +38,7 @@ public class LoginManager {
     }
     
 	/**
-     * Comprova si Žs correcte l'usuari + password
+     * Comprova si és correcte l'usuari + password
      * @param username el nom d'usuari
      * @param password la contrassenya
      * @return cert si existeix un usuari username amb contrassenya password.
@@ -52,18 +58,32 @@ public class LoginManager {
     	return mDbHelper.existsUser(username);
     }
     
+    /**
+     * Tanca la mDbhelper
+     */
     public void closeDb() {
     	if (mDbHelper != null) mDbHelper.close();
     }
     
+    /**
+     * Agafa els usuaris existents a la base de dades
+     */
     public ArrayList<User> getUsers() {
     	return mDbHelper.fetchAllProfiles();
     }
 
+    /**
+     * Estableix la mDbHelper
+     * @param mDbHelper l'adaptador de la base de dades
+     */
 	public void setmDbHelper(MeetMeDbAdapter mDbHelper) {
 		this.mDbHelper = mDbHelper;
 	}
 	
+	/**
+     * Estableix el username
+     * @param username nom d'usuari
+     */
 	public void setActiveUser(String username){
 		pa.setActiveUser(username);
 	}

@@ -23,12 +23,24 @@ public class WebAccessAdapter {
 		
 	}
 	
+	/**
+	 * Defineix la variable de la classe
+	 * @return singleton la variable definida
+	 */
+	
 	public static WebAccessAdapter getInstance(){
 		if(singleton == null){
 			singleton = new WebAccessAdapter();
 		}
 		return singleton;
 	}
+	
+	/**
+	 * Retorna les dades d'un accés al web
+	 * @param url adreça on estan les dades a les que volem accedir
+	 * @param data les dades que necessitem
+	 * @return les dades que aconseguim al fer l'accés al web
+	 */
 	
 	public String getWebAccessData(String url, String data){
 		//preparem dades a enviar

@@ -8,7 +8,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -22,7 +21,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +32,7 @@ import com.meetme.app.ProfileViewAdapter;
 import com.meetme.app.R;
 import com.meetme.app.User;
 
-public class ProfileActivity extends Activity implements OnClickListener {
+public class ProfileActivity extends Activity {
 
 	ViewFlipper flipper;
 	
@@ -56,7 +54,10 @@ public class ProfileActivity extends Activity implements OnClickListener {
 	private static final int CROP_FROM_CAMERA = 2;
 	private static final int PICK_FROM_FILE = 3;
 	
-	private Dialog confirmDialog;
+	/**
+	 * Funció que carrega totes les dades de l'usuari i les mostra per pantalla
+	 * @param savedInstanceState
+	 */
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +79,6 @@ public class ProfileActivity extends Activity implements OnClickListener {
         pva.loadUserInfo(mUser);
         flipper.addView(profile);
         
-        
-        
         View editProfile;
         editProfile = vi.inflate(R.layout.profile_edit, null);
         flipper.addView(editProfile);
@@ -90,6 +89,13 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		
 		builder.setTitle("Select Image");
 		builder.setAdapter( adapter, new DialogInterface.OnClickListener() {
+			
+			/**
+			 * Funció per carregar una imatge al perfil d'usuari
+			 * @param dialog llista d'opcions de selecció d'imatge
+			 * @param item indica la opció seleccionada per elegir una imatge
+			 */
+			
 			public void onClick( DialogInterface dialog, int item ) { //pick from camera
 				if (item == 0) {
 					Intent intent 	 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -123,7 +129,12 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		mImageView		= (ImageView) findViewById(R.id.profile_image_edit);
 		
 		button.setOnClickListener(new View.OnClickListener() {	
-			@Override
+			
+			/**
+			 * Funció per obrir la llista d'opcions per seleccionar una imatge
+			 * @param v la vista actual
+			 */
+			
 			public void onClick(View v) {
 				dialog.show();
 			}
@@ -132,6 +143,10 @@ public class ProfileActivity extends Activity implements OnClickListener {
         
     }
 	
+	/**
+	 * Funció per canviar de la vista de perfil a la vista d'edició de perfil. Es carreguen totes les 
+	 * dades existents
+	 */
 
 	private void changeToEditView(){
 		mNameBox = (EditText) findViewById(R.id.profile_name_box);
@@ -156,8 +171,11 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		flipper.showNext();
 	}
 	
+	/**
+	 * Funció que guarda els canvis de la vista d'edició de perfil, i torna a la vista de perfil
+	 */
+	
 	private void saveChangesAndChangeToProfileView(){
-		//pilla info
 		System.out.print("saveChangesAndChangeToProfileView");
 
 		mNameBox = (EditText) findViewById(R.id.profile_name_box);
@@ -168,7 +186,7 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		mWebBox = (EditText) findViewById(R.id.profile_web_box);
 		mTwitterBox = (EditText) findViewById(R.id.profile_twitter_box);
 		
-		mUser = new User();
+		
 		mUser.setName(mNameBox.getText().toString());
 		mUser.setCompany(mCompanyBox.getText().toString());
 		mUser.setPosition(mPositionBox.getText().toString());
@@ -194,10 +212,14 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		super.onDestroy();
 	}
 
-
+	/**
+	 * Controla les accions que s'han de dur a terme quan es fa click a un botó
+	 * @param view la vista actual
+	 */
+	
 	public void onClickButton(View view){
 		if(view.getId() == R.id.profile_sync_button){
-			showConfirmationDialog();
+			syncDataWithWeb();
 		}
 		else if(view.getId() == R.id.profile_save_changes){
 			saveChangesAndChangeToProfileView();
@@ -207,10 +229,20 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	/**
+	 * Sincronitza les dades amb el web
+	 */
+	
 	private void syncDataWithWeb(){
-
 		pdm.syncData();
 	}
+	
+	/**
+	 * Tracta la imatge per adaptar-la a la resolució establert al perfil d'usuari
+	 * @param requestCode número que indica la opció elegida per canviar la imatge de perfil
+	 * @param resultCode 
+	 * @param data la imatge
+	 */
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -254,6 +286,11 @@ public class ProfileActivity extends Activity implements OnClickListener {
 	    }
 	}
 	
+	/**
+     * Guarda una imatge
+     * @param photo la imatge que volem guardar
+     */
+	
 	private void saveImage(Bitmap photo) throws IOException{
 		String path = mUser.getUsername();
 		FileOutputStream fo = openFileOutput(path, MODE_PRIVATE);
@@ -261,12 +298,20 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		fo.close();
 	}
 	
+	/**
+	 * Mira si un string té text
+	 * @param s string que consultem
+	 * @return true si té text, false d'altra banda
+	 */
 	
 	private boolean hasText(String s) {
 		return !(s == null || s.equals(""));
 	}
 	
-    
+	/**
+	 * Estableix la configuració per poder carregar una imatge
+	 */
+	
     private void doCrop() {
 		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
     	
@@ -322,7 +367,7 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		        });
 	        
 		        builder.setOnCancelListener( new DialogInterface.OnCancelListener() {
-		            @Override
+		            
 		            public void onCancel( DialogInterface dialog ) {
 		               
 		                if (mImageCaptureUri != null ) {
@@ -337,36 +382,5 @@ public class ProfileActivity extends Activity implements OnClickListener {
 		        alert.show();
         	}
         }
-	}
-    
-	
-	public void showConfirmationDialog(){
-		showDialog(0);
-	}
-	
-	@Override
-    protected Dialog onCreateDialog (int id){
-		Dialog dialog = new Dialog(this, R.style.CustomDialog);
-		dialog.setTitle(R.string.sync);
-		dialog.setContentView(R.layout.confirm_sync);
-		
-		View confirmButton = dialog.findViewById(R.id.sync_confirm_button);
-		confirmButton.setOnClickListener(this);
-		View cancelButton = dialog.findViewById(R.id.sync_cancel_button);
-		cancelButton.setOnClickListener(this);
-		confirmDialog = dialog;
-		return dialog;
-	}
-
-
-	@Override
-	public void onClick(View arg0) {
-		if(arg0.getId() == R.id.sync_confirm_button){
-			syncDataWithWeb();
-			confirmDialog.dismiss();
-		}
-		else if(arg0.getId() == R.id.sync_cancel_button){
-			confirmDialog.dismiss();
-		}
 	}
 }

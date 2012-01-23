@@ -31,28 +31,32 @@ public class LoginActivity extends ListActivity {
 	ArrayList<User> users;
 	boolean inRegister;
 
+	/**
+	 * Controla les accions del butó Create i Login
+	 * @param savedInstanceState
+	 */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-                
         lm = new LoginManager(this);
-        
-        //load login.xml from layout
         setContentView(R.layout.login);
-        
-        //tool that let us exchange between login and register
         flipper = (ViewFlipper)findViewById(R.id.login_flip);
         inRegister = false;
         fillLogin();
-        
+
         login.setOnClickListener(new View.OnClickListener() {
+        	
+        	/**
+        	 * Entrem al perfil de l'usuari si el username i password són correctes
+        	 * @param v vista actual
+        	 */
+        	
 			public void onClick(View v) {
 				String username = usernameBox.getEditableText().toString();
 				String password = passwordBox.getEditableText().toString();
 				if (lm.correctUserAndPassword(username, password)) {
-					//posar el username de l'usuari actual a les shared
 					lm.setActiveUser(username);
-					//Iniciar l'aplicaci—
 					changeToApp();
 				}
 				else
@@ -62,12 +66,17 @@ public class LoginActivity extends ListActivity {
         
         create.setOnClickListener(new View.OnClickListener() {
 			
+        	/**
+        	 * Crea un nou usuari amb username i password si l'usuari no existeix, i anem al seu perfil
+        	 * @param v vista actual
+        	 */
+        	
 			public void onClick(View v) {
 				String username = usernameBox.getEditableText().toString();
 				String password = passwordBox.getEditableText().toString();
 				String cPass = password2Box.getEditableText().toString();
 				if (password.equals("")) errorText.setText("ERROR: password is empty");
-				else if (password.equals(cPass)) { //passwords iguals
+				else if (password.equals(cPass)) { 
 					if (lm.existsUser(username)) errorText.setText("ERROR CREATING NEW USER: The user already exists");
 					else {
 						lm.registerUser(username, password);
@@ -81,6 +90,14 @@ public class LoginActivity extends ListActivity {
         
 	}
 	
+	/**
+	 * Controla la llista d'usuaris existents. Si es clica un usuari, es passa a la vista de Login i es posa el nom d'usuari 
+	 * al camp de text de username
+	 * @param l la llista d'usuaris existents
+	 * @param v la vista actual
+	 * @param position posició de l'usuari
+	 * @param id identificador del camp de l'usuari
+	 */
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -107,6 +124,10 @@ public class LoginActivity extends ListActivity {
 		super.onDestroy();
 	}
 
+	/**
+	 * Funció que carrega els camps de text de la pantalla de login
+	 */
+	
 	private void fillLogin() {
         users = lm.getUsers();
         
@@ -132,7 +153,6 @@ public class LoginActivity extends ListActivity {
 	 * @param view
 	 */
 	public void changeToRegister(View view) {
-		//aixo carrega el segon layout dins el flipper
 		inRegister = true;
 		flipper.showNext();
 	}
@@ -142,11 +162,13 @@ public class LoginActivity extends ListActivity {
 	 * @param view
 	 */
 	public void changeToLogin(View view) {
-		//aixo torna al primer layout dins el flipper
 		inRegister = false;
 		flipper.showPrevious();
 	}
 	
+	/**
+	 * Funció per canviar de la pàgina inicial a la pàgina de perfil d'usuari
+	 */
 	private void changeToApp() {
 		Intent mainIntent = new Intent(this, MeetMeActivity.class);
 		startActivity(mainIntent);

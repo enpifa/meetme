@@ -15,11 +15,26 @@ import android.widget.TextView;
 public class ContactAdapter extends ArrayAdapter<User>{
 	private ArrayList<User> contacts;
 	
+	/**
+	 * Defineix els camps i variables necessaris per la pantalla de contactes
+	 * @param context context actual
+	 * @param textViewResourceId número identificador del camp de text
+	 * @param contacts llista de usuaris de contacte
+	 */
+	
 	public ContactAdapter(Context context, int textViewResourceId, ArrayList<User> contacts){
 		super(context, textViewResourceId, contacts);
 		
 		this.contacts = contacts;
 	}
+	
+	/**
+	 * Posa tots els camps del contacte a la vista
+	 * @param position número per identificar el contacte
+	 * @param convertView la vista actual
+	 * @param parent
+	 * @return la nova vista amb les dades de l'usuari afegides
+	 */
 	
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {

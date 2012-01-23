@@ -94,10 +94,20 @@ public class MeetMeDbAdapter {
     	
     }
     
+    /**
+	 * Obre la base de dades per realitzar consultes
+	 * @param ctx context actual
+	 */
+    
     public MeetMeDbAdapter(Context ctx) {
     	mCtx = ctx;
     	open();
     }
+    
+    /**
+	 * Obté la base de dades
+	 * @return la base de dades
+	 */
     
     public MeetMeDbAdapter open() throws SQLException {
         mDbHelper = new DatabaseHelper(mCtx);
@@ -105,20 +115,14 @@ public class MeetMeDbAdapter {
         return this;
     }
  
+    /**
+	 * Tanca la base de dades
+	 */
+    
     public void close() {
         mDbHelper.close();
     }
     
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * TAULA USERS: USERNAME I PASSWORD
-     */
     
     /**
      * Crea un nou usuari.
@@ -133,12 +137,25 @@ public class MeetMeDbAdapter {
     	return mDb.insert(DATABASE_TABLE_USERS, null, initialValues) > -1;
     }
     
+    /**
+	 * Actualitza el username i password
+	 * @param username nom d'usuari
+	 * @param password la contrasenya de l'usuari
+	 * @return cert si s'ha actualitzat l'usuari, fals en cas contrari
+	 */
+    
     public boolean updateUser(String username, String password) {
     	ContentValues args = new ContentValues();
     	args.put(KEY_USERNAME, username);
     	args.put(KEY_PASSWORD, password);
     	return mDb.update(DATABASE_TABLE_USERS, args, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
+    
+    /**
+	 * Esborra un usuari de la base de dades
+	 * @param username nom d'usuari
+	 * @return cert si s'ha esborrat l'usuari, fals en cas contrari
+	 */
     
     public boolean deleteUser(String username) {
         return mDb.delete(DATABASE_TABLE_USERS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
@@ -147,7 +164,7 @@ public class MeetMeDbAdapter {
     /**
      * Retorna un cursor amb la password de l'usuari username.
      * @param username identificador de l'usuari
-     * @return nomŽs retorna la password perqu el username ja el sabem
+     * @return nomŽs retorna la password perquè el username ja el sabem
      * @throws SQLException
      */
     public User fetchUser(String username)  throws SQLException {
@@ -163,6 +180,12 @@ public class MeetMeDbAdapter {
         }
         return user;
     }
+    
+    /**
+	 * Consulta si existeix un usuari
+	 * @param username nom d'usuari
+	 * @return cert si existeix l'usuari, fals en cas contrari
+	 */
     
     public boolean existsUser(String username) {
     	Cursor cursor = mDb.query(true, DATABASE_TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_USERNAME + "=" + "'" + username + "'",
@@ -180,14 +203,11 @@ public class MeetMeDbAdapter {
         return false;
     }
     
-    
-    
-    
-    
     /**
-     * TAULA PROFILES: emmagatzema la informaci— de perfil dels usuaris via username
-     */
-    
+	 * Crea un nou perfil d'usuari
+	 * @param user usuari
+	 * @return rowId o -1 si ha fallat
+	 */
     
     public boolean createProfile(User user) {
     	
@@ -201,6 +221,12 @@ public class MeetMeDbAdapter {
     	return mDb.insert(DATABASE_TABLE_PROFILES, null, initialValues) > -1;
     }
     
+    /**
+	 * Actualitza les dades d'un usuari
+	 * @param user usuari
+	 * @return cert si actualitzat l'usuari, fals en cas contrari
+	 */
+    
     public boolean updateProfile(User user) {
     	ContentValues args = new ContentValues();
     	args.put(KEY_USERNAME, user.getUsername());
@@ -212,10 +238,22 @@ public class MeetMeDbAdapter {
     	return mDb.update(DATABASE_TABLE_PROFILES, args, KEY_USERNAME + "=" + "'" + user.getUsername() + "'", null) > 0;
     }
     
+    /**
+	 * Esborra un usuari de la base de dades
+	 * @param username nom d'usuari
+	 * @return cert si s'ha esborrat l'usuari, fals en cas contrari
+	 */
     
     public boolean deleteProfile(String username) {
         return mDb.delete(DATABASE_TABLE_PROFILES, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
+    
+    /**
+     * Retorna un cursor amb les dades de l'usuari username.
+     * @param username identificador de l'usuari
+     * @return retorna les dades de perfil de l'usuari username
+     * @throws SQLException
+     */
     
     public User fetchProfile(String username) throws SQLException {
     	User user = new User();
@@ -239,6 +277,12 @@ public class MeetMeDbAdapter {
         return user;
     }
     
+    /**
+     * Retorna un cursor amb les dades de totes els perfils
+     * @return retorna una llista d'usuaris amb les dades principals de perfil
+     * @throws SQLException
+     */
+    
     public ArrayList<User> fetchAllProfiles() throws SQLException {
     	Cursor cursor =
     		mDb.query(DATABASE_TABLE_PROFILES, new String[] {KEY_USERNAME, KEY_NAME, KEY_COMPANY, KEY_POSITION}, null, null, null, null, null);
@@ -260,19 +304,11 @@ public class MeetMeDbAdapter {
     }
     
     
-    
-    
-    
-    /**
-     * TAULA PHONES: username + phone
-     */
-    
-    
     /**
      * Es crea una fila a la taula phones per a representar que
-     * l'usuari userId tŽ el telfone phoneNumber.
+     * l'usuari userId tŽ el telèfon phoneNumber.
      * @param userId la rowId de l'usuari
-     * @param phoneNumber un dels nœmeros de telfon de l'usuari
+     * @param phoneNumber un dels nœmeros de telèfon de l'usuari
      * @return rowId o -1 si ha fallat
      */
     public boolean createPhone(String username, String phoneNumber) throws SQLException {
@@ -287,9 +323,9 @@ public class MeetMeDbAdapter {
     
     
     /**
-     * Esborra el telfon phoneNumber de l'usuari username.
-     * @param phoneNumber nœmero de telfon a esborrar
-     * @param username identificador de l'usuari associat al telfon
+     * Esborra el telèfon phoneNumber de l'usuari username.
+     * @param phoneNumber nœmero de telèfon a esborrar
+     * @param username identificador de l'usuari associat al telèfon
      * @return cert si s'ha esborrat la fila correctament
      */
     public boolean deletePhoneOfUser(String phoneNumber, String username) {
@@ -297,6 +333,11 @@ public class MeetMeDbAdapter {
     			" and " + KEY_PHONE + "=" + phoneNumber, null) > 0;
     }
     
+    /**
+     * Esborra el telèfon phoneNumber de l'usuari username.
+     * @param username identificador de l'usuari associat al telèfon
+     * @return cert si s'ha esborrat la fila correctament
+     */
     
     public boolean deletePhonesOfUser(String username) {
     	return mDb.delete(DATABASE_TABLE_PHONES, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
@@ -304,9 +345,9 @@ public class MeetMeDbAdapter {
     }
     
     /**
-     * Retorna un cursor sobre els telfons d'un usuari.
+     * Retorna un cursor sobre els telèfons d'un usuari.
      * @param userId id de la fila de l'usuari a la taula users
-     * @return cursor sobre els telfons de l'usuari amb id userId
+     * @return cursor sobre els telèfons de l'usuari amb id userId
      * @throws SQLException
      */
     public void fetchPhonesOf(User user) throws SQLException {
@@ -324,14 +365,6 @@ public class MeetMeDbAdapter {
     	
     }	
     	
-
-    	
-    	
-    	
-    	
-    /**
-     * TAULA EMAILS: username + email	
-     */
     	
 	/**
      * Es crea una fila a la taula mails per a representar que
@@ -359,6 +392,11 @@ public class MeetMeDbAdapter {
     			" and " + KEY_MAIL + "=" + email, null) > 0;
     }
     
+    /**
+     * Esborra el mail mail de l'usuari username.
+     * @param username identificador de l'usuari associat al mail
+     * @return cert si s'ha esborrat la fila correctament
+     */
     
     public boolean deleteEmailsOfUSer(String username) {
     	return mDb.delete(DATABASE_TABLE_EMAILS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
@@ -383,17 +421,6 @@ public class MeetMeDbAdapter {
         	cursor.close();
     	}
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * TAULA WEBS: username + web
-     */
     
     
     /**
@@ -423,6 +450,11 @@ public class MeetMeDbAdapter {
     			" and " + KEY_WEB + "=" + webPage, null) > 0;
     }
     
+    /**
+     * Esborra la web webPage de l'usuari username.
+     * @param username identificador de l'usuari associat al mail
+     * @return cert si s'ha esborrat la fila correctament
+     */
     
     public boolean deleteWebsOfUser(String username) {
     	return mDb.delete(DATABASE_TABLE_WEBS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
@@ -447,9 +479,13 @@ public class MeetMeDbAdapter {
     	}
     }
   
-    
     /**
-     * TAULA CONTACTS: username, contacte, comment, location
+     * Crea un nou contacte
+     * @param username nom d'usuari
+     * @param contact el nom identificatiu del contacte
+     * @param comment comentari del contacte
+     * @location lloc on s'ha agregat el contacte
+     * @return rowId o -1 si ha fallat
      */
     
     public boolean createContact(String username, String contact, String comment, String location) {
@@ -462,6 +498,15 @@ public class MeetMeDbAdapter {
     	return mDb.insert(DATABASE_TABLE_CONTACTS, null, initialValues) > -1;
     }
     
+    /**
+     * Actualitza les dades d'un contacte
+     * @param username nom d'usuari
+     * @param contact el nom identificatiu del contacte
+     * @param comment comentari del contacte
+     * @location lloc on s'ha agregat el contacte
+     * @return cert si s'ha actualitzat, fals en cas contrari
+     */
+    
     public boolean updateContact(String username, String contact, String comment, String location) {
     	ContentValues args = new ContentValues();
     	args.put(KEY_USERNAME, username);
@@ -472,24 +517,33 @@ public class MeetMeDbAdapter {
     	return mDb.update(DATABASE_TABLE_CONTACTS, args, KEY_USERNAME + "=" + "'" + username + "'" + " and " + KEY_CONTACT + "=" + "'" + contact + "'", null) > 0;
     }
     
+    /**
+     * Retorna un cursor amb les dades de totes els contactes
+     * @param username nom d'usuari
+     * @return retorna una llista d'usuaris amb les dades principals dels contactes
+     */
+    
     public ArrayList<User> fetchContacts(String username) {
     	ArrayList<User> result = new ArrayList<User>();
     	Cursor cursor = mDb.query(DATABASE_TABLE_CONTACTS, new String[] {KEY_CONTACT, KEY_COMMENT, KEY_LOCATION}, KEY_USERNAME + "=" + "'" + username + "'", null, null, null, null); 
     	if(cursor != null){
-    		cursor.moveToFirst();
-    		while (!cursor.isAfterLast()) {
-    			User auxUser = new User();
+    		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
+        		User auxUser = new User();
         		auxUser.setUsername(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_CONTACT)));
         		auxUser.setComment(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_COMMENT)));
         		auxUser.setLocation(cursor.getString(cursor.getColumnIndex(MeetMeDbAdapter.KEY_LOCATION)));
-        		auxUser.setContact(true);
         		result.add(auxUser);
-        		cursor.moveToNext();
-    		}
+        	}
     		cursor.close();
     	}
     	return result;
     }
+    
+    /**
+     * Retorna un cursor amb els noms d'usuari dels contactes
+     * @param username nom d'usuari
+     * @return retorna una llista d'usuaris amb les dades principals de perfil
+     */
     
     public ArrayList<String> getContactUsernames(String username){
     	ArrayList<User> contacts = fetchContacts(username);
@@ -500,31 +554,26 @@ public class MeetMeDbAdapter {
     	return usernames;
     }
     
+    /**
+     * Esborra un contacte
+     * @param username nom d'usuari
+     * @param contact nom de contacte
+     * @return cert si ha esborrat el contacte, fals en cas contrari
+     */
+    
     public boolean deleteContact(String username, String contact) {
     	return mDb.delete(DATABASE_TABLE_CONTACTS, KEY_USERNAME + "=" + "'" + username + "'" + " and " + KEY_CONTACT + "=" + "'" + contact + "'", null) > 0;
     }
+    
+    /**
+     * Esborra un contacte
+     * @param username nom d'usuari
+     * @return cert si ha esborrat el contacte, fals en cas contrari
+     */
     
     public boolean deleteContactsOfUser(String username) {
     	return mDb.delete(DATABASE_TABLE_CONTACTS, KEY_USERNAME + "=" + "'" + username + "'", null) > 0;
     }
     
-/*
-    
-    
-    /**
-     * Esborra un usuari per complet: la fila de la taula d'usuaris i les files
-     * associades al mateix usuari de les taules phones, mails i webs.
-     * @param rowId id de l'usuari que volem esborrar
-     * @return cert si s'ha esborrat tota la informaci— relativa a l'usuari
-     */
-    /*
-    public boolean deleteUser(long rowId) {
-        if (mDb.delete(DATABASE_TABLE_MAILS, KEY_USERID + "=" + rowId, null) <= 0) return false;
-    	if (mDb.delete(DATABASE_TABLE_PHONES, KEY_USERID + "=" + rowId, null) <= 0) return false;
-    	if (mDb.delete(DATABASE_TABLE_WEBS, KEY_USERID + "=" + rowId, null) <= 0) return false;
-    	return mDb.delete(DATABASE_TABLE_USERS, KEY_ROWID + "=" + rowId, null) > 0;
-    }
-
-*/
-        
+       
 }

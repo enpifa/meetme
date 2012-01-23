@@ -14,15 +14,15 @@ import java.util.ArrayList;
 
 import com.meetme.app.R;
 
-/**
- * Adapter for crop option list.
- * 
- * @author Lorensius W. L. T <lorenz@londatiga.net>
- *
- */
 public class CropOptionAdapter extends ArrayAdapter<CropOption> {
 	private ArrayList<CropOption> mOptions;
 	private LayoutInflater mInflater;
+	
+	/**
+	 * Estableix les dades de les variables de la classe
+	 * @param context context actual
+	 * @param options
+	 */
 	
 	public CropOptionAdapter(Context context, ArrayList<CropOption> options) {
 		super(context, R.layout.crop_selector, options);
@@ -31,6 +31,14 @@ public class CropOptionAdapter extends ArrayAdapter<CropOption> {
 		
 		mInflater	= LayoutInflater.from(context);
 	}
+	
+	/**
+	 * Funció que estableix tots els camps necessaris per la vista
+	 * @param position posició de la opció a la llista d'opcions
+	 * @param convertView la vista actual
+	 * @param group
+	 * @return la vista modificada si existeix la opció, null en cas contrari
+	 */
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup group) {

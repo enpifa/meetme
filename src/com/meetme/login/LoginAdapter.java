@@ -22,12 +22,26 @@ public class LoginAdapter extends ArrayAdapter<User> {
 	private ArrayList<User> users;
 	private Context mContext;
 	
+	/**
+     * Funció que defineix les variables de la classe
+     * @param context el context que volem definir
+     * @param textViewResourceId id del text view de la llista d'usuaris
+     * @param objects el conjunt d'usuaris de la base de dades
+     */
 	public LoginAdapter(Context context, int textViewResourceId,
 			ArrayList<User> objects) {
 		super(context, textViewResourceId, objects);
 		users = objects;
 		mContext = context;
 	}
+	
+	/**
+     * Funció que estableix tots els camps necessaris per la vista de login
+     * @param position posició de l'usuari a la llista d'usuaris
+     * @param convertView vista actual
+     * @param parent
+     * @return vista amb els camps establerts
+     */
 	
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -63,6 +77,12 @@ public class LoginAdapter extends ArrayAdapter<User> {
 		return v;
 	}
 
+	/**
+     * Funció que carrega la imatge d'un usuari
+     * @param user usuari de l'imatge
+     * @return result el bitmap de la imatge
+     */
+	
 	private Bitmap getImage(User user) throws IOException {
 		FileInputStream fi = mContext.openFileInput(user.getUsername());
 		fi = mContext.openFileInput(user.getUsername());

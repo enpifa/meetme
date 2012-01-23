@@ -15,11 +15,26 @@ import com.meetme.app.User;
 public class UsersAdapter  extends ArrayAdapter<User>{
 	private ArrayList<User> users;
 	
+	/**
+	 * Mètode encarregat de definir les diferents variables
+	 * @param context context actual
+	 * @param textViewResourceId id del text
+	 * @param users llista d'usuaris
+	 */
+	
 	public UsersAdapter(Context context, int textViewResourceId, ArrayList<User> users){
 		super(context, textViewResourceId, users);
 		
 		this.users = users;
 	}
+	
+	/**
+	 * Estableix els diferents camps necessàris per la vista de l'usuari
+	 * @param position posició de l'usuari
+	 * @param convertView la vista actual
+	 * @param parent
+	 * @return la vista amb els camps establerts
+	 */
 	
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -45,13 +60,6 @@ public class UsersAdapter  extends ArrayAdapter<User>{
 			}
 			if(username != null){
 				username.setText(user.getUsername());
-			}
-			View isContactImage = v.findViewById(R.id.is_contact_image);
-			if(user.userIsContact()){
-				isContactImage.setVisibility(View.VISIBLE);
-			}
-			else {
-				isContactImage.setVisibility(View.GONE);
 			}
 		}
 		

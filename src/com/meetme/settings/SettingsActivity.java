@@ -9,6 +9,11 @@ import com.meetme.app.R;
 public class SettingsActivity extends Activity {
 	private SettingsManager sm;
 
+	/**
+	 * Mètode encarregat de definir les diferents variables
+	 * @param savedInstanceState
+	 */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +27,20 @@ public class SettingsActivity extends Activity {
 		super.onDestroy();
 	}
 	
+	/**
+	 * Mètode encarregat de tancar sessió d'usuari
+	 * @param v la vista actual
+	 */
+	
 	public void logout(View v) {
 		sm.logout();
 		finish();
 	}
+	
+	/**
+	 * Mètode encarregat de borrar un usuari
+	 * @param v vista actual
+	 */
 	
 	public void deleteCurrentUser(View v) {
 		sm.deleteCurrentUser();

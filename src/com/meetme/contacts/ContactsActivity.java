@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -30,6 +29,11 @@ public class ContactsActivity extends Activity {
 	User currentViewedUser;
 	
 	ProfileViewAdapter pva;
+	
+	/**
+	 * Defineix els camps i variables necessaris per la pantalla de contactes
+	 * @param savedInstanceState
+	 */
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,24 +59,26 @@ public class ContactsActivity extends Activity {
         flipper = (ViewFlipper)findViewById(R.id.contacts_flipper);
     }
     
+    /**
+	 * Carrega de nou els contactes
+	 */
+    
     public void onReload(){
     	System.out.println("reload contacts");
     	contacts = cdm.getContacts();
-    	adapter = new ContactAdapter(this, android.R.layout.simple_list_item_1, contacts);
-    	contactsList.setAdapter(adapter);
+    	adapter.notifyDataSetChanged();
     }
+    
+    /**
+	 * Mètode encarregat de canviar la vista a la pantalla de perfil d'un usuari
+	 * @param username usuari al que volem accedir
+	 */
     
     private void changeToProfileView(String username){
 		SearchManager sm = new SearchManager(this);
     	User user = sm.searchForUser(username);
-    	contacts = cdm.getContacts();
 		currentViewedUser = user;
 		
-		for(User c : contacts){
-			if(c.getUsername().equals(currentViewedUser.getUsername())){
-				currentViewedUser.setContact(true);
-			}
-		}
 		View contactProfile;
 		LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		contactProfile = vi.inflate(R.layout.profile, null);
@@ -80,8 +86,7 @@ public class ContactsActivity extends Activity {
 		pva = new ProfileViewAdapter(this, contactProfile);
 		pva.loadUserInfo(currentViewedUser);
 		flipper.addView(contactProfile);
-		View saveContactButton = findViewById(R.id.profile_save_contact_button);
-		saveContactButton.setVisibility(View.GONE);
+		
 		flipper.showNext();
 		
 	}
@@ -93,39 +98,25 @@ public class ContactsActivity extends Activity {
     	super.onDestroy();
     }
 
+    /**
+	 * Gestiona l'acció de prémer el botó per anar enrere
+	 * @param view la vista actual
+	 */
+    
     public void onClickButton(View view){
     	if(view.getId() == R.id.profile_back_button){
     		changeToSearchView();
     	}
-    	else if(view.getId() == R.id.contacts_search_button){
-    		onReload();
-    		EditText searchBox = (EditText)findViewById(R.id.contacts_search_box);
-    		calculateSearch(searchBox.getText().toString());
-    	}
     }
+    
+    /**
+	 * Canvia a la vista de buscar contactes
+	 */
     
     public void changeToSearchView(){
 		flipper.showPrevious();
 		flipper.removeViewAt(1);
 	}
-    
-    public void calculateSearch(String search){
-    	String lowercaseSearch = search.toLowerCase();
-    	contacts = cdm.getContacts();
-    	if(search.length() > 0){
-    		ArrayList<User> tmp = new ArrayList<User>();
-        	for(User c : contacts){
-        		
-        		if(c.getName().toLowerCase().indexOf(lowercaseSearch) != -1){
-        			System.out.println("checking " + c.getName());
-        			tmp.add(c);
-        		}
-        	}
-        	contacts = new ArrayList<User>(tmp);
-    	}
-    	adapter = new ContactAdapter(this, android.R.layout.simple_list_item_1, contacts);
-    	contactsList.setAdapter(adapter);
-    }
     
     public void showDeleteContactDialog(View view){
 		//TODO: fer una confirmacio

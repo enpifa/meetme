@@ -40,6 +40,11 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	User currentViewedUser;
 	
+	/**
+	 * Defineix els camps i variables necessaris per la pantalla de search
+	 * @param savedInstanceState
+	 */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +73,11 @@ public class SearchActivity extends Activity implements OnClickListener {
         flipper = (ViewFlipper)findViewById(R.id.users_flipper);
     }
 	
+	/**
+	 * Busca els usuaris si s'ha escrit algo al camp de text de buscar
+	 * @param view la vista actual
+	 */
+	
 	public void searchForUsers(View view){
 		String search = searchBox.getText().toString();
 		if(search.length() > 0){
@@ -76,6 +86,11 @@ public class SearchActivity extends Activity implements OnClickListener {
 			usersList.setAdapter(adapter);
 		}
 	}
+	
+	/**
+	 * Mètode encarregat de canviar la vista a la pantalla de perfil d'un usuari
+	 * @param username usuari al que volem accedir
+	 */
 	
 	private void changeToProfileView(String username){
 		User user = sm.searchForUser(username);
@@ -92,19 +107,38 @@ public class SearchActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	/**
+	 * Mètode encarregat de passar a la pantalla de buscar usuaris
+	 */
+	
 	public void changeToSearchView(){
 		flipper.showPrevious();
 		flipper.removeViewAt(1);
 	}
 	
+	/**
+	 * Mostra el diàleg per afegir un nou contacte
+	 */
+	
 	public void showAddContactDialog(){
 		showDialog(0);
 	}
+	
+	/**
+	 * Mètode que gestiona l'acció a dur a terme quan es produeix un click
+	 * @param view vista actual
+	 */
 	
 	public void onClickButton(View view){
 		if(view.getId() == R.id.profile_back_button) changeToSearchView();
 		else if (view.getId() == R.id.profile_save_contact_button) showAddContactDialog();
 	}
+	
+	/**
+	 * S'encarrega de generar el perfil del nou usuari que volem afegir com a contacte
+	 * @param id referencia XML
+	 * @return dialog el diàleg del nou contacte
+	 */
 	
 	@Override
     protected Dialog onCreateDialog (int id){
@@ -123,7 +157,10 @@ public class SearchActivity extends Activity implements OnClickListener {
 		addContactDialog = dialog;
 		return dialog;
 	}
-
+	
+	/**
+	 * Mètode encarregat d'afegir un nou contacte
+	 */
 	
 	public void addContact(){
 		//TODO: guardar el contacte
@@ -143,7 +180,11 @@ public class SearchActivity extends Activity implements OnClickListener {
 		addContactButton.setEnabled(false);
 	}
 
-	@Override
+	/**
+	 * Gestiona les accions que es poden produir a la pantalla d'afegir un contacte
+	 * @param view la vista actual
+	 */
+	
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.add_contact_save_button:

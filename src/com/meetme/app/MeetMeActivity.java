@@ -16,7 +16,9 @@ public class MeetMeActivity extends TabActivity {
 	
 	
 	TabHost tabHost;
-    /** Called when the activity is first created. */
+    /** Es crida quan es crea l'activitat per primer cop, i es defineixen les dades necessàries per començar l'aplicació.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class MeetMeActivity extends TabActivity {
     
     public class TabListener implements OnTabChangeListener {
 
-		@Override
+		
 		public void onTabChanged(String tabId) {
 			// TODO Auto-generated method stub
 			if(tabId == "profile"){

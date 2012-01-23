@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.meetme.app.MeetMeDbAdapter;
 import com.meetme.app.PreferencesAdapter;
 import com.meetme.app.User;
 import com.meetme.app.WebAccessAdapter;
@@ -21,25 +20,30 @@ public class SearchManager {
 	WebAccessAdapter wad;
 	PreferencesAdapter pa;
 	ContactsDataManager cdm;
-	MeetMeDbAdapter mda;
-	ArrayList<User> contacts;
+	
+	/**
+	 * Mètode encarregat de definir les variables de la classe
+	 * @param context el context actual
+	 */
 	
 	public SearchManager(Context context){
 		wad = WebAccessAdapter.getInstance();
 		pa = new PreferencesAdapter(context);
 		cdm = new ContactsDataManager(context);
-		mda  = new MeetMeDbAdapter(context);
-		String username = pa.getActiveUsername();
-		contacts = mda.fetchContacts(username);
 	}
+	
+	/**
+	 * Mètode encarregat d'obtenir una llista d'usuaris coneguts
+	 * @param query nom que s'ha de buscar
+	 * @result conjunt d'usuaris que cumpleixen amb la query
+	 */
 	
 	public ArrayList<User> searchForUsers(String query){
 		ArrayList<User> result = new ArrayList<User>();
 		String url = "http://www.amieggs.com/meetme/getUsers.php";
 		
 		String recievedData = wad.getWebAccessData(url, query);//preparem dades a enviar
-		String username = pa.getActiveUsername();
-		contacts = mda.fetchContacts(username);
+		
 		//parse json data
 		try{
 		    JSONArray jArray = new JSONArray(recievedData);
@@ -50,7 +54,6 @@ public class SearchManager {
 		        tmp.setName(json_data.getString("name"));
 		        tmp.setCompany(json_data.getString("company"));
 		        tmp.setPosition(json_data.getString("position"));
-		        checkIfUserIsContact(tmp);
 		        if(!pa.getActiveUsername().equals(tmp.getUsername())) result.add(tmp);
 		    }
 		}
@@ -62,12 +65,11 @@ public class SearchManager {
 		return result;
 	}
 	
-	public void checkIfUserIsContact(User user){
-		
-		for(User c : contacts){
-        	if(c.getUsername().equals(user.getUsername())) user.setContact(true);
-        }
-	}
+	/**
+	 * Mètode encarregat d'obtenir un usuari conegut de l'usuari loggejat
+	 * @param username nom d'usuari que busquem
+	 * @result usuari que busquem
+	 */
 	
 	public User searchForUser(String username) {
 		String url = "http://www.amieggs.com/meetme/getUserData.php";
@@ -106,7 +108,7 @@ public class SearchManager {
 		    	user.addWeb(json_webs.getString(i));
 		    }
 		    
-		    checkIfUserIsContact(user);
+		    
 		}
 		catch(JSONException e){
 		        Log.e("log_tag", "Error parsing data "+e.toString());
@@ -115,10 +117,13 @@ public class SearchManager {
 		return user;
 	}
 	
+	/**
+	 * Mètode encarregat d'agregar un contacte d'amistat
+	 * @param contact usuari que s'agrega com a amic
+	 */
+	
 	public void addContact(User contact){
 		cdm.addContact(contact);
-		String username = pa.getActiveUsername();
-		contacts = mda.fetchContacts(username);
 	}
 	
 }
