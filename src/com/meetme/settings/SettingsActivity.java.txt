@@ -1,0 +1,50 @@
+package com.meetme.settings;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+
+import com.meetme.app.R;
+
+public class SettingsActivity extends Activity {
+	private SettingsManager sm;
+
+	/**
+	 * Mètode encarregat de definir les diferents variables
+	 * @param savedInstanceState
+	 */
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sm = new SettingsManager(this);
+        setContentView(R.layout.settings);
+    }
+	
+	@Override
+	protected void onDestroy() {
+		sm.closeDb();
+		super.onDestroy();
+	}
+	
+	/**
+	 * Mètode encarregat de tancar sessió d'usuari
+	 * @param v la vista actual
+	 */
+	
+	public void logout(View v) {
+		sm.logout();
+		finish();
+	}
+	
+	/**
+	 * Mètode encarregat de borrar un usuari
+	 * @param v vista actual
+	 */
+	
+	public void deleteCurrentUser(View v) {
+		sm.deleteCurrentUser();
+		sm.logout();
+		finish();
+	}
+}
